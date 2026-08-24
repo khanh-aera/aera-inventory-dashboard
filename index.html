@@ -11,61 +11,99 @@
 <meta name="theme-color" content="#001B5E">
 <link rel="manifest" href="./manifest.json">
 <title>AERA — Inventory Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></scr'+'ipt>
 <style>
 :root{--pb:#0038BC;--pb-deep:#001B5E;--plat:#EEEEEE;--dim:#C9CDD4;--red:#E5484D;--green:#30A46C;--amber:#FFB224}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh}
-nav{display:flex;gap:20px;padding:16px 28px;background:rgba(0,27,94,.85);border-bottom:1px solid rgba(238,238,238,.15)}
-nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(1000px 500px at 70% -10%,rgba(0,56,188,.25),transparent 60%),radial-gradient(800px 400px at 10% 110%,rgba(0,56,188,.15),transparent 60%);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:50;display:flex;gap:20px;padding:14px 28px;background:rgba(0,18,55,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(238,238,238,.1)}
+nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:color .25s}
 nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
-.hero{padding:36px 28px 8px;text-align:center}
-.hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px}
-.hero p{font-size:12px;color:var(--dim);margin-top:6px;letter-spacing:1px}
-.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 64px}
-#errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:24px}
-.stat{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:14px;padding:18px;text-align:center}
-.stat .num{font-size:36px;font-weight:800}.stat .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.hero{position:relative;padding:46px 28px 12px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;left:50%;top:-140px;width:620px;height:360px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,56,188,.55),transparent 72%);filter:blur(34px);pointer-events:none}
+.hero h1{position:relative;font-size:27px;font-weight:800;letter-spacing:-.5px;animation:fadeUp .55s ease-out both}
+.hero p{position:relative;font-size:12px;color:var(--dim);margin-top:8px;letter-spacing:.5px;animation:fadeUp .55s .08s ease-out both}
+.livebadge{position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:6px 15px;border-radius:999px;border:1px solid rgba(48,164,108,.38);background:rgba(48,164,108,.1);color:var(--green);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;animation:fadeUp .55s .16s ease-out both}
+.livebadge .dotp{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}55%{box-shadow:0 0 0 7px rgba(48,164,108,0)}}
+.wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:26px 20px 64px}
+#errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px;border-radius:10px}
+#lowBanner{display:none;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 18px;border-radius:14px;background:linear-gradient(90deg,rgba(229,72,77,.15),rgba(255,178,36,.07));border:1px solid rgba(229,72,77,.38);margin-bottom:24px;animation:fadeUp .45s ease-out both}
+#lowBanner.show{display:flex}
+#lowBanner .btitle{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#FF9FA2;margin-right:4px}
+.bpill{padding:6px 13px;border-radius:999px;background:rgba(229,72,77,.16);border:1px solid rgba(229,72,77,.45);color:#FFB3B6;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .25s,transform .25s}
+.bpill:hover{background:rgba(229,72,77,.32);transform:translateY(-1px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.stat{background:linear-gradient(180deg,rgba(238,238,238,.07),rgba(238,238,238,.025));border:1px solid rgba(238,238,238,.12);border-top-color:rgba(238,238,238,.22);border-radius:14px;padding:18px;text-align:center;animation:fadeUp .5s ease-out both;transition:transform .3s ease-out,box-shadow .3s ease-out}
+.stat:nth-child(2){animation-delay:.06s}.stat:nth-child(3){animation-delay:.12s}.stat:nth-child(4){animation-delay:.18s}
+.stat:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,0,0,.35)}
+.stat .num{font-size:36px;font-weight:800;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+.stat .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:4px}
 .stat.blue .num{color:#7EA6FF}.stat.red .num{color:var(--red)}.stat.green .num{color:var(--green)}.stat.amber .num{color:var(--amber)}
-.card{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:22px;margin-bottom:24px}
+.card{background:linear-gradient(180deg,rgba(238,238,238,.065),rgba(238,238,238,.02));border:1px solid rgba(238,238,238,.12);border-top-color:rgba(238,238,238,.24);border-radius:16px;padding:22px;margin-bottom:24px;transition:transform .3s ease-out,box-shadow .3s ease-out;animation:fadeUp .55s ease-out both}
+.card:hover{box-shadow:0 14px 34px rgba(0,0,0,.32)}
 .card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:860px){.grid2{grid-template-columns:1fr}}
-.chart-box{position:relative;height:280px}.chart-box canvas{max-height:100%}
+.chart-box{position:relative;height:280px}
+.legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--dim)}
+.lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 table{width:100%;border-collapse:collapse;font-size:13px}
 thead th{text-align:left;padding:9px 11px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border-bottom:2px solid rgba(238,238,238,.25)}
-tbody td{padding:9px 11px;border-bottom:1px solid rgba(238,238,238,.08)}
-tbody tr:hover{background:rgba(238,238,238,.04)}
+tbody td{padding:9px 11px;border-bottom:1px solid rgba(238,238,238,.08);transition:background .2s}
+tbody tr:hover td{background:rgba(238,238,238,.045)}
+td.num-cell{font-weight:800;font-size:15px;color:#7EA6FF;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+tr.flash td{animation:rowflash 1.8s ease-out}
+@keyframes rowflash{0%,45%{background:rgba(0,56,188,.4)}100%{background:transparent}}
 .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:1px}
 .badge.ok{background:rgba(48,164,108,.16);color:var(--green);border:1px solid rgba(48,164,108,.4)}
 .badge.low{background:rgba(229,72,77,.16);color:var(--red);border:1px solid rgba(229,72,77,.4)}
 .badge.crit{background:rgba(255,178,36,.14);color:var(--amber);border:1px solid rgba(255,178,36,.45)}
 .badge.unused{background:rgba(238,238,238,.08);color:var(--dim);border:1px solid rgba(238,238,238,.2)}
 .cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.chip{padding:10px 16px;border-radius:999px;font-size:12.5px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase}
+'.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.search{flex:1;min-width:200px;max-width:320px;padding:10px 16px;border-radius:999px;border:1px solid rgba(238,238,238,.22);background:rgba(238,238,238,.05);color:var(--plat);font-family:inherit;font-size:13px;outline:none;transition:border-color .25s,background .25s}
+.search::placeholder{color:var(--dim)}
+.search:focus{border-color:var(--pb);background:rgba(0,56,188,.12)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:9px 15px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase;transition:all .25s ease-out}
+.chip:hover{border-color:rgba(126,166,255,.55);color:#fff;transform:translateY(-1px)}
 .chip.active{background:var(--pb);border-color:var(--pb);color:#fff}
 .bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden;min-width:130px}
-.bar>div{height:100%;border-radius:4px}
-.lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.capacity{font-size:13px;font-weight:700;margin-bottom:14px;padding:10px 14px;border-radius:10px;background:rgba(0,56,188,.25);border:1px solid rgba(126,166,255,.35)}
-.capacity b{font-size:20px;color:#7EA6FF}
+.bar>div{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.22,.61,.36,1)}
+.lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.capacity{font-size:13px;font-weight:700;margin-bottom:14px;padding:11px 15px;border-radius:10px;background:linear-gradient(90deg,rgba(0,56,188,.3),rgba(0,56,188,.12));border:1px solid rgba(126,166,255,.35)}
+.capacity b{font-size:21px;color:#7EA6FF;font-variant-numeric:tabular-nums}
 .parts-grid{display:none;flex-direction:column;gap:10px}
 .parts-grid.show{display:flex}
-.part{display:grid;grid-template-columns:1fr 90px 150px 110px;align-items:center;gap:14px;background:rgba(0,27,94,.6);border:1px solid rgba(238,238,238,.14);border-radius:12px;padding:12px 18px}
+.part{display:grid;grid-template-columns:1fr 90px 150px 130px;align-items:center;gap:14px;background:rgba(0,27,94,.55);border:1px solid rgba(238,238,238,.13);border-radius:12px;padding:12px 18px;opacity:0;animation:fadeUp .45s ease-out forwards;transition:border-color .25s,background .25s}
+.part:hover{border-color:rgba(126,166,255,.45);background:rgba(0,27,94,.78)}
 .part .pn{font-size:14.5px;font-weight:600;line-height:1.35;display:flex;align-items:center;gap:10px}
 .pchip{width:18px;height:18px;border-radius:6px;flex-shrink:0;border:1px solid rgba(255,255,255,.35);box-shadow:0 1px 4px rgba(0,0,0,.4)}
 .part .pv{text-align:right}
-.part .ps{font-size:26px;font-weight:800;color:#7EA6FF}
+.part .ps{font-size:26px;font-weight:800;color:#7EA6FF;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
 .part .ps.warn{color:#EEEEEE}
 .part .pu{font-size:11px;color:var(--dim);margin-left:4px}
 .pbar{height:10px;border-radius:5px;background:rgba(238,238,238,.12);overflow:hidden}
-.pbar>div{height:100%;border-radius:5px}
+.pbar>div{height:100%;border-radius:5px;width:0;transition:width .9s cubic-bezier(.22,.61,.36,1)}
 .pcap{font-size:12.5px;color:var(--dim);text-align:right}
-.pcap b{color:#EEEEEE;font-size:15px}
+.pcap b{color:#EEEEEE;font-size:15px;font-variant-numeric:tabular-nums}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#toTop{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(238,238,238,.28);background:rgba(0,27,94,.88);color:#fff;font-size:19px;cursor:pointer;display:none;z-index:60;backdrop-filter:blur(8px);transition:transform .25s,background .25s}
+#toTop.show{display:block;animation:fadeUp .3s ease-out}
+#toTop:hover{transform:translateY(-3px);background:var(--pb)}
+footer{position:relative;text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
 @media(max-width:640px){
+.hm{display:none}
+tbody td{padding:12px 10px;font-size:14.5px}
+thead th{padding:10px;font-size:11px}
+.wrap{padding:16px 12px 48px}
+.card{padding:16px 14px;border-radius:14px}
+.hero h1{font-size:24px}
 .part{grid-template-columns:1fr auto;grid-template-rows:auto auto auto;row-gap:8px;padding:14px 16px}
 .part .pn{grid-column:1/3;font-size:15px}
 .part .pv{grid-row:2;grid-column:1;text-align:left}
@@ -74,19 +112,21 @@ tbody tr:hover{background:rgba(238,238,238,.04)}
 .pcap{grid-column:1/3;grid-row:3;text-align:left;font-size:12.5px}
 .pcap b{font-size:17px}
 }
-@media(max-width:640px){.hm{display:none}tbody td{padding:12px 10px;font-size:14.5px}thead th{padding:10px;font-size:11px}.wrap{padding:16px 12px 48px}.card{padding:16px 14px;border-radius:14px}.hero h1{font-size:24px}}
-footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <nav><a href="./" class="active">Tổng quan</a><a href="./filaments.html">Filament 🧵</a></nav>
-<div class="hero"><h1>Inventory Dashboard</h1><p id="updated">AERA LOGISTIC</p></div>
+<div class="hero"><h1>Inventory Dashboard</h1><p>AERA LOGISTIC · Persian Blue × Platinum</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div></div>
 <div class="wrap">
 <div id="errbox"></div>
+<div id="lowBanner"><span class="btitle">⚠ Cần chú ý</span></div>
 <div class="stats" id="stats"></div>
 <div class="grid2" style="margin-bottom:24px">
 <div class="card"><h2>● Stock theo Category</h2><div class="chart-box"><canvas id="catChart"></canvas></div></div>
-<div class="card"><h2>● Tình trạng kho</h2><div class="chart-box"><canvas id="statusChart"></canvas></div></div>
+<div class="card"><h2>● Tình trạng kho</h2><div class="chart-box"><canvas id="statusChart"></canvas></div>
+<div class="legend"><span class="lg"><i style="background:#30A46C"></i>Đủ kho</span><span class="lg"><i style="background:#E5484D"></i>Sắp hết</span><span class="lg"><i style="background:#FFB224"></i>Nguy cấp</span><span class="lg"><i style="background:#8A8F98"></i>Không dùng</span></div>
+</div>
 </div>
 <div class="card">
 <h2>● Linh kiện đèn đang bán</h2>
@@ -95,7 +135,10 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:va
 </div>
 <div class="card">
 <h2>● Toàn bộ kho</h2>
+<div class="toolbar">
+<input type="text" class="search" id="q" placeholder="🔍 Tìm vật tư...">
 <div class="filters" id="filters"></div>
+</div>
 <div style="overflow-x:auto">
 <table>
 <thead><tr><th>Material</th><th class="hm">Category</th><th>Stock</th><th class="hm">Unit</th><th class="hm">Mức độ</th><th>Status</th></tr></thead>
@@ -104,6 +147,7 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:va
 </div>
 </div>
 </div>
+<button id="toTop" title="Lên đầu trang">↑</button>
 <footer>AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATINUM</footer>
 <script>
 const LAMPS = {
@@ -111,68 +155,105 @@ const LAMPS = {
  'FLORIA PRO': ['Nhựa PLA - trong suốt R3D','floria_desert_tan_base','floria_olive_green_base','floria_matte_red_base','floria_burnt_orange_base','floria_persian_blue_base','floria_milky_base','Dây đèn + đuôi đèn','Bóng đèn LED RGB pro','Hộp carton loại 1','Tờ infor Floria'],
  'STRATA': ['Nhựa PLA Matte - Dark Blue Bambu','Nhựa PLA Matte - Navy Blue Tinmorry','Nhựa PLA Matte - Matte Red','Dây đèn + đuôi đèn','Bóng đèn OSRAM LED (5W, 3000K)','Hộp carton loại 2','Tờ infor Strata']
 };
+</style>
 (async () => {
-let items=[],DATA_META={};
-try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];DATA_META={generated:_j.generated};}catch(e){
-document.getElementById('errbox').style.display='block';
-document.getElementById('errbox').textContent='Không tải được inventory.json — mở qua HTTP (GitHub Pages)';
+let items=[],META={};
+try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];META=_j;}catch(e){
+const eb=document.getElementById('errbox');eb.style.display='block';
+eb.textContent='Kh\u00f4ng t\u1ea3i \u0111\u01b0\u1ee3c inventory.json';
 return;}
-if(DATA_META.generated)document.getElementById('updated').textContent='Cập nhật: '+DATA_META.generated+' · Nguồn: inventory.json';
+if(META.generated)document.getElementById('liveTxt').textContent='Live \u00b7 c\u1eadp nh\u1eadt '+META.generated;
 const CRIT='crit',LOW='low',OK='ok',UNUSED='unused';
 items.forEach(d=>{d.state=d.alert===0?UNUSED:d.stock<=d.alert*.5?CRIT:d.stock<=d.alert?LOW:OK});
 const total=items.length;
-const low=items.filter(d=>d.state===LOW||d.state===CRIT).length;
 const crit=items.filter(d=>d.state===CRIT).length;
+const low=items.filter(d=>d.state===LOW).length+crit;
 const ok=items.filter(d=>d.state===OK).length;
-document.getElementById('stats').innerHTML=`<div class="stat blue"><div class="num">${total}</div><div class="lbl">Tổng vật tư</div></div><div class="stat green"><div class="num">${ok}</div><div class="lbl">Đủ kho</div></div><div class="stat red"><div class="num">${low}</div><div class="lbl">Sắp hết</div></div><div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy cấp</div></div>`;
+const lows=items.filter(d=>d.state===CRIT||d.state===LOW);
+if(lows.length){
+const lb=document.getElementById('lowBanner');
+lb.classList.add('show');
+lb.insertAdjacentHTML('beforeend',lows.map(d=>`<button class="bpill" data-n="${d.name}">${d.name}${d.state===CRIT?' \u26a0':''}</button>`).join(''));
+lb.addEventListener('click',e=>{const b=e.target.closest('.bpill');if(!b)return;
+const row=document.querySelector(`tr[data-name="${CSS.escape(b.dataset.n)}"]`);
+if(row){row.scrollIntoView({behavior:'smooth',block:'center'});row.classList.remove('flash');void row.offsetWidth;row.classList.add('flash');}});
+}
+document.getElementById('stats').innerHTML=
+ `<div class="stat blue"><div class="num">${total}</div><div class="lbl">T\u1ed5ng v\u1eadt t\u01b0</div></div>`+
+ `<div class="stat green"><div class="num">${ok}</div><div class="lbl">\u0110\u1ee7 kho</div></div>`+
+ `<div class="stat red"><div class="num">${low}</div><div class="lbl">S\u1eafp h\u1ebft</div></div>`+
+ `<div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy c\u1ea5p</div></div>`;
+document.querySelectorAll('#stats .num').forEach((el,i)=>{
+const to=[total,ok,low,crit][i],t0=performance.now();
+const tick=n=>{const p=Math.min((n-t0)/900,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)};
+requestAnimationFrame(tick);});
 Chart.defaults.font.family='Montserrat';Chart.defaults.color='#C9CDD4';Chart.defaults.borderColor='rgba(238,238,238,.1)';
+const centerPlugin={id:'ct',afterDraw(c){const info=c.$c;if(!info)return;const m=c.getDatasetMeta(0);if(!m.data.length)return;
+const {x,y}=m.data[0];const g=c.ctx;g.save();g.textAlign='center';g.textBaseline='middle';
+g.fillStyle='#EEEEEE';g.font='800 '+Math.round(y*.34)+'px Montserrat';g.fillText(info.big,x,y-7);
+g.fillStyle='#C9CDD4';g.font='600 11px Montserrat';g.fillText(info.small,x,y+15);g.restore();}};
+Chart.register(centerPlugin);
 const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
-new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}});
-new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}});
-const QTY={'Nhựa PLA - trong suốt R3D':0.135};
+new Chart(document.getElementById('catChart'),{type:'doughnut',
+data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},
+options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:total,small:'v\u1eadt t\u01b0'};
+new Chart(document.getElementById('statusChart'),{type:'doughnut',
+data:{labels:['\u0110\u1ee7 kho','S\u1eafp h\u1ebft','Nguy c\u1ea5p','Kh\u00f4ng d\u00f9ng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},
+options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:ok,small:'\u0111\u1ee7 kho'};
+
+const QTY={'Nh\u1ef1a PLA - trong su\u1ed1t R3D':0.135};
 const PCOLORS={
  'floria_desert_tan_base':'#C7A57B','floria_olive_green_base':'#626846','floria_matte_red_base':'#B03A3A',
  'floria_burnt_orange_base':'#D46C34','floria_persian_blue_base':'#274FD0','floria_milky_base':'#EAE6DC',
  'floria_standard_skin':'#E8D5C0','strata_matte_red_base':'#B03A3A','strata_matte_red_skin':'#B03A3A',
  'strata_navy_blue_base':'#394157','strata_dark_blue_skin':'#1F2A44',
- 'Nhựa PLA - trong suốt R3D':'#CFE3EE','Nhựa PLA Matte - Milky':'#EAE6DC','Nhựa PLA Basic - Persian Blue Bambu':'#274FD0',
- 'Nhựa PLA Basic - Burnt Orange R3D':'#D46C34','Nhựa PLA Matte - Matte Red':'#B03A3A',
- 'Nhựa PLA Matte - Olive Green Tinmorry':'#626846','Nhựa PLA Matte - Desert Tan Bambu':'#C7A57B',
- 'Nhựa PLA Matte - Dark Blue Bambu':'#1F2A44','Nhựa PLA Matte - Navy Blue Tinmorry':'#394157'
+ 'Nh\u1ef1a PLA - trong su\u1ed1t R3D':'#CFE3EE','Nh\u1ef1a PLA Matte - Milky':'#EAE6DC','Nh\u1ef1a PLA Basic - Persian Blue Bambu':'#274FD0',
+ 'Nh\u1ef1a PLA Basic - Burnt Orange R3D':'#D46C34','Nh\u1ef1a PLA Matte - Matte Red':'#B03A3A',
+ 'Nh\u1ef1a PLA Matte - Olive Green Tinmorry':'#626846','Nh\u1ef1a PLA Matte - Desert Tan Bambu':'#C7A57B',
+ 'Nh\u1ef1a PLA Matte - Dark Blue Bambu':'#1F2A44','Nh\u1ef1a PLA Matte - Navy Blue Tinmorry':'#394157'
 };
 const byName={};items.forEach(d=>byName[d.name]=d);
-function capOf(n,d){if(!d||d.stock==='—')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
+function capOf(n,d){if(!d||d.stock==='\u2014')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
 const tabsEl=document.getElementById('lampTabs'),panelsEl=document.getElementById('lampPanels');
 tabsEl.innerHTML=Object.keys(LAMPS).map((k,i)=>`<button class="chip ${i===0?'active':''}" data-l="${i}">${k}</button>`).join('');
 panelsEl.innerHTML=Object.entries(LAMPS).map(([k,names],i)=>{
-const rows=names.map(n=>{
-const d=byName[n]||{name:n,stock:'—',unit:'',state:'unused',alert:0};
+const rows=names.map((n,j)=>{
+const d=byName[n]||{name:n,stock:'\u2014',unit:'',state:'unused',alert:0};
 const cap=capOf(n,d);
 const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:(d.stock>0?100:0);
 const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
-const stTxt=d.state===CRIT?'NGUY CẤP':d.state===LOW?'SẮP HẾT':d.state===UNUSED?'KHÔNG DÙNG':'ĐỦ';
+const stTxt=d.state===CRIT?'NGUY C\u1ea4P':d.state===LOW?'S\u1eaeP H\u1ebeT':d.state===UNUSED?'KH\u00d4NG D\u00d9NG':'\u0110\u1ee6';
 const stColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
 const chip=PCOLORS[n]?`<span class="pchip" style="background:${PCOLORS[n]}"></span>`:'';
-return `<div class="part"><div class="pn">${chip}${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div style="width:${pct}%;background:${bc}"></div></div><div class="pcap"><b>≈${cap}</b> đèn · <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
+return `<div class="part" style="animation-delay:${j*45}ms"><div class="pn">${chip}${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div data-w="${pct}" style="background:${bc}"></div></div><div class="pcap"><b>\u2248${cap}</b> \u0111\u00e8n \u00b7 <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
 const shared=names.filter(n=>!n.includes('_base')||n.includes('skin')).map(n=>capOf(n,byName[n]));
 const capacity=shared.length?Math.min(...shared):0;
-return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">⚡ Đủ linh kiện chung để lắp <b>≈${capacity}</b> đèn (chưa tính base theo màu)</div>${rows}</div>`}).join('');
+return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">\u26a1 \u0110\u1ee7 linh ki\u1ec7n chung \u0111\u1ec3 l\u1eafp <b>\u2248${capacity}</b> \u0111\u00e8n (ch\u01b0a t\u00ednh base theo m\u00e0u)</div>${rows}</div>`}).join('');
+setTimeout(()=>{document.querySelectorAll('.parts-grid.show .pbar>div').forEach(b=>{b.style.width=b.dataset.w+'%'})},80);
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
 document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
-document.querySelectorAll('.parts-grid').forEach((g,i)=>g.classList.toggle('show',String(i)===b.dataset.l))});
-let filter='ALL';
+document.querySelectorAll('.parts-grid').forEach((g,i)=>{const on=String(i)===b.dataset.l;g.classList.toggle('show',on);
+if(on)g.querySelectorAll('.pbar>div').forEach(bar=>{bar.style.width='0';setTimeout(()=>{bar.style.width=bar.dataset.w+'%'},60)})})});
+let filter='ALL',query='';
 const catsAll=['ALL',...new Set(items.map(d=>d.cat))];
 const filtersEl=document.getElementById('filters');
 filtersEl.innerHTML=catsAll.map(c=>`<button class="chip ${c==='ALL'?'active':''}" data-c="${c}">${c}</button>`).join('');
 filtersEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.c;
 document.querySelectorAll('#filters .chip').forEach(x=>x.classList.toggle('active',x.dataset.c===filter));render()});
+document.getElementById('q').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render()});
 function render(){
-const rows=items.filter(d=>filter==='ALL'||d.cat===filter);
+const rows=items.filter(d=>{
+const okf=filter==='ALL'||d.cat===filter;
+const okq=!query||d.name.toLowerCase().includes(query)||d.cat.toLowerCase().includes(query);
+return okf&&okq});
 document.getElementById('tbody').innerHTML=rows.map(d=>{
 const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:100;
 const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
-return `<tr><td>${d.name}</td><td class="hm"><span class="cat-tag">${d.cat}</span></td><td style="font-weight:800;font-size:15px;color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</td><td class="hm">${d.unit}</td><td class="hm" style="min-width:140px"><div class="bar"><div style="width:${pct}%;background:${bc}"></div></div></td><td><span class="badge ${d.state}">${d.state.toUpperCase()}</span></td></tr>`}).join('')}
+return `<tr data-name="${d.name.replace(/"/g,'&quot;')}"><td>${d.name}</td><td class="hm"><span class="cat-tag">${d.cat}</span></td><td class="num-cell">${d.stock}</td><td class="hm">${d.unit}</td><td class="hm" style="min-width:140px"><div class="bar"><div style="width:${pct}%;background:${bc}"></div></div></td><td><span class="badge ${d.state}">${d.state.toUpperCase()}</span></td></tr>`}).join('')}
 render();
+const tt=document.getElementById('toTop');
+addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>420),{passive:true});
+tt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
 </script>
 </body>
