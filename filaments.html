@@ -35,8 +35,9 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 .badge.crit{background:rgba(255,178,36,.14);color:var(--amber);border:1px solid rgba(255,178,36,.45)}
 .chart-card{margin-bottom:28px;background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:22px}
 .chart-card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
-#kgChartWrap{height:300px}
+#kgChartWrap{height:320px}#kgChartWrap canvas{max-height:100%}
 .note{font-size:11px;color:var(--dim);opacity:.75;margin-top:14px}
+@media(max-width:640px){.wrap{padding:16px 12px 48px}.grid{grid-template-columns:1fr 1fr;gap:12px}.hero h1{font-size:24px}nav{padding:14px 16px}.chart-card{padding:16px 14px}.body{padding:12px 12px 14px}.name{font-size:12px;min-height:34px}.stocknum{font-size:24px}}
 footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
 </style>
 </head>
@@ -72,7 +73,7 @@ new Chart(document.getElementById('kgChart'),{type:'bar',data:{
 labels:fils.map(d=>d.name.replace('Nhựa PLA','').trim()),
 datasets:[{label:'Stock (kg)',data:fils.map(d=>d.stock),backgroundColor:fils.map(d=>(FIL[d.name]||{}).hex||'#4D79FF'),borderRadius:6},
 {label:'Alert (kg)',data:fils.map(d=>d.alert),backgroundColor:'rgba(238,238,238,.18)',borderRadius:6}]},
-options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(238,238,238,.08)'}},y:{ticks:{font:{size:11}},grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}}}});
+options:{maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(238,238,238,.08)'}},y:{ticks:{font:{size:11}},grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:11},padding:10}}}}});
 document.getElementById('cards').innerHTML=fils.map(d=>{
 const f=FIL[d.name]||{hex:'#888',brand:'?',type:'PLA'};
 const pct=Math.min(d.stock/d.alert,2)/2*100;
