@@ -32,7 +32,17 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}55%{box-shadow:0 0 0 7px rgba(48,164,108,0)}}
 .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:26px 20px 64px}
 #errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px;border-radius:10px}
-#lowBanner{display:none;padding:8px 14px;border-radius:10px;background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.3);margin-bottom:18px;animation:fadeUp .45s ease-out both;font-size:12px}\n#lowBanner.show{display:block}\n#lowBanner .bhead{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}\n#lowBanner .btitle{font-size:11.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#FF9FA2}\n#lowBanner .bcount{color:#FFB3B6;font-weight:700}\n#lowBanner .btoggle{margin-left:auto;color:var(--dim);font-size:11px;border:none;background:none;cursor:pointer;font-family:inherit;transition:transform .25s}\n#lowBanner.open .btoggle{transform:rotate(180deg)}\n.bpillwrap{display:none;flex-wrap:wrap;gap:6px;margin-top:8px}\n#lowBanner.open .bpillwrap{display:flex}\n.bpill{padding:3px 10px;border-radius:999px;background:rgba(229,72,77,.12);border:1px solid rgba(229,72,77,.35);color:#FFB3B6;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .25s}\n.bpill:hover{background:rgba(229,72,77,.28)}
+#lowBanner{display:none;padding:8px 14px;border-radius:10px;background:rgba(229,72,77,.09);border:1px solid rgba(229,72,77,.3);margin-bottom:18px;animation:fadeUp .45s ease-out both;font-size:12px}
+#lowBanner.show{display:block}
+#lowBanner .bhead{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+#lowBanner .btitle{font-size:11.5px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#FF9FA2}
+#lowBanner .bcount{color:#FFB3B6;font-weight:700}
+#lowBanner .btoggle{margin-left:auto;color:var(--dim);font-size:11px;border:none;background:none;cursor:pointer;font-family:inherit;transition:transform .25s}
+#lowBanner.open .btoggle{transform:rotate(180deg)}
+.bpillwrap{display:none;flex-wrap:wrap;gap:6px;margin-top:8px}
+#lowBanner.open .bpillwrap{display:flex}
+.bpill{padding:3px 10px;border-radius:999px;background:rgba(229,72,77,.12);border:1px solid rgba(229,72,77,.35);color:#FFB3B6;font-size:11.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:background .25s}
+.bpill:hover{background:rgba(229,72,77,.28)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
 .stat{background:linear-gradient(180deg,rgba(238,238,238,.07),rgba(238,238,238,.025));border:1px solid rgba(238,238,238,.12);border-top-color:rgba(238,238,238,.22);border-radius:14px;padding:18px;text-align:center;animation:fadeUp .5s ease-out both;transition:transform .3s ease-out,box-shadow .3s ease-out}
 .stat:nth-child(2){animation-delay:.06s}.stat:nth-child(3){animation-delay:.12s}.stat:nth-child(4){animation-delay:.18s}
@@ -61,7 +71,6 @@ tr.flash td{animation:rowflash 1.8s ease-out}
 .badge.crit{background:rgba(255,178,36,.14);color:var(--amber);border:1px solid rgba(255,178,36,.45)}
 .badge.unused{background:rgba(238,238,238,.08);color:var(--dim);border:1px solid rgba(238,238,238,.2)}
 .cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
-'.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .chip{padding:9px 15px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase;transition:all .25s ease-out}
 .chip:hover{border-color:rgba(126,166,255,.55);color:#fff;transform:translateY(-1px)}
@@ -113,7 +122,7 @@ thead th{padding:10px;font-size:11px}
 <div class="hero"><h1>Inventory Dashboard</h1><p>AERA LOGISTIC · Persian Blue × Platinum</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div></div>
 <div class="wrap">
 <div id="errbox"></div>
-<div id="lowBanner"><span class="btitle">⚠ Cần chú ý</span></div>
+<div id="lowBanner"><div class="bhead" onclick="this.parentElement.classList.toggle('open')"><span class="btitle">⚠ Cần chú ý</span><span class="bcount" id="lowCount"></span><button class="btoggle" tabindex="-1">▼</button></div><div class="bpillwrap" id="lowPills"></div></div>
 <div class="stats" id="stats"></div>
 <div class="grid2" style="margin-bottom:24px">
 <div class="card"><h2>● Stock theo Category</h2><div class="chart-box"><canvas id="catChart"></canvas></div></div>
@@ -149,9 +158,9 @@ const LAMPS = {
 let items=[],META={};
 try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];META=_j;}catch(e){
 const eb=document.getElementById('errbox');eb.style.display='block';
-eb.textContent='Kh\u00f4ng t\u1ea3i \u0111\u01b0\u1ee3c inventory.json';
+eb.textContent='Không tải được inventory.json';
 return;}
-if(META.generated)document.getElementById('liveTxt').textContent='Live \u00b7 c\u1eadp nh\u1eadt '+META.generated;
+if(META.generated)document.getElementById('liveTxt').textContent='Live · cập nhật '+META.generated;
 const CRIT='crit',LOW='low',OK='ok',UNUSED='unused';
 items.forEach(d=>{d.state=d.alert===0?UNUSED:d.stock<=d.alert*.5?CRIT:d.stock<=d.alert?LOW:OK});
 const total=items.length;
@@ -162,16 +171,16 @@ const lows=items.filter(d=>d.state===CRIT||d.state===LOW);
 if(lows.length){
 const lb=document.getElementById('lowBanner');
 lb.classList.add('show');
-lb.insertAdjacentHTML('beforeend',lows.map(d=>`<button class="bpill" data-n="${d.name}">${d.name}${d.state===CRIT?' \u26a0':''}</button>`).join(''));
+document.getElementById('lowCount').textContent=lows.length+' vật tư sắp hết';document.getElementById('lowPills').innerHTML=lows.map(d=>`<button class="bpill" data-n="${d.name}">${d.name}${d.state===CRIT?' ⚠':''}</button>`).join('');
 lb.addEventListener('click',e=>{const b=e.target.closest('.bpill');if(!b)return;
 const row=document.querySelector(`tr[data-name="${CSS.escape(b.dataset.n)}"]`);
 if(row){row.scrollIntoView({behavior:'smooth',block:'center'});row.classList.remove('flash');void row.offsetWidth;row.classList.add('flash');}});
 }
 document.getElementById('stats').innerHTML=
- `<div class="stat blue"><div class="num">${total}</div><div class="lbl">T\u1ed5ng v\u1eadt t\u01b0</div></div>`+
- `<div class="stat green"><div class="num">${ok}</div><div class="lbl">\u0110\u1ee7 kho</div></div>`+
- `<div class="stat red"><div class="num">${low}</div><div class="lbl">S\u1eafp h\u1ebft</div></div>`+
- `<div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy c\u1ea5p</div></div>`;
+ `<div class="stat blue"><div class="num">${total}</div><div class="lbl">Tổng vật tư</div></div>`+
+ `<div class="stat green"><div class="num">${ok}</div><div class="lbl">Đủ kho</div></div>`+
+ `<div class="stat red"><div class="num">${low}</div><div class="lbl">Sắp hết</div></div>`+
+ `<div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy cấp</div></div>`;
 document.querySelectorAll('#stats .num').forEach((el,i)=>{
 const to=[total,ok,low,crit][i],t0=performance.now();
 const tick=n=>{const p=Math.min((n-t0)/900,1);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(tick)};
@@ -185,39 +194,39 @@ Chart.register(centerPlugin);
 const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
 new Chart(document.getElementById('catChart'),{type:'doughnut',
 data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},
-options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:total,small:'v\u1eadt t\u01b0'};
+options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:total,small:'vật tư'};
 new Chart(document.getElementById('statusChart'),{type:'doughnut',
-data:{labels:['\u0110\u1ee7 kho','S\u1eafp h\u1ebft','Nguy c\u1ea5p','Kh\u00f4ng d\u00f9ng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},
-options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:ok,small:'\u0111\u1ee7 kho'};
+data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},
+options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:ok,small:'đủ kho'};
 
-const QTY={'Nh\u1ef1a PLA - trong su\u1ed1t R3D':0.135};
+const QTY={'Nhựa PLA - trong suốt R3D':0.135};
 const PCOLORS={
  'floria_desert_tan_base':'#C7A57B','floria_olive_green_base':'#626846','floria_matte_red_base':'#B03A3A',
  'floria_burnt_orange_base':'#D46C34','floria_persian_blue_base':'#274FD0','floria_milky_base':'#EAE6DC',
  'floria_standard_skin':'#E8D5C0','strata_matte_red_base':'#B03A3A','strata_matte_red_skin':'#B03A3A',
  'strata_navy_blue_base':'#394157','strata_dark_blue_skin':'#1F2A44',
- 'Nh\u1ef1a PLA - trong su\u1ed1t R3D':'#CFE3EE','Nh\u1ef1a PLA Matte - Milky':'#EAE6DC','Nh\u1ef1a PLA Basic - Persian Blue Bambu':'#274FD0',
- 'Nh\u1ef1a PLA Basic - Burnt Orange R3D':'#D46C34','Nh\u1ef1a PLA Matte - Matte Red':'#B03A3A',
- 'Nh\u1ef1a PLA Matte - Olive Green Tinmorry':'#626846','Nh\u1ef1a PLA Matte - Desert Tan Bambu':'#C7A57B',
- 'Nh\u1ef1a PLA Matte - Dark Blue Bambu':'#1F2A44','Nh\u1ef1a PLA Matte - Navy Blue Tinmorry':'#394157'
+ 'Nhựa PLA - trong suốt R3D':'#CFE3EE','Nhựa PLA Matte - Milky':'#EAE6DC','Nhựa PLA Basic - Persian Blue Bambu':'#274FD0',
+ 'Nhựa PLA Basic - Burnt Orange R3D':'#D46C34','Nhựa PLA Matte - Matte Red':'#B03A3A',
+ 'Nhựa PLA Matte - Olive Green Tinmorry':'#626846','Nhựa PLA Matte - Desert Tan Bambu':'#C7A57B',
+ 'Nhựa PLA Matte - Dark Blue Bambu':'#1F2A44','Nhựa PLA Matte - Navy Blue Tinmorry':'#394157'
 };
 const byName={};items.forEach(d=>byName[d.name]=d);
-function capOf(n,d){if(!d||d.stock==='\u2014')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
+function capOf(n,d){if(!d||d.stock==='—')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
 const tabsEl=document.getElementById('lampTabs'),panelsEl=document.getElementById('lampPanels');
 tabsEl.innerHTML=Object.keys(LAMPS).map((k,i)=>`<button class="chip ${i===0?'active':''}" data-l="${i}">${k}</button>`).join('');
 panelsEl.innerHTML=Object.entries(LAMPS).map(([k,names],i)=>{
 const rows=names.map((n,j)=>{
-const d=byName[n]||{name:n,stock:'\u2014',unit:'',state:'unused',alert:0};
+const d=byName[n]||{name:n,stock:'—',unit:'',state:'unused',alert:0};
 const cap=capOf(n,d);
 const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:(d.stock>0?100:0);
 const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
-const stTxt=d.state===CRIT?'NGUY C\u1ea4P':d.state===LOW?'S\u1eaeP H\u1ebeT':d.state===UNUSED?'KH\u00d4NG D\u00d9NG':'\u0110\u1ee6';
+const stTxt=d.state===CRIT?'NGUY CẤP':d.state===LOW?'SẮP HẾT':d.state===UNUSED?'KHÔNG DÙNG':'ĐỦ';
 const stColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
 const chip=PCOLORS[n]?`<span class="pchip" style="background:${PCOLORS[n]}"></span>`:'';
-return `<div class="part" style="animation-delay:${j*45}ms"><div class="pn">${chip}${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div data-w="${pct}" style="background:${bc}"></div></div><div class="pcap"><b>\u2248${cap}</b> \u0111\u00e8n \u00b7 <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
+return `<div class="part" style="animation-delay:${j*45}ms"><div class="pn">${chip}${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div data-w="${pct}" style="background:${bc}"></div></div><div class="pcap"><b>≈${cap}</b> đèn · <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
 const shared=names.filter(n=>!n.includes('_base')||n.includes('skin')).map(n=>capOf(n,byName[n]));
 const capacity=shared.length?Math.min(...shared):0;
-return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">\u26a1 \u0110\u1ee7 linh ki\u1ec7n chung \u0111\u1ec3 l\u1eafp <b>\u2248${capacity}</b> \u0111\u00e8n (ch\u01b0a t\u00ednh base theo m\u00e0u)</div>${rows}</div>`}).join('');
+return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">⚡ Đủ linh kiện chung để lắp <b>≈${capacity}</b> đèn (chưa tính base theo màu)</div>${rows}</div>`}).join('');
 setTimeout(()=>{document.querySelectorAll('.parts-grid.show .pbar>div').forEach(b=>{b.style.width=b.dataset.w+'%'})},80);
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
 document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
