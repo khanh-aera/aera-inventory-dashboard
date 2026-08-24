@@ -42,16 +42,22 @@ tbody tr:hover{background:rgba(238,238,238,.04)}
 .chip.active{background:var(--pb);border-color:var(--pb);color:#fff}
 .bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden;min-width:130px}
 .bar>div{height:100%;border-radius:4px}
-.lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.parts-grid{display:none;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.parts-grid.show{display:grid}
-.part{background:rgba(0,27,94,.5);border:1px solid rgba(238,238,238,.12);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.part .pn{font-size:12.5px;font-weight:600;line-height:1.3;flex:1}
-.part .pv{display:flex;align-items:center;gap:8px}
-.part .ps{font-size:20px;font-weight:800}
-.part .pu{font-size:11px;color:var(--dim)}
-.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.dot.ok{background:var(--green)}.dot.low{background:var(--red)}.dot.crit{background:var(--amber)}.dot.unused{background:#8A8F98}
+.lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.capacity{font-size:13px;font-weight:700;margin-bottom:14px;padding:10px 14px;border-radius:10px;background:rgba(0,56,188,.25);border:1px solid rgba(126,166,255,.35)}
+.capacity b{font-size:20px;color:#7EA6FF}
+.parts-grid{display:none;flex-direction:column;gap:10px}
+.parts-grid.show{display:flex}
+.part{display:grid;grid-template-columns:1fr 90px 150px 110px;align-items:center;gap:14px;background:rgba(0,27,94,.6);border:1px solid rgba(238,238,238,.14);border-radius:12px;padding:12px 18px}
+.part .pn{font-size:14.5px;font-weight:600;line-height:1.35}
+.part .pv{text-align:right}
+.part .ps{font-size:26px;font-weight:800;color:#7EA6FF}
+.part .ps.warn{color:#EEEEEE}
+.part .pu{font-size:11px;color:var(--dim);margin-left:4px}
+.pbar{height:10px;border-radius:5px;background:rgba(238,238,238,.12);overflow:hidden}
+.pbar>div{height:100%;border-radius:5px}
+.pcap{font-size:12.5px;color:var(--dim);text-align:right}
+.pcap b{color:#EEEEEE;font-size:15px}
+@media(max-width:640px){.part{grid-template-columns:1fr 80px}.pbar,.pcap{display:none}}
 footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
 </style>
 </head>
@@ -106,12 +112,23 @@ Chart.defaults.font.family='Montserrat';Chart.defaults.color='#C9CDD4';Chart.def
 const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
 new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
 new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
+const QTY={'Nhựa PLA - trong suốt R3D':0.135};
 const byName={};items.forEach(d=>byName[d.name]=d);
+function capOf(n,d){if(!d||d.stock==='—')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
 const tabsEl=document.getElementById('lampTabs'),panelsEl=document.getElementById('lampPanels');
 tabsEl.innerHTML=Object.keys(LAMPS).map((k,i)=>`<button class="chip ${i===0?'active':''}" data-l="${i}">${k}</button>`).join('');
-panelsEl.innerHTML=Object.entries(LAMPS).map(([k,names],i)=>`<div class="parts-grid ${i===0?'show':''}" id="lp${i}">${names.map(n=>{
-const d=byName[n]||{name:n,stock:'—',unit:'',state:'unused'};
-return `<div class="part"><div class="pn">${n}</div><div class="pv"><span class="pu">${d.unit}</span><span class="ps" style="color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</span><span class="dot ${d.state}" title="${d.state}"></span></div></div>`}).join('')}</div>`).join('');
+panelsEl.innerHTML=Object.entries(LAMPS).map(([k,names],i)=>{
+const rows=names.map(n=>{
+const d=byName[n]||{name:n,stock:'—',unit:'',state:'unused',alert:0};
+const cap=capOf(n,d);
+const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:(d.stock>0?100:0);
+const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
+const stTxt=d.state===CRIT?'NGUY CẤP':d.state===LOW?'SẮP HẾT':d.state===UNUSED?'KHÔNG DÙNG':'ĐỦ';
+const stColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
+return `<div class="part"><div class="pn">${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div style="width:${pct}%;background:${bc}"></div></div><div class="pcap"><b>≈${cap}</b> đèn · <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
+const shared=names.filter(n=>!n.includes('_base')||n.includes('skin')).map(n=>capOf(n,byName[n]));
+const capacity=shared.length?Math.min(...shared):0;
+return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">⚡ Đủ linh kiện chung để lắp <b>≈${capacity}</b> đèn (chưa tính base theo màu)</div>${rows}</div>`}).join('');
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
 document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
 document.querySelectorAll('.parts-grid').forEach((g,i)=>g.classList.toggle('show',String(i)===b.dataset.l))});
