@@ -1,1 +1,120 @@
-__PLACEHOLDER__
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AERA — Inventory Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{--persian-blue:#0038BC;--persian-blue-dark:#002A8C;--persian-blue-deep:#001B5E;--platinum:#EEEEEE;--platinum-dim:#C9CDD4;--alert-red:#E5484D;--ok-green:#30A46C;--warn-amber:#FFB224}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--persian-blue-deep);color:var(--platinum);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--persian-blue-deep) 0%,var(--persian-blue) 100%);padding:48px 24px 36px;text-align:center;border-bottom:3px solid var(--platinum)}
+.hero .glyph{font-size:64px;font-weight:800;letter-spacing:-2px;color:var(--platinum)}
+.hero h1{font-size:15px;font-weight:500;letter-spacing:6px;text-transform:uppercase;margin-top:8px;color:var(--platinum-dim)}
+.hero .updated{margin-top:12px;font-size:12px;color:var(--platinum-dim);opacity:.8}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 20px 64px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:36px}
+.stat{background:rgba(238,238,238,.06);border:1px solid rgba(238,238,238,.14);border-radius:14px;padding:20px;text-align:center}
+.stat .num{font-size:34px;font-weight:800}.stat .lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--platinum-dim);margin-top:4px}
+.stat.blue .num{color:#7EA6FF}.stat.red .num{color:var(--alert-red)}.stat.green .num{color:var(--ok-green)}.stat.amber .num{color:var(--warn-amber)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+.card{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:24px}
+.card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:18px;color:var(--platinum)}
+.card h2 .dot{color:var(--persian-blue)}
+.chart-box{position:relative;height:320px}.chart-box.tall{height:420px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:10px 12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--platinum-dim);border-bottom:2px solid rgba(238,238,238,.25);cursor:pointer;user-select:none;white-space:nowrap}
+thead th:hover{color:var(--platinum)}
+tbody td{padding:10px 12px;border-bottom:1px solid rgba(238,238,238,.08)}
+tbody tr:hover{background:rgba(238,238,238,.05)}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:1px}
+.badge.ok{background:rgba(48,164,108,.16);color:var(--ok-green);border:1px solid rgba(48,164,108,.4)}
+.badge.low{background:rgba(229,72,77,.16);color:var(--alert-red);border:1px solid rgba(229,72,77,.4)}
+.badge.crit{background:rgba(255,178,36,.14);color:var(--warn-amber);border:1px solid rgba(255,178,36,.45)}
+.badge.unused{background:rgba(238,238,238,.08);color:var(--platinum-dim);border:1px solid rgba(238,238,238,.2)}
+.cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--platinum-dim)}
+.bar-cell{min-width:140px}
+.bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden}
+.bar>div{height:100%;border-radius:4px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:6px 14px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--platinum-dim);cursor:pointer;font-family:inherit;text-transform:uppercase}
+.chip.active{background:var(--persian-blue);border-color:var(--persian-blue);color:#fff}
+footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--platinum-dim);opacity:.7}
+#errbox{display:none;background:var(--alert-red);color:#fff;padding:12px;text-align:center;font-family:Montserrat}
+</style>
+</head>
+<body>
+<div id="errbox"></div>
+<div class="hero">
+<div class="glyph">æ</div>
+<h1>Inventory Dashboard</h1>
+<div class="updated" id="updated">AERA LOGISTIC · Nguồn: inventory.json</div>
+</div>
+<div class="wrap">
+<div class="stats" id="stats"></div>
+<div class="grid2">
+<div class="card"><h2><span class="dot">●</span> Stock theo Category</h2><div class="chart-box"><canvas id="catChart"></canvas></div></div>
+<div class="card"><h2><span class="dot">●</span> Tình trạng kho</h2><div class="chart-box"><canvas id="statusChart"></canvas></div></div>
+</div>
+<div class="card" style="margin-bottom:36px"><h2><span class="dot">●</span> Stock vs Alert Level (Filament & Component)</h2><div class="chart-box tall"><canvas id="stockChart"></canvas></div></div>
+<div class="card">
+<h2><span class="dot">●</span> Bảng kho chi tiết</h2>
+<div class="filters" id="filters"></div>
+<div style="overflow-x:auto">
+<table>
+<thead><tr><th>Material</th><th>Category</th><th>Stock</th><th>Unit</th><th>Alert</th><th class="bar-cell">Mức độ</th><th>Status</th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+</div>
+</div>
+<footer>AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATINUM</footer>
+<script>
+(async () => {
+let DATA=[];
+try{
+const resp=await fetch('./inventory.json?t='+Date.now());
+DATA=await resp.json();
+}catch(e){
+document.getElementById('errbox').style.display='block';
+document.getElementById('errbox').textContent='Không tải được inventory.json — mở qua HTTP (GitHub Pages), không dùng file://';
+return;
+}
+if(DATA.generated){document.getElementById('updated').textContent='Cập nhật: '+DATA.generated+' · Nguồn: inventory.json'}
+const items=DATA.items||DATA;
+const CRIT='crit',LOW='low',OK='ok',UNUSED='unused';
+items.forEach(d=>{if(d.alert===0)d.state=UNUSED;else if(d.stock<=d.alert*0.5)d.state=CRIT;else if(d.stock<=d.alert)d.state=LOW;else d.state=OK});
+const total=items.length;
+const low=items.filter(d=>d.state===LOW||d.state===CRIT).length;
+const crit=items.filter(d=>d.state===CRIT).length;
+const ok=items.filter(d=>d.state===OK).length;
+document.getElementById('stats').innerHTML=`<div class="stat blue"><div class="num">${total}</div><div class="lbl">Tổng vật tư</div></div><div class="stat green"><div class="num">${ok}</div><div class="lbl">Đủ kho</div></div><div class="stat red"><div class="num">${low}</div><div class="lbl">Sắp hết</div></div><div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy cấp</div></div>`;
+Chart.defaults.font.family='Montserrat';Chart.defaults.color='#C9CDD4';Chart.defaults.borderColor='rgba(238,238,238,.1)';
+const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
+const catNames=Object.keys(cats);
+new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:catNames,datasets:[{data:catNames.map(c=>cats[c]),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});
+new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});
+const tracked=items.filter(d=>d.cat==='Filament'||d.cat==='Component');
+new Chart(document.getElementById('stockChart'),{type:'bar',data:{labels:tracked.map(d=>d.name),datasets:[{label:'Stock',data:tracked.map(d=>d.stock),backgroundColor:'#4D79FF',borderRadius:4},{label:'Alert level',data:tracked.map(d=>d.alert),backgroundColor:'rgba(229,72,77,.75)',borderRadius:4}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(238,238,238,.08)'}},y:{ticks:{font:{size:10.5}},grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}}}});
+let filter='ALL';
+const catsAll=['ALL',...new Set(items.map(d=>d.cat))];
+const filtersEl=document.getElementById('filters');
+filtersEl.innerHTML=catsAll.map(c=>`<button class="chip ${c==='ALL'?'active':''}" data-c="${c}">${c}</button>`).join('');
+filtersEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x.dataset.c===filter));render()});
+const stateBadge=s=>({ok:'<span class="badge ok">OK</span>',low:'<span class="badge low">LOW</span>',crit:'<span class="badge crit">CRITICAL</span>',unused:'<span class="badge unused">UNUSED</span>'}[s]);
+function render(){
+const rows=items.filter(d=>filter==='ALL'||d.cat===filter);
+document.getElementById('tbody').innerHTML=rows.map(d=>{
+const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2:1;
+const barColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
+return `<tr><td>${d.name}</td><td><span class="cat-tag">${d.cat}</span></td><td style="font-weight:700;color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</td><td>${d.unit}</td><td>${d.alert}</td><td class="bar-cell"><div class="bar"><div style="width:${pct*100}%;background:${barColor}"></div></div></td><td>${stateBadge(d.state)}</td></tr>`}).join('')}
+render();
+})();
+</script>
+</body>
+</html>
