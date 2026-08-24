@@ -66,9 +66,6 @@ tr.flash td{animation:rowflash 1.8s ease-out}
 .badge.unused{background:rgba(238,238,238,.08);color:var(--dim);border:1px solid rgba(238,238,238,.2)}
 .cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
 '.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.search{flex:1;min-width:200px;max-width:320px;padding:10px 16px;border-radius:999px;border:1px solid rgba(238,238,238,.22);background:rgba(238,238,238,.05);color:var(--plat);font-family:inherit;font-size:13px;outline:none;transition:border-color .25s,background .25s}
-.search::placeholder{color:var(--dim)}
-.search:focus{border-color:var(--pb);background:rgba(0,56,188,.12)}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .chip{padding:9px 15px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase;transition:all .25s ease-out}
 .chip:hover{border-color:rgba(126,166,255,.55);color:#fff;transform:translateY(-1px)}
@@ -135,10 +132,7 @@ thead th{padding:10px;font-size:11px}
 </div>
 <div class="card">
 <h2>● Toàn bộ kho</h2>
-<div class="toolbar">
-<input type="text" class="search" id="q" placeholder="🔍 Tìm vật tư...">
 <div class="filters" id="filters"></div>
-</div>
 <div style="overflow-x:auto">
 <table>
 <thead><tr><th>Material</th><th class="hm">Category</th><th>Stock</th><th class="hm">Unit</th><th class="hm">Mức độ</th><th>Status</th></tr></thead>
@@ -233,18 +227,16 @@ tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)retu
 document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
 document.querySelectorAll('.parts-grid').forEach((g,i)=>{const on=String(i)===b.dataset.l;g.classList.toggle('show',on);
 if(on)g.querySelectorAll('.pbar>div').forEach(bar=>{bar.style.width='0';setTimeout(()=>{bar.style.width=bar.dataset.w+'%'},60)})})});
-let filter='ALL',query='';
+let filter='ALL';
 const catsAll=['ALL',...new Set(items.map(d=>d.cat))];
 const filtersEl=document.getElementById('filters');
 filtersEl.innerHTML=catsAll.map(c=>`<button class="chip ${c==='ALL'?'active':''}" data-c="${c}">${c}</button>`).join('');
 filtersEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.c;
 document.querySelectorAll('#filters .chip').forEach(x=>x.classList.toggle('active',x.dataset.c===filter));render()});
-document.getElementById('q').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render()});
 function render(){
 const rows=items.filter(d=>{
 const okf=filter==='ALL'||d.cat===filter;
-const okq=!query||d.name.toLowerCase().includes(query)||d.cat.toLowerCase().includes(query);
-return okf&&okq});
+return okf});
 document.getElementById('tbody').innerHTML=rows.map(d=>{
 const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:100;
 const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
