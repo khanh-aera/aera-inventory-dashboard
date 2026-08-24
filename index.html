@@ -4,70 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AERA — Inventory Dashboard</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--persian-blue:#0038BC;--persian-blue-dark:#002A8C;--persian-blue-deep:#001B5E;--platinum:#EEEEEE;--platinum-dim:#C9CDD4;--alert-red:#E5484D;--ok-green:#30A46C;--warn-amber:#FFB224}
+:root{--pb:#0038BC;--pb-deep:#001B5E;--plat:#EEEEEE;--dim:#C9CDD4;--red:#E5484D;--green:#30A46C;--amber:#FFB224}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:var(--persian-blue-deep);color:var(--platinum);min-height:100vh}
-.hero{background:linear-gradient(135deg,var(--persian-blue-deep) 0%,var(--persian-blue) 100%);padding:48px 24px 36px;text-align:center;border-bottom:3px solid var(--platinum)}
-.hero .glyph{font-size:64px;font-weight:800;letter-spacing:-2px;color:var(--platinum)}
-.hero h1{font-size:15px;font-weight:500;letter-spacing:6px;text-transform:uppercase;margin-top:8px;color:var(--platinum-dim)}
-.hero .updated{margin-top:12px;font-size:12px;color:var(--platinum-dim);opacity:.8}
-.wrap{max-width:1200px;margin:0 auto;padding:32px 20px 64px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:36px}
-.stat{background:rgba(238,238,238,.06);border:1px solid rgba(238,238,238,.14);border-radius:14px;padding:20px;text-align:center}
-.stat .num{font-size:34px;font-weight:800}.stat .lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--platinum-dim);margin-top:4px}
-.stat.blue .num{color:#7EA6FF}.stat.red .num{color:var(--alert-red)}.stat.green .num{color:var(--ok-green)}.stat.amber .num{color:var(--warn-amber)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px}
+body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh}
+nav{display:flex;gap:20px;padding:16px 28px;background:rgba(0,27,94,.85);border-bottom:1px solid rgba(238,238,238,.15)}
+nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
+nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
+.hero{padding:36px 28px 8px;text-align:center}
+.hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.hero p{font-size:12px;color:var(--dim);margin-top:6px;letter-spacing:1px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 64px}
+#errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:28px}
+.stat{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:14px;padding:18px;text-align:center}
+.stat .num{font-size:32px;font-weight:800}.stat .lbl{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-top:4px}
+.stat.blue .num{color:#7EA6FF}.stat.red .num{color:var(--red)}.stat.green .num{color:var(--green)}.stat.amber .num{color:var(--amber)}
+.card{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:22px;margin-bottom:24px}
+.card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 @media(max-width:860px){.grid2{grid-template-columns:1fr}}
-.card{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:24px}
-.card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:18px;color:var(--platinum)}
-.card h2 .dot{color:var(--persian-blue)}
-.chart-box{position:relative;height:320px}.chart-box.tall{height:420px}
+.chart-box{position:relative;height:300px}
 table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{text-align:left;padding:10px 12px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--platinum-dim);border-bottom:2px solid rgba(238,238,238,.25);cursor:pointer;user-select:none;white-space:nowrap}
-thead th:hover{color:var(--platinum)}
-tbody td{padding:10px 12px;border-bottom:1px solid rgba(238,238,238,.08)}
-tbody tr:hover{background:rgba(238,238,238,.05)}
+thead th{text-align:left;padding:9px 11px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border-bottom:2px solid rgba(238,238,238,.25)}
+tbody td{padding:9px 11px;border-bottom:1px solid rgba(238,238,238,.08)}
+tbody tr:hover{background:rgba(238,238,238,.04)}
 .badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:1px}
-.badge.ok{background:rgba(48,164,108,.16);color:var(--ok-green);border:1px solid rgba(48,164,108,.4)}
-.badge.low{background:rgba(229,72,77,.16);color:var(--alert-red);border:1px solid rgba(229,72,77,.4)}
-.badge.crit{background:rgba(255,178,36,.14);color:var(--warn-amber);border:1px solid rgba(255,178,36,.45)}
-.badge.unused{background:rgba(238,238,238,.08);color:var(--platinum-dim);border:1px solid rgba(238,238,238,.2)}
-.cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--platinum-dim)}
-.bar-cell{min-width:140px}
-.bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden}
+.badge.ok{background:rgba(48,164,108,.16);color:var(--green);border:1px solid rgba(48,164,108,.4)}
+.badge.low{background:rgba(229,72,77,.16);color:var(--red);border:1px solid rgba(229,72,77,.4)}
+.badge.crit{background:rgba(255,178,36,.14);color:var(--amber);border:1px solid rgba(255,178,36,.45)}
+.badge.unused{background:rgba(238,238,238,.08);color:var(--dim);border:1px solid rgba(238,238,238,.2)}
+.cat-tag{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--dim)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chip{padding:6px 14px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase}
+.chip.active{background:var(--pb);border-color:var(--pb);color:#fff}
+.bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden;min-width:130px}
 .bar>div{height:100%;border-radius:4px}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chip{padding:6px 14px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--platinum-dim);cursor:pointer;font-family:inherit;text-transform:uppercase}
-.chip.active{background:var(--persian-blue);border-color:var(--persian-blue);color:#fff}
-footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--platinum-dim);opacity:.7}
-#errbox{display:none;background:var(--alert-red);color:#fff;padding:12px;text-align:center;font-family:Montserrat}
+.lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.parts-grid{display:none;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.parts-grid.show{display:grid}
+.part{background:rgba(0,27,94,.5);border:1px solid rgba(238,238,238,.12);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.part .pn{font-size:12.5px;font-weight:600;line-height:1.3;flex:1}
+.part .pv{display:flex;align-items:center;gap:8px}
+.part .ps{font-size:20px;font-weight:800}
+.part .pu{font-size:11px;color:var(--dim)}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot.ok{background:var(--green)}.dot.low{background:var(--red)}.dot.crit{background:var(--amber)}.dot.unused{background:#8A8F98}
+footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
 </style>
 </head>
 <body>
-<div id="errbox"></div>
-<div class="hero">
-<div class="glyph">æ</div>
-<h1>Inventory Dashboard</h1>
-<div class="updated" id="updated">AERA LOGISTIC · Nguồn: inventory.json</div>
-</div>
+<nav><a href="./" class="active">Tổng quan</a><a href="./filaments.html">Filament 🧵</a></nav>
+<div class="hero"><h1>Inventory Dashboard</h1><p id="updated">AERA LOGISTIC</p></div>
 <div class="wrap">
+<div id="errbox"></div>
 <div class="stats" id="stats"></div>
-<div class="grid2">
-<div class="card"><h2><span class="dot">●</span> Stock theo Category</h2><div class="chart-box"><canvas id="catChart"></canvas></div></div>
-<div class="card"><h2><span class="dot">●</span> Tình trạng kho</h2><div class="chart-box"><canvas id="statusChart"></canvas></div></div>
+<div class="grid2" style="margin-bottom:24px">
+<div class="card"><h2>● Stock theo Category</h2><div class="chart-box"><canvas id="catChart"></canvas></div></div>
+<div class="card"><h2>● Tình trạng kho</h2><div class="chart-box"><canvas id="statusChart"></canvas></div></div>
 </div>
-<div class="card" style="margin-bottom:36px"><h2><span class="dot">●</span> Stock vs Alert Level (Filament & Component)</h2><div class="chart-box tall"><canvas id="stockChart"></canvas></div></div>
 <div class="card">
-<h2><span class="dot">●</span> Bảng kho chi tiết</h2>
+<h2>● Linh kiện đèn đang bán</h2>
+<div class="lamp-tabs" id="lampTabs"></div>
+<div id="lampPanels"></div>
+</div>
+<div class="card">
+<h2>● Toàn bộ kho</h2>
 <div class="filters" id="filters"></div>
 <div style="overflow-x:auto">
 <table>
-<thead><tr><th>Material</th><th>Category</th><th>Stock</th><th>Unit</th><th>Alert</th><th class="bar-cell">Mức độ</th><th>Status</th></tr></thead>
+<thead><tr><th>Material</th><th>Category</th><th>Stock</th><th>Unit</th><th>Mức độ</th><th>Status</th></tr></thead>
 <tbody id="tbody"></tbody>
 </table>
 </div>
@@ -75,20 +83,20 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:va
 </div>
 <footer>AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATINUM</footer>
 <script>
+const LAMPS = {
+ 'FLORIA (thường)': ['Nhựa PLA - trong suốt R3D','floria_desert_tan_base','floria_olive_green_base','floria_matte_red_base','floria_burnt_orange_base','floria_persian_blue_base','floria_milky_base','Dây đèn + đuôi đèn','Bóng đèn OSRAM LED (3W, 3000K)','Hộp carton loại 1','Tờ infor Floria'],
+ 'FLORIA PRO': ['Nhựa PLA - trong suốt R3D','floria_desert_tan_base','floria_olive_green_base','floria_matte_red_base','floria_burnt_orange_base','floria_persian_blue_base','floria_milky_base','Dây đèn + đuôi đèn','Bóng đèn LED RGB pro','Hộp carton loại 1','Tờ infor Floria'],
+ 'STRATA': ['Nhựa PLA Matte - Dark Blue Bambu','Nhựa PLA Matte - Navy Blue Tinmorry','Nhựa PLA Matte - Matte Red','Dây đèn + đuôi đèn','Bóng đèn OSRAM LED (5W, 3000K)','Hộp carton loại 2','Tờ infor Strata']
+};
 (async () => {
-let DATA=[];
-try{
-const resp=await fetch('./inventory.json?t='+Date.now());
-DATA=await resp.json();
-}catch(e){
+let items=[],DATA_META={};
+try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];DATA_META={generated:_j.generated};}catch(e){
 document.getElementById('errbox').style.display='block';
-document.getElementById('errbox').textContent='Không tải được inventory.json — mở qua HTTP (GitHub Pages), không dùng file://';
-return;
-}
-if(DATA.generated){document.getElementById('updated').textContent='Cập nhật: '+DATA.generated+' · Nguồn: inventory.json'}
-const items=DATA.items||DATA;
+document.getElementById('errbox').textContent='Không tải được inventory.json — mở qua HTTP (GitHub Pages)';
+return;}
+if(DATA_META.generated)document.getElementById('updated').textContent='Cập nhật: '+DATA_META.generated+' · Nguồn: inventory.json';
 const CRIT='crit',LOW='low',OK='ok',UNUSED='unused';
-items.forEach(d=>{if(d.alert===0)d.state=UNUSED;else if(d.stock<=d.alert*0.5)d.state=CRIT;else if(d.stock<=d.alert)d.state=LOW;else d.state=OK});
+items.forEach(d=>{d.state=d.alert===0?UNUSED:d.stock<=d.alert*.5?CRIT:d.stock<=d.alert?LOW:OK});
 const total=items.length;
 const low=items.filter(d=>d.state===LOW||d.state===CRIT).length;
 const crit=items.filter(d=>d.state===CRIT).length;
@@ -96,23 +104,29 @@ const ok=items.filter(d=>d.state===OK).length;
 document.getElementById('stats').innerHTML=`<div class="stat blue"><div class="num">${total}</div><div class="lbl">Tổng vật tư</div></div><div class="stat green"><div class="num">${ok}</div><div class="lbl">Đủ kho</div></div><div class="stat red"><div class="num">${low}</div><div class="lbl">Sắp hết</div></div><div class="stat amber"><div class="num">${crit}</div><div class="lbl">Nguy cấp</div></div>`;
 Chart.defaults.font.family='Montserrat';Chart.defaults.color='#C9CDD4';Chart.defaults.borderColor='rgba(238,238,238,.1)';
 const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
-const catNames=Object.keys(cats);
-new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:catNames,datasets:[{data:catNames.map(c=>cats[c]),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});
-new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:16,usePointStyle:true}}}}});
-const tracked=items.filter(d=>d.cat==='Filament'||d.cat==='Component');
-new Chart(document.getElementById('stockChart'),{type:'bar',data:{labels:tracked.map(d=>d.name),datasets:[{label:'Stock',data:tracked.map(d=>d.stock),backgroundColor:'#4D79FF',borderRadius:4},{label:'Alert level',data:tracked.map(d=>d.alert),backgroundColor:'rgba(229,72,77,.75)',borderRadius:4}]},options:{indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(238,238,238,.08)'}},y:{ticks:{font:{size:10.5}},grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true}}}}});
+new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
+new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
+const byName={};items.forEach(d=>byName[d.name]=d);
+const tabsEl=document.getElementById('lampTabs'),panelsEl=document.getElementById('lampPanels');
+tabsEl.innerHTML=Object.keys(LAMPS).map((k,i)=>`<button class="chip ${i===0?'active':''}" data-l="${i}">${k}</button>`).join('');
+panelsEl.innerHTML=Object.entries(LAMPS).map(([k,names],i)=>`<div class="parts-grid ${i===0?'show':''}" id="lp${i}">${names.map(n=>{
+const d=byName[n]||{name:n,stock:'—',unit:'',state:'unused'};
+return `<div class="part"><div class="pn">${n}</div><div class="pv"><span class="pu">${d.unit}</span><span class="ps" style="color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</span><span class="dot ${d.state}" title="${d.state}"></span></div></div>`}).join('')}</div>`).join('');
+tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
+document.querySelectorAll('.parts-grid').forEach((g,i)=>g.classList.toggle('show',String(i)===b.dataset.l))});
 let filter='ALL';
 const catsAll=['ALL',...new Set(items.map(d=>d.cat))];
 const filtersEl=document.getElementById('filters');
 filtersEl.innerHTML=catsAll.map(c=>`<button class="chip ${c==='ALL'?'active':''}" data-c="${c}">${c}</button>`).join('');
-filtersEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x.dataset.c===filter));render()});
-const stateBadge=s=>({ok:'<span class="badge ok">OK</span>',low:'<span class="badge low">LOW</span>',crit:'<span class="badge crit">CRITICAL</span>',unused:'<span class="badge unused">UNUSED</span>'}[s]);
+filtersEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;filter=b.dataset.c;
+document.querySelectorAll('#filters .chip').forEach(x=>x.classList.toggle('active',x.dataset.c===filter));render()});
 function render(){
 const rows=items.filter(d=>filter==='ALL'||d.cat===filter);
 document.getElementById('tbody').innerHTML=rows.map(d=>{
-const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2:1;
-const barColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
-return `<tr><td>${d.name}</td><td><span class="cat-tag">${d.cat}</span></td><td style="font-weight:700;color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</td><td>${d.unit}</td><td>${d.alert}</td><td class="bar-cell"><div class="bar"><div style="width:${pct*100}%;background:${barColor}"></div></div></td><td>${stateBadge(d.state)}</td></tr>`}).join('')}
+const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:100;
+const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
+return `<tr><td>${d.name}</td><td><span class="cat-tag">${d.cat}</span></td><td style="font-weight:700;color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</td><td>${d.unit}</td><td style="min-width:140px"><div class="bar"><div style="width:${pct}%;background:${bc}"></div></div></td><td><span class="badge ${d.state}">${d.state.toUpperCase()}</span></td></tr>`}).join('')}
 render();
 })();
 </script>
