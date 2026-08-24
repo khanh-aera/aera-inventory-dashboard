@@ -48,7 +48,8 @@ tbody tr:hover{background:rgba(238,238,238,.04)}
 .parts-grid{display:none;flex-direction:column;gap:10px}
 .parts-grid.show{display:flex}
 .part{display:grid;grid-template-columns:1fr 90px 150px 110px;align-items:center;gap:14px;background:rgba(0,27,94,.6);border:1px solid rgba(238,238,238,.14);border-radius:12px;padding:12px 18px}
-.part .pn{font-size:14.5px;font-weight:600;line-height:1.35}
+.part .pn{font-size:14.5px;font-weight:600;line-height:1.35;display:flex;align-items:center;gap:10px}
+.pchip{width:18px;height:18px;border-radius:6px;flex-shrink:0;border:1px solid rgba(255,255,255,.35);box-shadow:0 1px 4px rgba(0,0,0,.4)}
 .part .pv{text-align:right}
 .part .ps{font-size:26px;font-weight:800;color:#7EA6FF}
 .part .ps.warn{color:#EEEEEE}
@@ -113,6 +114,16 @@ const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
 new Chart(document.getElementById('catChart'),{type:'doughnut',data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
 new Chart(document.getElementById('statusChart'),{type:'doughnut',data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},options:{cutout:'62%',plugins:{legend:{position:'bottom',labels:{padding:14,usePointStyle:true}}}}});
 const QTY={'Nhựa PLA - trong suốt R3D':0.135};
+const PCOLORS={
+ 'floria_desert_tan_base':'#C7A57B','floria_olive_green_base':'#626846','floria_matte_red_base':'#B03A3A',
+ 'floria_burnt_orange_base':'#D46C34','floria_persian_blue_base':'#274FD0','floria_milky_base':'#EAE6DC',
+ 'floria_standard_skin':'#E8D5C0','strata_matte_red_base':'#B03A3A','strata_matte_red_skin':'#B03A3A',
+ 'strata_navy_blue_base':'#394157','strata_dark_blue_skin':'#1F2A44',
+ 'Nhựa PLA - trong suốt R3D':'#CFE3EE','Nhựa PLA Matte - Milky':'#EAE6DC','Nhựa PLA Basic - Persian Blue Bambu':'#274FD0',
+ 'Nhựa PLA Basic - Burnt Orange R3D':'#D46C34','Nhựa PLA Matte - Matte Red':'#B03A3A',
+ 'Nhựa PLA Matte - Olive Green Tinmorry':'#626846','Nhựa PLA Matte - Desert Tan Bambu':'#C7A57B',
+ 'Nhựa PLA Matte - Dark Blue Bambu':'#1F2A44','Nhựa PLA Matte - Navy Blue Tinmorry':'#394157'
+};
 const byName={};items.forEach(d=>byName[d.name]=d);
 function capOf(n,d){if(!d||d.stock==='—')return 0;const q=QTY[n]||1;return Math.floor(d.stock/q);}
 const tabsEl=document.getElementById('lampTabs'),panelsEl=document.getElementById('lampPanels');
@@ -125,7 +136,8 @@ const pct=d.alert>0?Math.min(d.stock/d.alert,2)/2*100:(d.stock>0?100:0);
 const bc=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
 const stTxt=d.state===CRIT?'NGUY CẤP':d.state===LOW?'SẮP HẾT':d.state===UNUSED?'KHÔNG DÙNG':'ĐỦ';
 const stColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':d.state===UNUSED?'#8A8F98':'#30A46C';
-return `<div class="part"><div class="pn">${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div style="width:${pct}%;background:${bc}"></div></div><div class="pcap"><b>≈${cap}</b> đèn · <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
+const chip=PCOLORS[n]?`<span class="pchip" style="background:${PCOLORS[n]}"></span>`:'';
+return `<div class="part"><div class="pn">${chip}${n}</div><div class="pv"><span class="ps ${d.state===OK?'':'warn'}">${d.stock}</span><span class="pu">${d.unit}</span></div><div class="pbar"><div style="width:${pct}%;background:${bc}"></div></div><div class="pcap"><b>≈${cap}</b> đèn · <span style="color:${stColor};font-weight:700">${stTxt}</span></div></div>`}).join('');
 const shared=names.filter(n=>!n.includes('_base')||n.includes('skin')).map(n=>capOf(n,byName[n]));
 const capacity=shared.length?Math.min(...shared):0;
 return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">⚡ Đủ linh kiện chung để lắp <b>≈${capacity}</b> đèn (chưa tính base theo màu)</div>${rows}</div>`}).join('');
