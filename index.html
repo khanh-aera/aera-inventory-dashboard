@@ -29,6 +29,10 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 .hero p{position:relative;font-size:12px;color:var(--dim);margin-top:8px;letter-spacing:.5px;animation:fadeUp .55s .08s ease-out both}
 .livebadge{position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:6px 15px;border-radius:999px;border:1px solid rgba(48,164,108,.38);background:rgba(48,164,108,.1);color:var(--green);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;animation:fadeUp .55s .16s ease-out both}
 .livebadge .dotp{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite}
+#reloadBtn{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin-left:8px;border-radius:50%;border:1px solid rgba(238,238,238,.25);background:rgba(238,238,238,.06);color:var(--plat);font-size:15px;cursor:pointer;vertical-align:middle;transition:transform .25s,background .25s,border-color .25s}
+#reloadBtn:hover{background:rgba(0,56,188,.3);border-color:var(--pb)}
+#reloadBtn.spinning{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}55%{box-shadow:0 0 0 7px rgba(48,164,108,0)}}
 .wrap{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:26px 20px 64px}
 #errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px;border-radius:10px}
@@ -119,7 +123,7 @@ thead th{padding:10px;font-size:11px}
 </head>
 <body>
 <nav><a href="./" class="active">Tổng quan</a><a href="./filaments.html">Filament 🧵</a></nav>
-<div class="hero"><h1>Inventory Dashboard</h1><p>AERA LOGISTIC · Persian Blue × Platinum</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div></div>
+<div class="hero"><h1>Inventory Dashboard</h1><p>AERA LOGISTIC · Persian Blue × Platinum</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div><button id="reloadBtn" title="Tải dữ liệu mới">↻</button></div>
 <div class="wrap">
 <div id="errbox"></div>
 <div id="lowBanner"><div class="bhead" onclick="this.parentElement.classList.toggle('open')"><span class="btitle">⚠ Cần chú ý</span><span class="bcount" id="lowCount"></span><button class="btoggle" tabindex="-1">▼</button></div><div class="bpillwrap" id="lowPills"></div></div>
@@ -250,6 +254,10 @@ render();
 const tt=document.getElementById('toTop');
 addEventListener('scroll',()=>tt.classList.toggle('show',scrollY>420),{passive:true});
 tt.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+const rb=document.getElementById('reloadBtn');
+rb.addEventListener('click',()=>{if(rb.classList.contains('spinning'))return;
+rb.classList.add('spinning');
+fetch('./inventory.json?t='+Date.now()).then(r=>r.ok).then(ok=>{location.reload()}).catch(()=>location.reload());});
 })();
 </script>
 </body>
