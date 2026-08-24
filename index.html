@@ -155,7 +155,6 @@ const LAMPS = {
  'FLORIA PRO': ['Nhựa PLA - trong suốt R3D','floria_desert_tan_base','floria_olive_green_base','floria_matte_red_base','floria_burnt_orange_base','floria_persian_blue_base','floria_milky_base','Dây đèn + đuôi đèn','Bóng đèn LED RGB pro','Hộp carton loại 1','Tờ infor Floria'],
  'STRATA': ['Nhựa PLA Matte - Dark Blue Bambu','Nhựa PLA Matte - Navy Blue Tinmorry','Nhựa PLA Matte - Matte Red','Dây đèn + đuôi đèn','Bóng đèn OSRAM LED (5W, 3000K)','Hộp carton loại 2','Tờ infor Strata']
 };
-</style>
 (async () => {
 let items=[],META={};
 try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];META=_j;}catch(e){
