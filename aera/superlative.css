@@ -1,0 +1,148 @@
+
+body{
+  margin: 0;
+  background-color: var(--black);
+}
+
+.section{
+  border-bottom: 1px solid #353535;
+  padding: 2rem 0rem 8rem 0rem;
+}
+
+.careers{
+  padding-left: 1rem;
+}
+
+.job_openings>* {
+  padding: 0rem 1rem;
+}
+
+.job{
+  padding-bottom: 2rem;
+}
+
+.job_openings .space {
+  padding-bottom: 4rem;
+}
+
+@media (max-width: 1024px) {
+  .job_openings {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.blurb-section{
+  border-bottom: 1px solid #353535;
+}
+
+#title{
+  padding: 5rem 1rem 2rem 1rem;
+}
+
+.source{
+  float: left;
+}
+
+.press_line {
+  border-bottom: 1px solid #353535;
+  padding: 1rem 0rem;
+  display: grid;
+  grid-template-columns: 2fr 7fr 1fr 4fr 2fr; 
+  grid-template-areas: "date title . source url";
+}
+@media (hover: hover) {
+  .press_line:hover{
+    background-color: var(--dark_gray);
+    cursor: pointer;
+  }
+  /* Have the "articles" line not hoverable */
+  .press_line:nth-child(2):hover{
+    background-color: transparent;
+    cursor: auto;
+  }
+}
+
+.press_line.hidden_desktop, .press_line.hidden_mobile{
+  padding-top: 0;
+}
+.press_line>*{
+  padding: 0rem 1rem;
+}
+.press_line >:nth-child(1){
+  grid-area: date;
+}
+.press_line >:nth-child(2){
+  grid-area: title;
+}
+.press_line >:nth-child(3){
+  grid-area: source;
+}
+.press_line >:nth-child(4){
+  grid-area: url;
+}
+.press_line >:nth-child(5){
+  grid-area: date-source;
+}
+
+.title_holder{
+  position: relative;
+}
+.ellipsis{
+  position: absolute;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* To make line sit corerctly in parent and not overflow */
+  width: calc(43.75vw - 2rem);
+  overflow: hidden;
+}
+
+#enquiries{
+  display: grid;
+}
+#enquiries>*>:last-child
+{
+  padding-bottom: 2rem;
+}
+#enquiries>:last-child>:last-child
+{
+  padding-bottom: 0;
+}
+.contact .visiting{
+  padding-bottom: 4rem;
+}
+
+.contact>*{
+  padding: 0rem 1rem;
+}
+
+@media (max-width: 1024px) {
+  .contact{
+    grid-template-columns: 1fr;
+  }
+  .contact .visiting{
+    padding-bottom: 2rem;
+  }
+  .section {
+    padding: 2rem 0rem 4rem 0rem;
+  }
+  .press_line{
+    grid-template-columns: 3fr  1fr 1fr; 
+    grid-template-rows: auto;
+    grid-template-areas: "title title title title"
+                          "date-source date-source date-source url";
+    padding: 1rem;
+  }
+  .press_line >:nth-child(2){
+    padding-bottom: 1.33rem;;
+  }
+  .press_line>*{
+    padding: 0;
+  }
+  .ellipsis{
+    width: calc(100vw - 2rem);
+  }
+  #title{
+    padding: 4rem 1rem 0rem 1rem;
+  }
+}
