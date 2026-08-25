@@ -74,15 +74,6 @@ body{font-family:'Montserrat',system-ui,sans-serif;transition:background .5s,col
 
 footer{padding:60px 24px;text-align:center;font-size:11px;letter-spacing:.18em;opacity:.5;text-transform:uppercase}
 @media(max-width:640px){.builder{grid-template-columns:1fr}.spec-card .fig{height:150px}}
-
-/* real packaging drawings */
-.fig svg[viewBox="0 0 313.28 315.37"]{height:auto;width:78%;max-height:100%}
-.fig svg[viewBox="0 0 283.39 134.17"]{height:auto;width:92%;max-height:100%}
-
-/* abstract technical silhouettes (theo bản vẽ print package) */
-.fig svg{height:88%;max-height:100%;width:auto;display:block;margin:0 auto;color:#1a3a8f}
-.spec-card:hover .fig svg{color:var(--blue)}
-.fig svg [stroke-dasharray]{stroke:var(--red,#C33B23)}
 </style>
 </head>
 <body data-concept="c1">
@@ -103,29 +94,18 @@ footer{padding:60px 24px;text-align:center;font-size:11px;letter-spacing:.18em;o
     <div class="spec-card" id="card-strata">
       <span class="corner tl"></span><span class="corner br"></span>
       <div class="code">SS26P02</div>
-      <div class="fig"><svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Strata: layered canopy (rèm sáo layers) on slim stem — theo bản vẽ print package -->
-  <g stroke="currentColor" stroke-width="1.6">
-    <!-- canopy layers, widest top -->
-    <path d="M40 62 L160 62 L150 78 L50 78 Z" fill="none"/>
-    <path d="M52 82 L148 82 L140 97 L60 97 Z" fill="none"/>
-    <path d="M62 101 L138 101 L131 115 L69 115 Z" fill="none"/>
-    <path d="M71 119 L129 119 L123 132 L77 132 Z" fill="none"/>
-    <!-- light glow line between layers -->
-    <line x1="55" y1="80" x2="145" y2="80" stroke-width="0.7" stroke-dasharray="2 3" opacity=".55"/>
-    <line x1="65" y1="99" x2="135" y2="99" stroke-width="0.7" stroke-dasharray="2 3" opacity=".55"/>
-    <line x1="73" y1="117" x2="127" y2="117" stroke-width="0.7" stroke-dasharray="2 3" opacity=".55"/>
-    <!-- stem -->
-    <line x1="100" y1="132" x2="100" y2="168"/>
-    <!-- base -->
-    <line x1="76" y1="170" x2="124" y2="170"/>
-    <path d="M84 168 Q100 156 116 168" stroke-width="1.2"/>
-    <!-- dimension marks like technical drawing -->
-    <line x1="34" y1="62" x2="34" y2="132" stroke-width="0.5" opacity=".4"/>
-    <line x1="30" y1="62" x2="38" y2="62" stroke-width="0.5" opacity=".4"/>
-    <line x1="30" y1="132" x2="38" y2="132" stroke-width="0.5" opacity=".4"/>
-  </g>
-</svg></div>
+      <div class="fig">
+        <svg width="130" height="180" viewBox="0 0 130 180">
+          <g stroke="#0038BC" stroke-width="1.4" fill="none">
+            <rect x="25" y="18" width="80" height="10"/>
+            <rect x="33" y="42" width="64" height="8"/>
+            <rect x="41" y="66" width="48" height="46" rx="4"/>
+            <line x1="65" y1="28" x2="65" y2="42"/><line x1="65" y1="50" x2="65" y2="66"/>
+            <circle cx="65" cy="128" r="7" fill="#C33B23" stroke="none"/>
+            <rect x="47" y="146" width="36" height="8"/>
+          </g>
+          <text x="112" y="70" font-size="8" fill="#0038BC" font-family="monospace">A</text>
+        </svg>
       </div>
       <h3>Strata</h3>
       <div class="use">USE › desk / bookshelf / record corner<br>MOOD › “attitude” · industrial layers</div>
@@ -139,36 +119,13 @@ footer{padding:60px 24px;text-align:center;font-size:11px;letter-spacing:.18em;o
     <div class="spec-card">
       <span class="corner tl"></span><span class="corner br"></span>
       <div class="code">SS26P01</div>
-      <div class="fig"><svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Floria: ruffled flower shade + slender waist + round base — theo front label -->
-  <g stroke="currentColor" stroke-width="1.6">
-    <!-- ruffled shade: scalloped petals -->
-    <path d="M100 28
-             C82 26 68 36 70 50
-             C58 52 54 66 64 74
-             C56 84 64 96 76 94
-             C74 106 88 112 100 104
-             C112 112 126 106 124 94
-             C136 96 144 84 136 74
-             C146 66 142 52 130 50
-             C132 36 118 26 100 28 Z"
-          fill="none" stroke-linejoin="round"/>
-    <!-- inner glow arcs -->
-    <path d="M86 60 Q100 50 114 60" stroke-width="0.7" opacity=".55" stroke-dasharray="2 3"/>
-    <path d="M82 72 Q100 84 118 72" stroke-width="0.7" opacity=".55" stroke-dasharray="2 3"/>
-    <!-- neck -->
-    <path d="M92 108 L94 122 L106 122 L108 108" fill="none"/>
-    <!-- slender stem -->
-    <line x1="100" y1="122" x2="100" y2="150"/>
-    <!-- round base -->
-    <ellipse cx="100" cy="158" rx="26" ry="9"/>
-    <ellipse cx="100" cy="158" rx="14" ry="4.5" stroke-width="0.8" opacity=".6"/>
-    <!-- dimension marks -->
-    <line x1="146" y1="28" x2="146" y2="167" stroke-width="0.5" opacity=".4"/>
-    <line x1="142" y1="28" x2="150" y2="28" stroke-width="0.5" opacity=".4"/>
-    <line x1="142" y1="167" x2="150" y2="167" stroke-width="0.5" opacity=".4"/>
-  </g>
-</svg></div>
+      <div class="fig">
+        <svg width="140" height="180" viewBox="0 0 140 180">
+          <path d="M70 20 C40 30 38 62 70 74 C102 62 100 30 70 20Z" fill="#F2EEE6" stroke="#0038BC" stroke-width="1.4"/>
+          <path d="M70 74 C48 84 48 104 70 112 C92 104 92 84 70 74Z" fill="none" stroke="#0038BC" stroke-width="1.4"/>
+          <rect x="58" y="118" width="24" height="14" fill="none" stroke="#0038BC" stroke-width="1.4"/>
+          <text x="106" y="60" font-size="8" fill="#0038BC" font-family="monospace">B</text>
+        </svg>
       </div>
       <h3>Floria</h3>
       <div class="use">USE › bedside / góc bàn / quà tặng<br>MOOD · “nhún bèo mềm mại”</div>
