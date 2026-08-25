@@ -36,15 +36,21 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 .unit{font-size:12px;color:var(--dim)}
 .bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden;margin-top:10px}
 .bar>div{height:100%;border-radius:4px}
+.meta{display:flex;justify-content:space-between;margin-top:6px;font-size:10.5px;color:var(--dim)}
 .badge{display:inline-block;margin-top:10px;padding:3px 10px;border-radius:999px;font-size:10.5px;font-weight:700;letter-spacing:1px}
 .badge.ok{background:rgba(48,164,108,.16);color:var(--green);border:1px solid rgba(48,164,108,.4)}
 .badge.low{background:rgba(229,72,77,.16);color:var(--red);border:1px solid rgba(229,72,77,.4)}
 .badge.crit{background:rgba(255,178,36,.14);color:var(--amber);border:1px solid rgba(255,178,36,.45)}
 .chart-card{margin-bottom:28px;background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:22px}
 .chart-card h2{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
-#kgChartWrap{height:320px}#kgChartWrap canvas{max-height:100%}
+#kgChart{height:300px}
+.price{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 12px;border-radius:10px;background:rgba(0,27,94,.55);border:1px solid rgba(238,238,238,.1);font-size:12px}
+.price .pval{font-weight:800;color:#7EA6FF;font-variant-numeric:tabular-nums}
+.price .psrc{font-size:10px;color:var(--dim);letter-spacing:.5px}
+.price.none{opacity:.55}
+.price.none .pval{color:var(--dim);font-weight:600;font-size:11.5px}
 .note{font-size:11px;color:var(--dim);opacity:.75;margin-top:14px}
-@media(max-width:640px){.wrap{padding:16px 12px 48px}.grid{grid-template-columns:1fr 1fr;gap:12px}.hero h1{font-size:24px}nav{padding:14px 16px}.chart-card{padding:16px 14px}.body{padding:12px 12px 14px}.name{font-size:12px;min-height:34px}.stocknum{font-size:24px}}
+@media(max-width:640px){.wrap{padding:16px 12px 48px}.grid{grid-template-columns:1fr 1fr;gap:12px}.hero h1{font-size:24px}nav{padding:14px 16px}}
 footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
 </style>
 </head>
@@ -52,22 +58,23 @@ footer{text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:va
 <nav><a href="./">Tổng quan</a><a href="./filaments.html" class="active">Filament 🧵</a></nav>
 <div class="hero"><h1>Filament Stock</h1><p>Nguyên liệu nhựa — hiển thị theo màu thực của spool</p></div>
 <div class="wrap">
-<div class="chart-card"><h2>Số kg còn lại theo màu</h2><div id="kgChartWrap"><canvas id="kgChart"></canvas></div></div>
+<div class="chart-card"><h2>Số kg còn lại theo màu</h2><canvas id="kgChart"></canvas></div>
 <div class="grid" id="cards"></div>
-<p class="note">* Màu swatch tham khảo theo bảng màu công bố của hãng (Bambu Lab / Tinmorry / R3D). Màu thực có thể lệch nhẹ tùy batch.</p>
+<p class="note">* Màu swatch tham khảo theo bảng màu công bố của hãng (Bambu Lab / Tinmorry / R3D). Màu thực có thể lệch nhẹ tùy batch.
+* Giá tham chiếu VND/kg scout ngày 24/08/2026 — nguồn: meme3d.com (đại lý Bambu Lab VN), nge.vn. Giá có thể thay đổi, xác nhận với shop trước khi đặt.</p>
 </div>
 <footer>AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATINUM</footer>
 <script>
 const FIL = {
- "Nhựa PLA - trong suốt R3D": {hex:"#CFE3EE", brand:"R3D", type:"PLA Clear"},
- "Nhựa PLA Matte - Milky": {hex:"#EAE6DC", brand:"BAMBU LAB", type:"PLA Matte"},
- "Nhựa PLA Basic - Persian Blue Bambu": {hex:"#274FD0", brand:"BAMBU LAB", type:"PLA Basic"},
- "Nhựa PLA Basic - Burnt Orange R3D": {hex:"#D46C34", brand:"R3D", type:"PLA Basic"},
- "Nhựa PLA Matte - Matte Red": {hex:"#B03A3A", brand:"R3D", type:"PLA Matte"},
- "Nhựa PLA Matte - Olive Green Tinmorry": {hex:"#626846", brand:"TINMORRY", type:"PLA Matte"},
- "Nhựa PLA Matte - Desert Tan Bambu": {hex:"#C7A57B", brand:"BAMBU LAB", type:"PLA Matte"},
- "Nhựa PLA Matte - Dark Blue Bambu": {hex:"#1F2A44", brand:"BAMBU LAB", type:"PLA Matte"},
- "Nhựa PLA Matte - Navy Blue Tinmorry": {hex:"#394157", brand:"TINMORRY", type:"PLA Matte"}
+  "Nhựa PLA - trong suốt R3D": {hex:"#CFE3EE", brand:"R3D", type:"PLA Clear", alpha:.92, price:null, src:null},
+  "Nhựa PLA Matte - Milky": {hex:"#EAE6DC", brand:"BAMBU LAB", type:"PLA Matte", price:220000, src:"Meme3D"},
+  "Nhựa PLA Basic - Persian Blue Bambu": {hex:"#274FD0", brand:"BAMBU LAB", type:"PLA Basic", price:250000, src:"Meme3D sale"},
+  "Nhựa PLA Basic - Burnt Orange R3D": {hex:"#D46C34", brand:"R3D", type:"PLA Basic", price:null, src:null},
+  "Nhựa PLA Matte - Matte Red": {hex:"#B03A3A", brand:"R3D", type:"PLA Matte", price:null, src:null},
+  "Nhựa PLA Matte - Olive Green Tinmorry": {hex:"#626846", brand:"TINMORRY", type:"PLA Matte", price:null, src:null},
+  "Nhựa PLA Matte - Desert Tan Bambu": {hex:"#C7A57B", brand:"BAMBU LAB", type:"PLA Matte", price:220000, src:"Meme3D"},
+  "Nhựa PLA Matte - Dark Blue Bambu": {hex:"#1F2A44", brand:"BAMBU LAB", type:"PLA Matte", price:220000, src:"Meme3D"},
+  "Nhựa PLA Matte - Navy Blue Tinmorry": {hex:"#394157", brand:"TINMORRY", type:"PLA Matte", price:null, src:null}
 };
 (async () => {
 let DATA=[];
@@ -75,24 +82,29 @@ try{DATA=(await(await fetch('./inventory.json?t='+Date.now())).json()).items||[]
 const fils=DATA.filter(d=>d.cat==='Filament');
 const CRIT='crit',LOW='low',OK='ok';
 fils.forEach(d=>{d.state=d.stock<=d.alert*.5?CRIT:d.stock<=d.alert?LOW:OK});
+// chart
 Chart.defaults.font.family='Montserrat';Chart.defaults.color='#C9CDD4';
 new Chart(document.getElementById('kgChart'),{type:'bar',data:{
 labels:fils.map(d=>d.name.replace('Nhựa PLA','').trim()),
 datasets:[{label:'Stock (kg)',data:fils.map(d=>d.stock),backgroundColor:fils.map(d=>(FIL[d.name]||{}).hex||'#4D79FF'),borderRadius:6},
 {label:'Alert (kg)',data:fils.map(d=>d.alert),backgroundColor:'rgba(238,238,238,.18)',borderRadius:6}]},
 options:{maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(238,238,238,.08)'}},y:{ticks:{font:{size:11}},grid:{display:false}}},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,font:{size:11},padding:10}}}}});
+// cards
 document.getElementById('cards').innerHTML=fils.map(d=>{
 const f=FIL[d.name]||{hex:'#888',brand:'?',type:'PLA'};
 const pct=Math.min(d.stock/d.alert,2)/2*100;
 const barColor=d.state===CRIT?'#FFB224':d.state===LOW?'#E5484D':'#30A46C';
 const badge=d.state===CRIT?'<span class="badge crit">CRITICAL</span>':d.state===LOW?'<span class="badge low">LOW</span>':'<span class="badge ok">OK</span>';
 return `<div class="card">
-<div class="swatch" style="background:${f.hex}"><span class="brand">${f.brand}</span><span class="type">${f.type}</span></div>
+<div class="swatch" style="background:${f.hex};${f.alpha?`opacity:.95`:''}"><span class="brand">${f.brand}</span><span class="type">${f.type}</span></div>
 <div class="body">
 <div class="name">${d.name}</div>
-<div class="stockrow"><span class="stocknum" style="color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</span><span class="unit">${d.unit}</span></div>
+<div class="stockrow"><span class="stocknum" style="color:${d.state===OK?'#7EA6FF':'#EEEEEE'}">${d.stock}</span><span class="unit">${d.unit} / alert ${d.alert} ${d.unit}</span></div>
 <div class="bar"><div style="width:${pct}%;background:${barColor}"></div></div>
 ${badge}
+<div class="price ${f.price?'':'none'}">${f.price
+ ?`<span class="pval">${f.price.toLocaleString('vi-VN')}₫</span><span class="psrc">📦 ${f.src}</span>`
+ :`<span class="pval">Chưa có nguồn giá</span><span class="psrc">—</span>`}</div>
 </div></div>`}).join('');
 })();
 </script>
