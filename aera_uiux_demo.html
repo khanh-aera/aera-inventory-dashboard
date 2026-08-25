@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AERA — UI/UX Concepts Demo</title>
+<style>
+:root{
+  --blue:#0038BC; --platinum:#EEEEEE;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',system-ui,sans-serif;transition:background .5s,color .5s}
+
+/* ===== THEME SWITCHER ===== */
+.switcher{position:fixed;top:16px;right:16px;z-index:99;display:flex;gap:8px;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);padding:8px;border-radius:999px}
+.switcher button{border:none;border-radius:999px;padding:9px 16px;font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;cursor:pointer;color:#eee;background:transparent;text-transform:uppercase;transition:.25s}
+.switcher button.active{background:var(--accent);color:var(--btn-text)}
+
+/* ============ CONCEPT 1 : SPECIMEN SHEET ============ */
+[data-concept="c1"]{background:#F7F7F4;color:#111}
+[data-concept="c1"] .wrap{max-width:1080px;margin:0 auto;padding:96px 24px}
+[data-concept="c1"] .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.3em;color:var(--blue)}
+[data-concept="c1"] h1{font-weight:800;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(34px,6vw,64px);color:var(--blue);margin:8px 0 40px}
+.c1-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:rgba(0,56,188,.18);border:1px solid rgba(0,56,188,.18)}
+.spec-card{background:#F7F7F4;padding:28px;position:relative;cursor:crosshair;transition:.3s}
+.spec-card:hover{background:#fff}
+.spec-card .code{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.25em;color:var(--blue)}
+.spec-card .fig{height:200px;display:flex;align-items:center;justify-content:center;margin:20px 0}
+.spec-card h3{text-transform:uppercase;font-size:15px;letter-spacing:.14em;margin-bottom:6px}
+.spec-card .use{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#777;line-height:1.7}
+.spec-card .corner{position:absolute;width:14px;height:14px;border-color:var(--blue);border-style:solid;border-width:0}
+.spec-card .corner.tl{top:8px;left:8px;border-top-width:1.5px;border-left-width:1.5px}
+.spec-card .corner.br{bottom:8px;right:8px;border-bottom-width:1.5px;border-right-width:1.5px}
+.spec-card .swatches{display:flex;gap:6px;margin-top:14px}
+.spec-card .sw{width:18px;height:18px;border-radius:50%;cursor:pointer;transition:transform .15s}
+.spec-card .sw:hover{transform:scale(1.25)}
+.datasheet-note{margin-top:36px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#666;line-height:2}
+.datasheet-note b{color:var(--blue)}
+
+/* ============ CONCEPT 2 : 2700K ============ */
+[data-concept="c2"]{background:#0E0E10;color:#EEEEEE}
+[data-concept="c2"] .glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(600px 420px at var(--gx,50%) var(--gy,30%),rgba(255,178,92,.14),transparent 70%)}
+[data-concept="c2"] section.chap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px max(24px,10vw);position:relative;z-index:1}
+[data-concept="c2"] .chnum{font-size:13px;letter-spacing:.4em;color:transparent;-webkit-text-stroke:1px #FFB25C;font-weight:700;margin-bottom:18px}
+[data-concept="c2"] blockquote{font-weight:300;font-style:italic;font-size:clamp(26px,4.6vw,52px);line-height:1.35;max-width:820px}
+[data-concept="c2"] .src{margin-top:22px;font-size:12px;letter-spacing:.2em;color:#FFB25C;opacity:.85}
+[data-concept="c2"] .chap.two blockquote{color:#eee}
+[data-concept="c2"] .lamp-line{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,#FFCC80 0%,#FFB25C 45%,transparent 72%);filter:blur(2px);margin-top:34px;animation:breathe 3.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.75;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+[data-concept="c2"] .cta2{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9;background:#C33B23;color:#fff;border:none;padding:14px 30px;border-radius:999px;font-family:inherit;font-weight:700;letter-spacing:.12em;cursor:pointer;box-shadow:0 8px 32px rgba(195,59,35,.4)}
+
+/* ============ CONCEPT 3 : MAKING ROOM ============ */
+[data-concept="c3"]{background:#F4F1EA;color:#22201C}
+[data-concept="c3"] .wrap{max-width:1000px;margin:0 auto;padding:96px 24px}
+[data-concept="c3"] h1{font-weight:700;font-size:clamp(30px,5vw,54px);line-height:1.15}
+[data-concept="c3"] h1 em{color:var(--blue);font-style:normal}
+[data-concept="c3"] .steps{margin:48px 0;display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:24px;align-items:flex-start;padding:26px 0;border-left:3px solid #D9CFBE;padding-left:26px;position:relative}
+.step::before{content:"";position:absolute;left:-9px;top:32px;width:15px;height:15px;border-radius:50%;background:#F4F1EA;border:3px solid #8A6F55}
+.step .n{font-weight:800;font-size:13px;letter-spacing:.2em;color:#8A6F55;min-width:110px;padding-top:3px}
+.step h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.step p{font-size:13.5px;color:#6B6154;line-height:1.65;max-width:520px}
+.builder{background:#fff;border:1px solid #E5DECE;border-radius:18px;padding:32px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;box-shadow:0 12px 40px rgba(138,111,85,.12)}
+.builder .preview{width:170px;height:170px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .4s;clip-path:circle(75% at 50% 50%)}
+.bulb-svg{transition:fill .4s}
+.builder .opts{display:flex;flex-direction:column;gap:14px}
+.builder label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.2em;color:#8A6F55}
+.builder .row{display:flex;gap:10px}
+.builder .sw2{width:44px;height:44px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:.2s}
+.builder .sw2.sel{border-color:var(--blue);transform:scale(1.1)}
+.builder .cfg{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#22201C;margin-top:4px}
+.builder .send{margin-top:10px;background:var(--blue);color:#fff;border:none;padding:13px 24px;border-radius:12px;font-family:inherit;font-weight:700;cursor:pointer;transition:transform .15s}
+.builder .send:active{transform:scale(.95) rotate(-2deg)}
+
+footer{padding:60px 24px;text-align:center;font-size:11px;letter-spacing:.18em;opacity:.5;text-transform:uppercase}
+@media(max-width:640px){.builder{grid-template-columns:1fr}.spec-card .fig{height:150px}}
+</style>
+</head>
+<body data-concept="c1">
+
+<div class="switcher">
+  <button class="active" onclick="setConcept('c1',this)">① Specimen Sheet</button>
+  <button onclick="setConcept('c2',this)">② 2700K</button>
+  <button onclick="setConcept('c3',this)">③ Making Room</button>
+</div>
+
+<!-- ═══════════ CONCEPT 1 ═══════════ -->
+<div id="c1">
+<div class="wrap">
+  <div class="kicker">AERA · SS26 SPECIMEN INDEX</div>
+  <h1>The Specimen Sheet</h1>
+  <div class="c1-grid">
+
+    <div class="spec-card" id="card-strata">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <div class="code">SS26P02</div>
+      <div class="fig">
+        <svg width="130" height="180" viewBox="0 0 130 180">
+          <g stroke="#0038BC" stroke-width="1.4" fill="none">
+            <rect x="25" y="18" width="80" height="10"/>
+            <rect x="33" y="42" width="64" height="8"/>
+            <rect x="41" y="66" width="48" height="46" rx="4"/>
+            <line x1="65" y1="28" x2="65" y2="42"/><line x1="65" y1="50" x2="65" y2="66"/>
+            <circle cx="65" cy="128" r="7" fill="#C33B23" stroke="none"/>
+            <rect x="47" y="146" width="36" height="8"/>
+          </g>
+          <text x="112" y="70" font-size="8" fill="#0038BC" font-family="monospace">A</text>
+        </svg>
+      </div>
+      <h3>Strata</h3>
+      <div class="use">USE › desk / bookshelf / record corner<br>MOOD › “attitude” · industrial layers</div>
+      <div class="swatches">
+        <span class="sw" style="background:#C33B23" title="Brick Red"></span>
+        <span class="sw" style="background:#22201C" title="Anodized"></span>
+        <span class="sw" style="background:#F2EEE6" title="Milky"></span>
+      </div>
+    </div>
+
+    <div class="spec-card">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <div class="code">SS26P01</div>
+      <div class="fig">
+        <svg width="140" height="180" viewBox="0 0 140 180">
+          <path d="M70 20 C40 30 38 62 70 74 C102 62 100 30 70 20Z" fill="#F2EEE6" stroke="#0038BC" stroke-width="1.4"/>
+          <path d="M70 74 C48 84 48 104 70 112 C92 104 92 84 70 74Z" fill="none" stroke="#0038BC" stroke-width="1.4"/>
+          <rect x="58" y="118" width="24" height="14" fill="none" stroke="#0038BC" stroke-width="1.4"/>
+          <text x="106" y="60" font-size="8" fill="#0038BC" font-family="monospace">B</text>
+        </svg>
+      </div>
+      <h3>Floria</h3>
+      <div class="use">USE › bedside / góc bàn / quà tặng<br>MOOD · “nhún bèo mềm mại”</div>
+      <div class="swatches">
+        <span class="sw" style="background:#D8402B" title="Solar Red"></span>
+        <span class="sw" style="background:#F2EEE6" title="Milky"></span>
+        <span class="sw" style="background:#3E5F8A" title="Blue"></span>
+        <span class="sw" style="background:#7A8B5C" title="Moss"></span>
+      </div>
+    </div>
+
+    <div class="spec-card">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <div class="code">STUDIO</div>
+      <div class="fig">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="56" fill="none" stroke="#0038BC" stroke-width="1.4" stroke-dasharray="4 5"/>
+          <circle cx="80" cy="80" r="26" fill="#FFCC80"/>
+          <text x="80" y="152" font-size="9" fill="#0038BC" text-anchor="middle" font-family="monospace">aera.making</text>
+        </svg>
+      </div>
+      <h3>Xưởng</h3>
+      <div class="use">PROCESS › print · finish · assemble<br>LOCATION › HCMC</div>
+      <div class="swatches"><span class="sw" style="background:#0038BC"></span></div>
+    </div>
+  </div>
+
+  <p class="datasheet-note">
+    LOGIC › Mã SP <b>SS26P02</b> &amp; texture series <b>"The Texture of Strata"</b> → ngôn ngữ datasheet mẫu vật.<br>
+    Hover card để xem exploded view · click swatch đổi accent · cursor crosshair vùng kỹ thuật.
+  </p>
+</div>
+</div>
+
+<!-- ═══════════ CONCEPT 2 ═══════════ -->
+<div id="c2" hidden>
+  <div class="glow" id="glow"></div>
+  <section class="chap">
+    <div class="chnum">CHƯƠNG 01 — FLORIA</div>
+    <blockquote>“Như một cánh hoa vừa hé nở, ánh sáng dịu dàng len lỏi vào từng góc nhỏ trong nhà bạn.”</blockquote>
+    <div class="src">— CAPTION GỐC IG, FLORIA MILKY · 19/06/26</div>
+    <div class="lamp-line"></div>
+  </section>
+  <section class="chap two">
+    <div class="chnum">CHƯƠNG 02 — STRATA</div>
+    <blockquote>“Các lớp ánh sáng với một khung dáng mạnh mẽ… cho không gian cần thêm chút attitude.”</blockquote>
+    <div class="src">— LAUNCH SS26P02 · 08/08/26</div>
+    <div class="lamp-line" style="animation-delay:1.2s"></div>
+  </section>
+  <section class="chap">
+    <div class="chnum">CHƯƠNG 03 — KHÔNG GIAN</div>
+    <blockquote>“Ánh sáng vàng ấm thắp sáng giữa bảng màu tươi trẻ — vừa cozy vừa vintage-cool.”</blockquote>
+    <div class="src">— AERA × OOHLALA.CONCEPT · 11/07/26</div>
+    <div class="lamp-line" style="animation-delay:2s"></div>
+  </section>
+  <button class="cta2">INBOX AERA ↗</button>
+</div>
+
+<!-- ═══════════ CONCEPT 3 ═══════════ -->
+<div id="c3" hidden>
+<div class="wrap">
+  <h1>Từ filament đến ánh sáng.<br><em>Lắp ráp bởi tay người, chọn màu bởi bạn.</em></h1>
+
+  <div class="steps">
+    <div class="step"><div class="n">BƯỚC 01</div><div><h3>In PLA</h3><p>Mỗi lớp nhún bèo của Floria được in từng milimet — phần "mềm mại" ấy mất hàng giờ để thành hình.</p></div></div>
+    <div class="step"><div class="n">BƯỚC 02</div><div><h3>Khung &amp; đế</h3><p>Đế định hình cứng cáp — đúng "khung dáng mạnh mẽ" mà Strata mang trên mình.</p></div></div>
+    <div class="step"><div class="n">BƯỚC 03</div><div><h3>Lắp ráp &amp; test sáng</h3><p>Giống hệt reel "Unbox, Assemble &amp; Light Demo": mỗi đèn được bật thử trước khi đóng hộp.</p></div></div>
+    <div class="step"><div class="n">BƯỚC 04</div><div><h3>Gửi đến góc của bạn</h3><p>Góc bàn, đầu giường, record corner — nơi nào cần một chút ánh sáng có tính cách.</p></div></div>
+  </div>
+
+  <div class="builder">
+    <div class="preview" id="prevBg" style="background:#F2EEE6">
+      <svg class="bulb-svg" width="90" height="90" viewBox="0 0 90 90">
+        <path id="shade" d="M45 8 C22 15 21 38 45 47 C69 38 68 15 45 8Z" fill="#F2EEE6" stroke="#22201C" stroke-opacity=".25"/>
+        <rect x="37" y="52" width="16" height="10" rx="2" fill="#22201C"/>
+        <circle cx="45" cy="72" r="5" fill="#FFCC80"/>
+      </svg>
+    </div>
+    <div class="opts">
+      <label>COLORWAY — CHỌN ĐỂ XEM TRƯỚC</label>
+      <div class="row">
+        <span class="sw2 sel" data-bg="#F2EEE6" data-shade="#F2EEE6" style="background:#F2EEE6" title="Milky"></span>
+        <span class="sw2" data-bg="#FADBD2" data-shade="#D8402B" style="background:#D8402B" title="Solar Red"></span>
+        <span class="sw2" data-bg="#D6DEF0" data-shade="#3E5F8A" style="background:#3E5F8A" title="Blue"></span>
+        <span class="sw2" data-bg="#DEE4D2" data-shade="#7A8B5C" style="background:#7A8B5C" title="Moss"></span>
+      </div>
+      <div class="cfg" id="cfgText">CONFIG #047 · FLORIA / MILKY</div>
+      <button class="send" id="sendBtn">GỬI CONFIG QUA INBOX ↗</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<footer>AERA · BRAND DNA → UI/UX DEMO · DỮ LIỆU THẬT TỪ IG &amp; THREADS @AERA_SAMPLES · 24/08/2026</footer>
+
+<script>
+function setConcept(id, btn){
+  document.querySelectorAll('.switcher button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.body.dataset.concept = id;
+  ['c1','c2','c3'].forEach(k=>{
+    const el=document.getElementById(k);
+    if(k===id){el.hidden=false}else{el.hidden=true}
+  });
+  window.scrollTo({top:0});
+  // per-concept accent
+  const accents={c1:['#0038BC','#fff'],c2:['#C33B23','#fff'],c3:['#0038BC','#fff']};
+  document.body.style.setProperty('--accent',accents[id][0]);
+  document.body.style.setProperty('--btn-text',accents[id][1]);
+}
+document.body.style.setProperty('--accent','#0038BC');
+document.body.style.setProperty('--btn-text','#fff');
+
+/* C2 — light follows pointer + warm shift on scroll */
+const glow=document.getElementById('glow');
+document.addEventListener('pointermove',e=>{
+  glow.style.setProperty('--gx',(e.clientX/innerWidth*100)+'%');
+  glow.style.setProperty('--gy',(e.clientY/innerHeight*100)+'%');
+});
+window.addEventListener('scroll',()=>{
+  if(document.body.dataset.concept!=='c2')return;
+  const p=scrollY/(document.body.scrollHeight-innerHeight||1);
+  const k=Math.round(2700+(3000-2700)*Math.min(1,p));
+  document.title=k+'K — AERA';
+},{passive:true});
+
+/* C3 — colorway builder */
+let cfgN=47;
+document.querySelectorAll('.sw2').forEach(sw=>{
+  sw.addEventListener('click',()=>{
+    document.querySelectorAll('.sw2').forEach(s=>s.classList.remove('sel'));
+    sw.classList.add('sel');
+    document.getElementById('prevBg').style.background=sw.dataset.bg;
+    document.getElementById('shade').setAttribute('fill',sw.dataset.shade);
+    cfgN++;
+    const name={ '#F2EEE6':'MILKY','#D8402B':'SOLAR RED','#3E5F8A':'BLUE','#7A8B5C':'MOSS'}[sw.dataset.shade];
+    document.getElementById('cfgText').textContent='CONFIG #'+String(cfgN).padStart(3,'0')+' · FLORIA / '+name;
+  });
+});
+document.getElementById('sendBtn').addEventListener('click',()=>{ /* deep-link IG DM trong bản production */ });
+</script>
+</body>
+</html>
