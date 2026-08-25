@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aera — Strata 3D Viewer</title>
+<style>
+  :root { --blue:#0038BC; --platinum:#EEEEEE; --warm:#FFCC80; --ink:#121212; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { height:100%; background:var(--ink); color:var(--platinum); font-family:'Montserrat',system-ui,sans-serif; overflow:hidden; }
+
+  #app { position:relative; width:100%; height:100vh; }
+  #app canvas { display:block; width:100%; height:100%; }
+
+  /* overlay HUD */
+  .hud { position:absolute; top:24px; left:28px; z-index:10; pointer-events:none; }
+  .hud .kicker { font-size:11px; letter-spacing:.34em; text-transform:uppercase; color:var(--warm); margin-bottom:8px; }
+  .hud h1 { font-size:clamp(22px,3.4vw,40px); font-weight:800; letter-spacing:.02em; text-transform:uppercase; margin:0; }
+  .hud .sub { font-size:13px; color:rgba(238,238,238,.72); margin-top:8px; max-width:360px; line-height:1.5; }
+
+  .hint { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); z-index:10;
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:rgba(238,238,238,.55);
+    pointer-events:none; white-space:nowrap; }
+
+  .badge { position:absolute; right:26px; bottom:20px; z-index:10; pointer-events:none;
+    font-size:10px; letter-spacing:.24em; color:var(--blue); border:1px solid rgba(0,56,188,.55);
+    padding:7px 12px; border-radius:999px; background:rgba(18,18,18,.5); backdrop-filter:blur(6px); }
+
+  .rotate-mark { position:absolute; right:26px; top:24px; z-index:10; pointer-events:none; color:rgba(238,238,238,.5); }
+  .rotate-mark svg { display:block; opacity:.6; }
+
+  #loader { position:absolute; inset:0; z-index:20; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:16px; background:var(--ink); }
+  #loader .ring { width:56px; height:56px; border-radius:50%; border:2px solid rgba(238,238,238,.15);
+    border-top-color:var(--warm); animation:spin .9s linear infinite; }
+  #loader .pct { font-size:12px; letter-spacing:.2em; color:var(--platinum); }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #loader.done { opacity:0; visibility:hidden; transition:.5s; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="hud">
+    <div class="kicker">AERA · SS26P2</div>
+    <h1>Strata</h1>
+    <div class="sub">Đèn để bàn in 3D — lớp rèm sáo × kết cấu công nghiệp. Kéo chuột để xoay, lăn để zoom, di chuột để parallax.</div>
+  </div>
+
+  <div class="rotate-mark" aria-hidden="true">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#FFCC80" stroke-width="1.4">
+      <path d="M12 4a8 8 0 1 1-8 8"/><polyline points="12 1 12 4 9 4"/>
+    </svg>
+  </div>
+
+  <div class="badge">STRATA RED · GLB · PBR</div>
+  <div class="hint">drag to orbit · scroll to zoom · idle spin</div>
+
+  <div id="loader"><div class="ring"></div><div class="pct">Loading model…</div></div>
+</div>
+
+<!-- Three.js via importmap (ES modules, pinned version) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const container = document.getElementById('app');
+const loaderEl  = document.getElementById('loader');
+const pctEl     = document.querySelector('#loader .pct');
+
+// ── Renderer ──
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio||1));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+container.appendChild(renderer.domElement);
+
+// ── Scene & camera ──
+const scene = new THREE.Scene();
+// subtle radial background so PBR metal reads against a value, not pure black
+scene.background = new THREE.Color(0x0f0e0c);
+scene.fog = new THREE.Fog(0x0f0e0c, 8, 22);
+
+const camera = new THREE.PerspectiveCamera(38, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.set(0, 1.4, 7.5);
+
+// ── Lighting: ambient + key (shadow) + rim/fill ──
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+scene.add(new THREE.HemisphereLight(0xfff4e6, 0x0f0e0c, 0.5));
+
+const key = new THREE.DirectionalLight(0xfff2e0, 2.4);
+key.position.set(4, 6, 5);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.near = 0.5;
+key.shadow.camera.far = 20;
+key.shadow.camera.left = -4; key.shadow.camera.right = 4;
+key.shadow.camera.top = 4; key.shadow.camera.bottom = -4;
+key.shadow.bias = -0.0004;
+key.shadow.normalBias = 0.02;
+scene.add(key);
+
+// warm rim light from behind (makes anodized metal edge glow)
+const rim = new THREE.DirectionalLight(0xffcc80, 1.1);
+rim.position.set(-3, 1.5, -5);
+scene.add(rim);
+
+// cool fill to keep shadows from going flat
+const fill = new THREE.DirectionalLight(0x4a6da8, 0.5);
+fill.position.set(-4, 1, 2);
+scene.add(fill);
+
+// ── Ground for shadows ──
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(6, 64),
+  new THREE.ShadowMaterial({ opacity:0.35 })
+);
+ground.rotation.x = -Math.PI/2;
+ground.position.y = -1.15;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// ── Controls: drag orbit + wheel zoom (mouse-tracking handled separately) ──
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.enablePan = false;
+controls.minDistance = 3.2;
+controls.maxDistance = 14;
+controls.maxPolarAngle = Math.PI * 0.72;
+controls.minPolarAngle = Math.PI * 0.12;
+controls.autoRotate = false; // idle spin done manually on group, not camera
+
+// ── Load GLB ──
+const group = new THREE.Group();
+scene.add(group);
+
+let model = null;
+const loader = new GLTFLoader();
+// PBR material override for a clean, predictable look across GLB variants
+loader.load(
+  'assets/models/STRATA RED.glb',
+  (gltf) => {
+    model = gltf.scene;
+    model.traverse((o) => {
+      if (o.isMesh) {
+        o.castShadow = true;
+        o.receiveShadow = true;
+        // Ensure PBR env-independent: keep original textures, force correct flags
+        if (o.material) {
+          o.material.needsUpdate = true;
+          if (o.material.metalness !== undefined) o.material.metalness = Math.min(1, o.material.metalness ?? 0.9);
+          if (o.material.roughness !== undefined) o.material.roughness = Math.max(0.15, o.material.roughness ?? 0.5);
+        }
+      }
+    });
+
+    // center + fit
+    const box = new THREE.Box3().setFromObject(model);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    model.position.sub(center);           // center at origin
+    model.position.y += size.y * 0.5 - 0; // sit base near y=0
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    model.scale.setScalar(2.2 / maxDim);   // normalize to ~2.2 units tall
+
+    group.add(model);
+    loaderEl.classList.add('done');
+    window.__aeraReady = true;
+  },
+  (xhr) => {
+    if (xhr.total) pctEl.textContent = `Loading model… ${Math.round(xhr.loaded / xhr.total * 100)}%`;
+  },
+  (err) => {
+    pctEl.textContent = 'Failed to load model';
+    console.error('GLB load error', err);
+  }
+);
+
+// ── Idle rotation (Y) + subtle mouse parallax on the GROUP ──
+let targetRotY = 0;
+let targetTiltX = 0;
+let targetTiltY = 0;
+let idle = true;
+let pointerX = 0, pointerY = 0;
+
+window.addEventListener('pointermove', (e) => {
+  pointerX = (e.clientX / window.innerWidth)  - 0.5;
+  pointerY = (e.clientY / window.innerHeight) - 0.5;
+});
+
+// pause idle spin while user is dragging
+const startInteract = () => { idle = false; };
+const endInteract   = () => { idle = true; };
+renderer.domElement.addEventListener('pointerdown', startInteract);
+window.addEventListener('pointerup', endInteract);
+
+const clock = new THREE.Clock();
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = clock.getDelta();
+
+  if (model) {
+    // continuous 360° idle rotation (slow)
+    if (idle) group.rotation.y += dt * 0.35;
+
+    // mouse parallax: gentle independent tilt offset for depth
+    targetTiltY = pointerX * 0.28;
+    targetTiltX = pointerY * 0.18;
+    group.rotation.y += (targetTiltY - 0) * dt * 2.0; // subtle drift toward cursor side
+    group.rotation.x += (targetTiltX - group.rotation.x) * 0.03;
+
+    // float bob
+    group.position.y = Math.sin(clock.elapsedTime * 0.8) * 0.05;
+  }
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+animate();
+
+// ── Responsive ──
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
