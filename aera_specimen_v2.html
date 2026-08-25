@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AERA — Specimen Sheet v2</title>
+<style>
+:root{
+  --blue:#0038BC; --blue-dark:#002DA1; --platinum:#EEEEEE;
+  --red-brick:#C33B23; --solar-red:#D8402B; --warm-light:#FFCC80;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',system-ui,sans-serif;background:#F7F7F4;color:#111}
+
+/* ===== halftone dot field (current-site DNA) ===== */
+#dots{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+main{position:relative;z-index:1}
+
+/* ===== header ===== */
+header.top{position:sticky;top:0;z-index:50;background:rgba(247,247,244,.88);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,56,188,.15)}
+.top-inner{max-width:1160px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.wordmark{font-weight:800;font-size:20px;letter-spacing:.02em;color:var(--blue)}
+.wordmark span{color:#C33B23}
+nav.tags{display:flex;gap:18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.18em;color:#666}
+nav.tags a{color:inherit;text-decoration:none;padding-bottom:3px;border-bottom:2px solid transparent;transition:.25s}
+nav.tags a:hover{color:var(--blue);border-color:var(--blue)}
+
+.wrap{max-width:1160px;margin:0 auto;padding:56px 24px 120px}
+
+/* ===== hero ===== */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;margin-bottom:90px}
+.hero-left .kicker{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.32em;color:var(--blue)}
+.hero-left h1{font-weight:800;text-transform:uppercase;letter-spacing:.02em;font-size:clamp(36px,5.4vw,62px);line-height:1.04;color:var(--blue);margin:14px 0 20px}
+.hero-left h1 em{font-style:normal;color:var(--red-brick)}
+.hero-left p{font-size:15px;line-height:1.75;color:#555;max-width:480px}
+.hero-left p b{color:#111}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{border:none;font-family:inherit;font-weight:700;font-size:13px;letter-spacing:.1em;padding:14px 26px;cursor:pointer;transition:transform .15s, box-shadow .25s;text-decoration:none;display:inline-block}
+.btn.primary{background:var(--blue);color:#fff}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,56,188,.35)}
+.btn.ghost{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}
+.hero-right{position:relative}
+.video-frame{position:relative;background:#0E0E10;border-radius:6px;overflow:hidden;box-shadow:0 24px 70px rgba(0,30,110,.22)}
+.video-frame video{width:100%;display:block}
+.figtag{position:absolute;top:14px;left:14px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;color:var(--warm-light);background:rgba(14,14,16,.65);padding:5px 10px;border-radius:3px}
+.corner-tick{position:absolute;width:18px;height:18px;border-color:var(--blue);border-style:solid;border-width:0}
+.corner-tick.tl{top:-7px;left:-7px;border-top-width:2px;border-left-width:2px}
+.corner-tick.br{bottom:-7px;right:-7px;border-bottom-width:2px;border-right-width:2px}
+
+/* ===== section headers ===== */
+.sec-head{display:flex;align-items:baseline;gap:18px;margin:96px 0 34px}
+.sec-head .no{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red-brick)}
+.sec-head h2{font-weight:800;text-transform:uppercase;font-size:clamp(22px,3vw,32px);letter-spacing:.06em;color:#111}
+.sec-head .line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,56,188,.35),transparent)}
+
+/* ===== specimen cards ===== */
+.c1-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:rgba(0,56,188,.18);border:1px solid rgba(0,56,188,.18)}
+.spec-card{background:#F7F7F4;position:relative;cursor:crosshair;transition:.3s;overflow:hidden}
+.spec-card:hover{background:#fff}
+.spec-card .pad{padding:26px}
+.spec-card .code{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.25em;color:var(--blue);display:flex;justify-content:space-between}
+.spec-card .code i{font-style:normal;color:var(--red-brick)}
+.spec-card figure{margin:20px 0;position:relative;height:260px;overflow:hidden;background:#EFEFEA}
+.spec-card figure img{width:100%;height:100%;object-fit:cover;transition:opacity .45s ease, transform .6s ease}
+.spec-card:hover figure img{transform:scale(1.04)}
+.spec-card figure .alt-img{position:absolute;inset:0;opacity:0}
+.spec-card:hover figure .base-img{opacity:0}
+.spec-card:hover figure .alt-img{opacity:1}
+.spec-card h3{text-transform:uppercase;font-size:16px;letter-spacing:.16em;margin-bottom:6px}
+.spec-card h3 small{font-size:10px;letter-spacing:.2em;color:var(--red-brick);vertical-align:super}
+.spec-card .use{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#777;line-height:1.8}
+.spec-card .swatches{display:flex;gap:8px;margin-top:16px}
+.spec-card .sw{width:20px;height:20px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.12);transition:transform .18s}
+.spec-card .sw:hover,.spec-card .sw.sel{transform:scale(1.28)}
+.spec-card .corner{position:absolute;width:14px;height:14px;border-color:var(--blue);border-style:solid;border-width:0;z-index:2}
+.spec-card .corner.tl{top:8px;left:8px;border-top-width:1.5px;border-left-width:1.5px}
+.spec-card .corner.br{bottom:8px;right:8px;border-bottom-width:1.5px;border-right-width:1.5px}
+
+/* ===== material strip ===== */
+.mat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.mat{position:relative;height:190px;border-radius:6px;overflow:hidden;cursor:pointer}
+.mat img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.mat:hover img{transform:scale(1.07)}
+.mat figcaption{position:absolute;left:10px;bottom:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:#fff;background:rgba(14,14,16,.55);backdrop-filter:blur(6px);padding:5px 9px;border-radius:3px}
+
+/* ===== colorway archive (color = the engine) ===== */
+.archive{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px}
+.arch-card{background:#fff;border:1px solid rgba(0,56,188,.14);border-radius:6px;padding:18px;text-align:left;cursor:pointer;transition:.25s;font-family:inherit}
+.arch-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,30,110,.12)}
+.arch-card .dot{width:44px;height:44px;border-radius:50%;margin-bottom:14px;transition:transform .3s}
+.arch-card:hover .dot{transform:scale(1.12)}
+.arch-card .nm{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.arch-card .dt{font-family:'IBM Plex Mono',monospace;font-size:10px;color:#888;margin-top:4px;line-height:1.7}
+.arch-card .badge{display:inline-block;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.15em;color:var(--red-brick);border:1px solid var(--red-brick);padding:2px 7px;border-radius:999px}
+
+/* ===== footer title-block ===== */
+footer.tb{margin-top:110px;background:var(--blue);color:var(--platinum);padding:54px max(24px,7vw);position:relative;overflow:hidden}
+footer.tb::after{content:"";position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,204,128,.25),transparent 70%)}
+footer.tb .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:28px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;line-height:2}
+footer.tb b{display:block;font-size:10px;color:var(--warm-light);letter-spacing:.28em;margin-bottom:8px}
+footer.tb .wm{font-family:'Montserrat';font-weight:800;font-size:30px;margin-bottom:18px}
+footer.tb a{color:var(--platinum)}
+
+@media(max-width:840px){
+  .hero{grid-template-columns:1fr}
+  nav.tags{display:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="dots"></canvas>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="wordmark">aera<span>.</span></div>
+    <nav class="tags">
+      <a href="#specimens">SPECIMENS</a>
+      <a href="#materials">MATERIALS</a>
+      <a href="#archive">COLOR ARCHIVE</a>
+      <a href="#studio">STUDIO</a>
+    </nav>
+    <button class="btn primary" style="padding:10px 20px;font-size:12px">INBOX ↗</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="kicker">AERA · SEASON SS26 · SPECIMEN INDEX</div>
+      <h1>Đèn là <em>mẫu vật</em>,<br>không phải đồ gia dụng.</h1>
+      <p>Mỗi chiếc đèn Aera mang một mã số, một cấu trúc lớp và một bảng màu riêng — như <b>tờ hồ sơ mẫu vật</b> của một phòng thí nghiệm ánh sáng. Cấu trúc hybrid: vỏ PLA in 3D mềm mại trên khung định hình mạnh mẽ.</p>
+      <div class="hero-cta">
+        <a class="btn primary" href="#specimens">XEM BỘ SƯU TẬP</a>
+        <a class="btn ghost" href="#archive">COLOR ARCHIVE</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <span class="corner-tick tl"></span><span class="corner-tick br"></span>
+      <div class="video-frame">
+        <video src="assets_demo/strata_explode.mp4" autoplay muted loop playsinline></video>
+        <span class="figtag">FIG.00 — EXPLODED VIEW / SS26P02</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIMENS -->
+  <div class="sec-head" id="specimens"><span class="no">01</span><h2>Specimens</h2><div class="line"></div></div>
+  <section class="c1-grid">
+
+    <div class="spec-card" id="card-strata">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <div class="pad">
+        <div class="code"><span>SS26P02</span><i id="strataCode">/ RED</i></div>
+        <figure>
+          <img class="base-img" src="assets_demo/product_citadel.jpg" alt="Strata hoàn thiện">
+          <img class="alt-img" src="assets_demo/product_citadel_turntable.jpg" alt="Strata góc khác">
+        </figure>
+        <h3>Strata <small>FLAGSHIP</small></h3>
+        <div class="use">USE › góc bàn làm việc / kệ sách / record corner<br>MOOD › "attitude" · các lớp rèm sáo · kết cấu công nghiệp</div>
+        <div class="swatches" id="swStrata">
+          <span class="sw sel" data-hex="#C33B23" data-name="BRICK RED" style="background:#C33B23"></span>
+          <span class="sw" data-hex="#22201C" data-name="ANODIZED" style="background:#22201C"></span>
+          <span class="sw" data-hex="#D8402B" data-name="SOLAR RED" style="background:#D8402B"></span>
+          <span class="sw" data-hex="#F2EEE6" data-name="MILKY" style="background:#F2EEE6"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-card">
+      <span class="corner tl"></span><span class="corner br"></span>
+      <div class="pad">
+        <div class="code"><span>SS26P01</span><i>/ FLORIA</i></div>
+        <figure>
+          <img class="base-img" src="assets_demo/product_floria.jpg" alt="Floria">
+          <img class="alt-img" src="assets_demo/material_milky.jpg" alt="Texture nhún bèo">
+        </figure>
+        <h3>Floria <small>GIFT PICK</small></h3>
+        <div class="use">USE › đầu giường / góc bàn / quà tặng<br>MOOD · "nhún bèo mềm mại" · "cánh hoa vừa hé nở"</div>
+        <div class="swatches">
+          <span class="sw sel" data-hex="#D8402B" style="background:#D8402B"></span>
+          <span class="sw" data-hex="#F2EEE6" style="background:#F2EEE6"></span>
+          <span class="sw" data-hex="#3E5F8A" style="background:#3E5F8A"></span>
+          <span class="sw" data-hex="#7A8B5C" style="background:#7A8B5C"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <div class="sec-head" id="materials"><span class="no">02</span><h2>Material Studies</h2><div class="line"></div></div>
+  <section class="mat-strip">
+    <figure class="mat"><img src="assets_demo/material_red.jpg"><figcaption>MAT.01 — PLA RED</figcaption></figure>
+    <figure class="mat"><img src="assets_demo/material_milky.jpg"><figcaption>MAT.02 — PLA MILKY</figcaption></figure>
+    <figure class="mat"><img src="assets_demo/material_blue.jpg"><figcaption>MAT.03 — PLA BLUE</figcaption></figure>
+    <figure class="mat"><img src="assets_demo/material_moss.jpg"><figcaption>MAT.04 — PLA MOSS</figcaption></figure>
+    <figure class="mat"><img src="assets_demo/material_sandy.jpg"><figcaption>MAT.05 — PLA SANDY</figcaption></figure>
+  </section>
+
+  <!-- COLOR ARCHIVE -->
+  <div class="sec-head" id="archive"><span class="no">03</span><h2>Color Archive</h2><div class="line"></div></div>
+  <p style="font-size:13.5px;color:#666;max-width:640px;margin:-14px 0 26px;line-height:1.75">Màu là động cơ của Aera — mỗi drop màu là một sự kiện. Đây là lưu trữ toàn bộ colorway đã ra mắt theo season.</p>
+  <section class="archive">
+    <button class="arch-card"><div class="dot" style="background:#F2EEE6"></div><div class="nm">Milky</div><div class="dt">SS26 · JUL 2026<br>"trắng mềm mại, tinh khôi"</div><span class="badge">TOP DROP</span></button>
+    <button class="arch-card"><div class="dot" style="background:#D8402B"></div><div class="nm">Solar Red</div><div class="dt">SS26 · JUL 2026<br>"năng lượng & điểm nhấn cá tính"</div></button>
+    <button class="arch-card"><div class="dot" style="background:#C33B23"></div><div class="nm">Brick Red</div><div class="dt">SS26P02 · AUG 2026<br>Strata flagship colorway</div></button>
+    <button class="arch-card"><div class="dot" style="background:#3E5F8A"></div><div class="nm">Deep Blue</div><div class="dt">ARCHIVE · 2026<br>Persian family</div></button>
+    <button class="arch-card"><div class="dot" style="background:#7A8B5C"></div><div class="nm">Moss</div><div class="dt">ARCHIVE · 2026<br>Nature series</div></button>
+  </section>
+
+  <!-- STUDIO -->
+  <div class="sec-head" id="studio"><span class="no">04</span><h2>Studio</h2><div class="line"></div></div>
+  <section style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center">
+    <img src="assets_demo/product_citadel_turntable.jpg" style="width:100%;border-radius:6px;box-shadow:0 18px 50px rgba(0,30,110,.15)" alt="Studio">
+    <div>
+      <div class="kicker" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.3em;color:var(--blue)">HCMC · QUARTERLY RELEASE</div>
+      <h2 style="font-weight:800;font-size:clamp(22px,3vw,34px);text-transform:uppercase;margin:14px 0 16px;line-height:1.2">Studio thiết kế<br>&amp; sản xuất</h2>
+      <p style="font-size:14px;line-height:1.8;color:#555">Từng bước: in PLA → hoàn thiện khung → lắp ráp → test sáng → đóng hộp. Mỗi quý một bộ mẫu vật mới, mỗi drop màu một câu chuyện mới. Trưng bày & pick-up tại concept store đối tác ở HCMC.</p>
+      <div class="hero-cta"><a class="btn primary" href="#specimens">ĐẶT MẪU VẬT CỦA BẠN</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="tb">
+  <div class="wm">aera.</div>
+  <div class="row">
+    <div><b>SPECIMEN</b>SS26P01 — Floria<br>SS26P02 — Strata</div>
+    <div><b>STUDIO</b>Thiết kế & sản xuất đèn decor<br>HCMC, Việt Nam</div>
+    <div><b>RELEASE</b>Quarterly New Release<br>Inbox để được tư vấn</div>
+    <div><b>FIND US</b>Offline display @ partner store<br>IG · Threads @aera_samples</div>
+  </div>
+</footer>
+
+<script>
+/* ===== halftone dot field — pulse theo scroll velocity (DNA trang hiện tại) ===== */
+const cv=document.getElementById('dots'),ctx=cv.getContext('2d');
+let W,H,dots=[],lastY=scrollY,vel=0,hue=210;
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+  dots=[];const gap=26;
+  for(let y=gap/2;y<H;y+=gap)for(let x=gap/2;x<W;x+=gap)
+    dots.push({x,y,r:1.1+Math.random()*1.2,ph:Math.random()*6.28});
+}
+resize();addEventListener('resize',resize);
+addEventListener('scroll',()=>{vel=Math.min(30,Math.abs(scrollY-lastY));lastY=scrollY},{passive:true});
+(function loop(t){
+  ctx.clearRect(0,0,W,H);
+  const bandY=(t*.04)%(H+300)-150; // traveling band
+  vel*=.92;
+  for(const d of dots){
+    const pulse=.5+.5*Math.sin(t*.001+d.ph);
+    let r=d.r*(0.75+pulse*.5)+vel*.06;
+    // band highlight
+    const bd=1-Math.min(1,Math.abs(d.y-bandY)/130);
+    r+=bd*2.4;
+    // blue base, warm-light band
+    if(bd>.25){ctx.fillStyle=`rgba(255,204,128,${.25+bd*.45})`}
+    else{ctx.fillStyle=`rgba(0,56,188,${.08+pulse*.09})`}
+    ctx.beginPath();ctx.arc(d.x,d.y,r,0,6.29);ctx.fill();
+  }
+  requestAnimationFrame(loop);
+})(0);
+
+/* ===== swatch → accent stamp ===== */
+document.querySelectorAll('#swStrata .sw').forEach(sw=>{
+  sw.addEventListener('click',()=>{
+    document.querySelectorAll('#swStrata .sw').forEach(s=>s.classList.remove('sel'));
+    sw.classList.add('sel');
+    const code=document.getElementById('strataCode');
+    code.textContent='/ '+sw.dataset.name;
+    code.style.animation='none';void code.offsetWidth;
+    code.style.animation='stamp .35s ease';
+  });
+});
+// inject keyframes for stamp
+const st=document.createElement('style');
+st.textContent='@keyframes stamp{0%{transform:scale(1.4);color:'+getComputedStyle(document.documentElement).getPropertyValue('--blue')+'}100%{transform:scale(1)}}';
+document.head.appendChild(st);
+
+/* ===== reveal on scroll (light-sweep) ===== */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
+},{threshold:.12});
+document.querySelectorAll('.spec-card,.mat,.arch-card').forEach((el,i)=>{
+  el.style.opacity=0;el.style.transform='translateY(22px)';
+  el.style.transition='opacity .6s '+(i%4)*.08+'s, transform .6s '+(i%4)*.08+'s';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
