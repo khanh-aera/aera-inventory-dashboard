@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-07 09:29 ICT",
+ "generated": "2026-09-08 07:22 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -95,7 +95,7 @@
   {
    "name": "Bóng đèn OSRAM LED (3W, 3000K)",
    "cat": "Component",
-   "stock": 10.0,
+   "stock": 9.0,
    "unit": "pcs",
    "alert": 5.0
   },
