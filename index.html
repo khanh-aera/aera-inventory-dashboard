@@ -197,7 +197,7 @@ g.fillStyle='#C9CDD4';g.font='600 11px Montserrat';g.fillText(info.small,x,y+15)
 Chart.register(centerPlugin);
 const cats={};items.forEach(d=>{cats[d.cat]=(cats[d.cat]||0)+1});
 new Chart(document.getElementById('catChart'),{type:'doughnut',
-data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#7EA6FF','#0052E0','#002A8C','#9DB9FF'],borderColor:'#001B5E',borderWidth:3}]},
+data:{labels:Object.keys(cats),datasets:[{data:Object.values(cats),backgroundColor:['#4D79FF','#FFB224','#00B8A9','#8E6BF1','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},
 options:{maintainAspectRatio:false,cutout:'68%',animation:{animateRotate:true,duration:900,easing:'easeOutQuart'},plugins:{legend:{position:'bottom',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}}).$c={big:total,small:'vật tư'};
 new Chart(document.getElementById('statusChart'),{type:'doughnut',
 data:{labels:['Đủ kho','Sắp hết','Nguy cấp','Không dùng'],datasets:[{data:[ok,low-crit,crit,total-ok-low],backgroundColor:['#30A46C','#E5484D','#FFB224','#8A8F98'],borderColor:'#001B5E',borderWidth:3}]},
