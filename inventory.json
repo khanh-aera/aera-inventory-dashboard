@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-08 07:22 ICT",
+ "generated": "2026-09-09 07:50 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -18,7 +18,7 @@
   {
    "name": "floria_matte_red_base",
    "cat": "PrintedComponent",
-   "stock": 4.0,
+   "stock": 3.0,
    "unit": "pcs",
    "alert": 2.0
   },
@@ -46,21 +46,21 @@
   {
    "name": "floria_standard_skin",
    "cat": "PrintedComponent",
-   "stock": 2.0,
+   "stock": 7.0,
    "unit": "pcs",
    "alert": 3.0
   },
   {
    "name": "strata_matte_red_base",
    "cat": "PrintedComponent",
-   "stock": 6.0,
+   "stock": 5.0,
    "unit": "pcs",
    "alert": 2.0
   },
   {
    "name": "strata_matte_red_skin",
    "cat": "PrintedComponent",
-   "stock": 6.0,
+   "stock": 5.0,
    "unit": "pcs",
    "alert": 2.0
   },
@@ -95,14 +95,14 @@
   {
    "name": "Bóng đèn OSRAM LED (3W, 3000K)",
    "cat": "Component",
-   "stock": 9.0,
+   "stock": 8.0,
    "unit": "pcs",
    "alert": 5.0
   },
   {
    "name": "Bóng đèn OSRAM LED (5W, 3000K)",
    "cat": "Component",
-   "stock": 1.0,
+   "stock": 0.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -123,14 +123,14 @@
   {
    "name": "Hộp carton loại 2",
    "cat": "Packaging",
-   "stock": 63.0,
+   "stock": 62.0,
    "unit": "pcs",
    "alert": 10.0
   },
   {
    "name": "Hộp carton loại 1",
    "cat": "Packaging",
-   "stock": 27.0,
+   "stock": 26.0,
    "unit": "pcs",
    "alert": 10.0
   },
@@ -179,7 +179,7 @@
   {
    "name": "Dây đèn + đuôi đèn",
    "cat": "Component",
-   "stock": 17.0,
+   "stock": 15.0,
    "unit": "pcs",
    "alert": 10.0
   },
@@ -193,7 +193,7 @@
   {
    "name": "Tờ infor Strata",
    "cat": "Documentation",
-   "stock": 100.0,
+   "stock": 99.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -228,7 +228,7 @@
   {
    "name": "Tờ infor Floria",
    "cat": "Documentation",
-   "stock": 103.0,
+   "stock": 102.0,
    "unit": "pcs",
    "alert": 5.0
   },
