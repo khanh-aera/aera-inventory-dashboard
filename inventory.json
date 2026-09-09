@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-09 07:50 ICT",
+ "generated": "2026-09-09 11:22 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -102,7 +102,7 @@
   {
    "name": "Bóng đèn OSRAM LED (5W, 3000K)",
    "cat": "Component",
-   "stock": 0.0,
+   "stock": 1.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -256,7 +256,7 @@
   {
    "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
    "cat": "Component",
-   "stock": 1.0,
+   "stock": 0.0,
    "unit": "pcs",
    "alert": 5.0
   }
