@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-09 12:18 ICT",
+ "generated": "2026-09-09 17:13 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -256,7 +256,7 @@
   {
    "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
    "cat": "Component",
-   "stock": 0.0,
+   "stock": 10.0,
    "unit": "pcs",
    "alert": 5.0
   }
