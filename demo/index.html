@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>aera — website demo (9:16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0038BC;
+    --platinum:#EEEEEE;
+    --bp-bg:#0E2A6E;
+    --white:#ffffff;
+    --ink:#0A0A0A;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:'Montserrat',sans-serif;
+    background:#05070f;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  /* ===== 9:16 CANVAS — 1080x1920 design space ===== */
+  .canvas{
+    width:100vw;height:100vh;
+    aspect-ratio:9/16;
+    max-width:100vw;max-height:100vh;
+    position:relative;
+    background:var(--bp-bg);
+    overflow:hidden;
+  }
+  .halftone{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background-image:radial-gradient(rgba(238,238,238,.12) 1px, transparent 1.6px);
+    background-size:14px 14px;
+  }
+  /* ===== SCENES: each shows in sequence on a 24s loop ===== */
+  .scene{
+    position:absolute;inset:0;z-index:2;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:8%;
+    opacity:0;pointer-events:none;
+    animation:sceneCycle 24s ease-in-out infinite;
+  }
+  .scene.s1{animation-delay:0s;}
+  .scene.s2{animation-delay:6s;}
+  .scene.s3{animation-delay:12s;}
+  .scene.s4{animation-delay:18s;}
+  @keyframes sceneCycle{
+    0%   {opacity:0;transform:translateY(18px);}
+    3%   {opacity:1;transform:translateY(0);}
+    22%  {opacity:1;transform:translateY(0);}
+    27%  {opacity:0;transform:translateY(-18px);}
+    100% {opacity:0;transform:translateY(-18px);}
+  }
+  /* ===== S1 — LOADING ===== */
+  .glyph{height:56px;color:var(--platinum);animation:glyphIn 1.2s ease-out both;}
+  @keyframes glyphIn{
+    from{opacity:0;transform:scale(.85);}
+    to{opacity:1;transform:scale(1);}
+  }
+  .load-bar{
+    margin-top:3em;width:180px;height:2px;
+    background:rgba(238,238,238,.25);
+    border-radius:1px;overflow:hidden;
+  }
+  .load-bar i{
+    display:block;height:100%;width:0;
+    background:var(--platinum);
+    animation:loadFill 2.4s ease-in-out .4s infinite;
+  }
+  @keyframes loadFill{
+    0%{width:0;}
+    60%{width:78%;}
+    100%{width:100%;}
+  }
+  .load-label{
+    margin-top:1.4em;font-size:12px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--platinum);opacity:.7;
+    animation:labelPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes labelPulse{0%,100%{opacity:.4;}50%{opacity:.9;}}
+  /* ===== MOCK BROWSER (S2/S3/S4) ===== */
+  .browser{
+    width:100%;aspect-ratio:3/4.4;
+    background:var(--white);
+    border-radius:14px;
+    box-shadow:0 24px 64px rgba(0,0,0,.45);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .chrome-bar{
+    flex:none;height:44px;
+    background:#F4F4F4;border-bottom:1px solid #E3E3E3;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+  }
+  .chrome-bar .dots{display:flex;gap:6px;}
+  .chrome-bar .dots i{width:10px;height:10px;border-radius:50%;background:#D4D4D4;}
+  .urlbox{
+    flex:1;height:24px;border-radius:12px;background:#fff;
+    border:1px solid #E3E3E3;
+    font-size:11px;color:#8A8A8A;
+    display:flex;align-items:center;padding:0 12px;letter-spacing:.02em;
+  }
+  .page{flex:1;overflow:hidden;position:relative;background:#FCFCFC;}
+  /* --- S2 product view --- */
+  .prod-img{
+    height:52%;background:url('images/floria_persian_blue.jpg') center/cover no-repeat;
+    animation:prodZoom 6s ease-in-out infinite alternate;
+  }
+  @keyframes prodZoom{from{transform:scale(1);}to{transform:scale(1.08);}}
+  .prod-info{padding:14% 8%;}
+  .prod-kicker{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--blue);font-weight:600;}
+  .prod-name{margin-top:.5em;font-size:clamp(20px,3.4vw,30px);font-weight:700;color:var(--ink);}
+  .prod-price{margin-top:.5em;font-size:14px;color:#666;}
+  .swatches{display:flex;gap:10px;margin-top:1.2em;}
+  .swatches i{width:18px;height:18px;border-radius:50%;}
+  .swatches i:nth-child(1){background:#0038BC;box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--blue);}
+  .swatches i:nth-child(2){background:#C6401E;}
+  .swatches i:nth-child(3){background:#B7CDBB;}
+  .swatches i:nth-child(4){background:#E8D88C;}
+  .cta{
+    margin-top:1.6em;height:44px;border-radius:3px;
+    background:var(--blue);color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;
+    animation:ctaBreathe 3s ease-in-out infinite;
+  }
+  @keyframes ctaBreathe{0%,100%{opacity:1;}50%{opacity:.82;}}
+  /* --- S3 about page --- */
+  .about-hero{
+    height:36%;background:url('images/aera_strata_render1.jpg') center/cover no-repeat;
+  }
+  .about-body{padding:9% 8%;}
+  .about-kicker{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--blue);font-weight:600;}
+  .about-h{margin-top:.5em;font-size:clamp(18px,3vw,26px);font-weight:700;color:var(--ink);line-height:1.25;}
+  .about-p{margin-top:1em;font-size:12.5px;line-height:1.7;color:#555;}
+  /* --- S4 popup over homepage --- */
+  .home-back{
+    position:absolute;inset:0;
+    background:url('images/strata_red_1.jpg') center/cover no-repeat;
+    filter:blur(1px) brightness(.9);
+  }
+  .home-veil{position:absolute;inset:0;background:rgba(10,10,10,.45);}
+  .modal{
+    position:absolute;left:8%;right:8%;top:50%;transform:translateY(-50%);
+    background:var(--white);border-radius:10px;overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    animation:modalPop 6s ease-in-out infinite;
+  }
+  @keyframes modalPop{
+    0%{transform:translateY(-42%) scale(.94);opacity:0;}
+    12%{transform:translateY(-50%) scale(1);opacity:1;}
+    88%{transform:translateY(-50%) scale(1);opacity:1;}
+    100%{transform:translateY(-58%) scale(.94);opacity:0;}
+  }
+  .modal-img{height:34%;background:url('images/mkt_floria_milky.jpg') center/cover no-repeat;}
+  .modal-body{padding:7% 8% 9%;text-align:center;}
+  .modal-h{font-size:clamp(16px,2.6vw,22px);font-weight:700;color:var(--ink);}
+  .modal-p{margin-top:.8em;font-size:11.5px;line-height:1.65;color:#666;}
+  .modal-btn{
+    margin-top:1.4em;height:40px;border-radius:3px;
+    background:var(--blue);color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:600;
+  }
+  /* ===== progress dots ===== */
+  .progress{
+    position:absolute;z-index:3;left:50%;bottom:4.5%;transform:translateX(-50%);
+    display:flex;gap:10px;
+  }
+  .progress i{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(238,238,238,.35);
+    animation:dotActive 24s ease-in-out infinite;
+  }
+  .progress i:nth-child(1){animation-delay:0s;}
+  .progress i:nth-child(2){animation-delay:6s;}
+  .progress i:nth-child(3){animation-delay:12s;}
+  .progress i:nth-child(4){animation-delay:18s;}
+  @keyframes dotActive{
+    0%,3%{background:rgba(238,238,238,.35);transform:scale(1);}
+    4%,24%{background:var(--platinum);transform:scale(1.25);}
+    27%,100%{background:rgba(238,238,238,.35);transform:scale(1);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01s !important;animation-iteration-count:1 !important;}
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="halftone"></div>
+
+  <!-- S1: LOADING -->
+  <div class="scene s1">
+    <svg class="glyph" viewBox="0 0 112.55 72.7" fill="currentColor" aria-label="aera glyph">
+      <path d="M0,72.7 L27,0 L45.6,0 L72.6,72.7 L53.8,72.7 L49.2,59.4 L23.4,59.4 L18.8,72.7 Z M28.6,44.1 L44,44.1 L36.3,21.9 Z"/>
+      <path d="M77.4,72.7 L77.4,0 L95.2,0 L95.2,52.4 L112.55,52.4 L112.55,72.7 Z"/>
+    </svg>
+    <div class="load-bar"><i></i></div>
+    <div class="load-label">aera.info.vn</div>
+  </div>
+
+  <!-- S2: PRODUCT VIEW -->
+  <div class="scene s2">
+    <div class="browser">
+      <div class="chrome-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbox">aera.info.vn/vn/floria</div>
+      </div>
+      <div class="page">
+        <div class="prod-img"></div>
+        <div class="prod-info">
+          <div class="prod-kicker">floria</div>
+          <div class="prod-name">Floria — Persian Blue</div>
+          <div class="prod-price">Available to order</div>
+          <div class="swatches"><i></i><i></i><i></i><i></i></div>
+          <div class="cta">Order</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: ABOUT PAGE -->
+  <div class="scene s3">
+    <div class="browser">
+      <div class="chrome-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbox">aera.info.vn/vn/about</div>
+      </div>
+      <div class="page">
+        <div class="about-hero"></div>
+        <div class="about-body">
+          <div class="about-kicker">studio</div>
+          <div class="about-h">Design studio đèn &amp; đồ decor Việt Nam</div>
+          <div class="about-p">Mỗi quý một sản phẩm mới, tất cả available to order. Vân in 3D là chất liệu — không phải khuyết điểm.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4: POPUP -->
+  <div class="scene s4">
+    <div class="browser">
+      <div class="chrome-bar">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div class="urlbox">aera.info.vn</div>
+      </div>
+      <div class="page">
+        <div class="home-back"></div>
+        <div class="home-veil"></div>
+        <div class="modal">
+          <div class="modal-img"></div>
+          <div class="modal-body">
+            <div class="modal-h">Bộ sưu tập mới</div>
+            <div class="modal-p">Đăng ký để nhận thông tin sản phẩm mới mỗi quý.</div>
+            <div class="modal-btn">Khám phá</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress"><i></i><i></i><i></i><i></i></div>
+</div>
+</body>
+</html>
