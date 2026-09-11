@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-10 22:31 ICT",
+ "generated": "2026-09-11 10:03 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -109,7 +109,7 @@
   {
    "name": "Nhựa PLA - trong suốt R3D",
    "cat": "Filament",
-   "stock": 1.132,
+   "stock": 1.0,
    "unit": "kg",
    "alert": 2.0
   },
