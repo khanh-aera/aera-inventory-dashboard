@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-11 10:03 ICT",
+ "generated": "2026-09-22 12:05 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -46,21 +46,21 @@
   {
    "name": "floria_standard_skin",
    "cat": "PrintedComponent",
-   "stock": 7.0,
+   "stock": 5.0,
    "unit": "pcs",
    "alert": 3.0
   },
   {
    "name": "strata_matte_red_base",
    "cat": "PrintedComponent",
-   "stock": 5.0,
+   "stock": 3.0,
    "unit": "pcs",
    "alert": 2.0
   },
   {
    "name": "strata_matte_red_skin",
    "cat": "PrintedComponent",
-   "stock": 5.0,
+   "stock": 3.0,
    "unit": "pcs",
    "alert": 2.0
   },
@@ -81,35 +81,28 @@
   {
    "name": "Dây dimmer chiết áp",
    "cat": "Component",
-   "stock": 2.0,
+   "stock": 6.0,
    "unit": "pcs",
    "alert": 5.0
   },
   {
    "name": "Bóng đèn LED Essential E27 (5W, 3000K)",
    "cat": "Component",
-   "stock": 1.0,
+   "stock": 6.0,
    "unit": "pcs",
    "alert": 5.0
   },
   {
    "name": "Bóng đèn OSRAM LED (3W, 3000K)",
    "cat": "Component",
-   "stock": 8.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Bóng đèn OSRAM LED (5W, 3000K)",
-   "cat": "Component",
-   "stock": 1.0,
+   "stock": 5.0,
    "unit": "pcs",
    "alert": 5.0
   },
   {
    "name": "Nhựa PLA - trong suốt R3D",
    "cat": "Filament",
-   "stock": 1.0,
+   "stock": 3.0,
    "unit": "kg",
    "alert": 2.0
   },
@@ -123,28 +116,28 @@
   {
    "name": "Hộp carton loại 2",
    "cat": "Packaging",
-   "stock": 62.0,
+   "stock": 60.0,
    "unit": "pcs",
    "alert": 10.0
   },
   {
    "name": "Hộp carton loại 1",
    "cat": "Packaging",
-   "stock": 26.0,
+   "stock": 24.0,
    "unit": "pcs",
    "alert": 10.0
   },
   {
    "name": "Nhựa PLA Matte - Milky",
    "cat": "Filament",
-   "stock": 1.15,
+   "stock": 3.0,
    "unit": "kg",
-   "alert": 1.5
+   "alert": 2.0
   },
   {
    "name": "Nhựa PLA Basic - Persian Blue Bambu",
    "cat": "Filament",
-   "stock": 1.0,
+   "stock": 2.0,
    "unit": "kg",
    "alert": 1.5
   },
@@ -158,7 +151,7 @@
   {
    "name": "Bóng đèn LED RGB pro",
    "cat": "Component",
-   "stock": 22.0,
+   "stock": 21.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -179,21 +172,21 @@
   {
    "name": "Dây đèn + đuôi đèn",
    "cat": "Component",
-   "stock": 15.0,
+   "stock": 11.0,
    "unit": "pcs",
    "alert": 10.0
   },
   {
    "name": "Nhựa PLA Matte - Matte Red",
    "cat": "Filament",
-   "stock": 1.436,
+   "stock": 1.336,
    "unit": "kg",
    "alert": 1.0
   },
   {
    "name": "Tờ infor Strata",
    "cat": "Documentation",
-   "stock": 99.0,
+   "stock": 97.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -228,7 +221,7 @@
   {
    "name": "Tờ infor Floria",
    "cat": "Documentation",
-   "stock": 102.0,
+   "stock": 100.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -256,7 +249,7 @@
   {
    "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
    "cat": "Component",
-   "stock": 10.0,
+   "stock": 8.0,
    "unit": "pcs",
    "alert": 5.0
   }
