@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-22 12:05 ICT",
+ "generated": "2026-09-22 12:41 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -193,7 +193,7 @@
   {
    "name": "Nhựa PLA Matte - Olive Green Tinmorry",
    "cat": "Filament",
-   "stock": 9.8,
+   "stock": 9.552,
    "unit": "kg",
    "alert": 1.5
   },
