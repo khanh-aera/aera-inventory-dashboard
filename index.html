@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="./favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="AERA Inv">
@@ -80,7 +81,7 @@ tr.flash td{animation:rowflash 1.8s ease-out}
 .chip:hover{border-color:rgba(126,166,255,.55);color:#fff;transform:translateY(-1px)}
 .chip.active{background:var(--pb);border-color:var(--pb);color:#fff}
 .bar{height:8px;border-radius:4px;background:rgba(238,238,238,.1);overflow:hidden;min-width:130px}
-.bar>div{height:100%;border-radius:4px;transition:width .8s cubic-bezier(.22,.61,.36,1)}
+.bar>div{height:100%;border-radius:5px;transition:width .8s cubic-bezier(.22,.61,.36,1)}
 .lamp-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .capacity{font-size:13px;font-weight:700;margin-bottom:14px;padding:11px 15px;border-radius:10px;background:linear-gradient(90deg,rgba(0,56,188,.3),rgba(0,56,188,.12));border:1px solid rgba(126,166,255,.35)}
 .capacity b{font-size:21px;color:#7EA6FF;font-variant-numeric:tabular-nums}
@@ -122,7 +123,7 @@ thead th{padding:10px;font-size:11px}
 </style>
 </head>
 <body>
-<nav><a href="./" class="active">Tổng quan</a><a href="./filaments.html">Filament 🧵</a></nav>
+<nav><a href="./" class="active">Tổng quan</a><a href="./parts.html">Linh kiện in 🧩</a><a href="./filaments.html">Filament 🧵</a></nav>
 <div class="hero"><h1>Inventory Dashboard</h1><p>AERA LOGISTIC · Persian Blue × Platinum</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div><button id="reloadBtn" title="Tải dữ liệu mới">↻</button></div>
 <div class="wrap">
 <div id="errbox"></div>
@@ -231,7 +232,7 @@ return `<div class="part" style="animation-delay:${j*45}ms"><div class="pn">${ch
 const shared=names.filter(n=>!n.includes('_base')||n.includes('skin')).map(n=>capOf(n,byName[n]));
 const capacity=shared.length?Math.min(...shared):0;
 return `<div class="parts-grid ${i===0?'show':''}" id="lp${i}"><div class="capacity">⚡ Đủ linh kiện chung để lắp <b>≈${capacity}</b> đèn (chưa tính base theo màu)</div>${rows}</div>`}).join('');
-setTimeout(()=>{document.querySelectorAll('.parts-grid.show .pbar>div').forEach(b=>{b.style.width=b.dataset.w+'%'})},80);
+setTimeout(()=>{document.querySelectorAll('.parts-grid.show .pbar>div').forEach(b=>{b.style.width=b.dataset.w+'%'},80)});setTimeout(()=>{document.querySelectorAll('.parts-grid.show .pbar>div').forEach(b=>{b.style.width=b.dataset.w+'%'})},80);
 tabsEl.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
 document.querySelectorAll('.lamp-tabs .chip').forEach(x=>x.classList.toggle('active',x.dataset.l===b.dataset.l));
 document.querySelectorAll('.parts-grid').forEach((g,i)=>{const on=String(i)===b.dataset.l;g.classList.toggle('show',on);
