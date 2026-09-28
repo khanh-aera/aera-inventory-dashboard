@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-22 12:41 ICT",
+ "generated": "2026-09-28 08:19 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -11,7 +11,7 @@
   {
    "name": "floria_olive_green_base",
    "cat": "PrintedComponent",
-   "stock": 3.0,
+   "stock": 4.0,
    "unit": "pcs",
    "alert": 2.0
   },
@@ -46,7 +46,7 @@
   {
    "name": "floria_standard_skin",
    "cat": "PrintedComponent",
-   "stock": 5.0,
+   "stock": 4.0,
    "unit": "pcs",
    "alert": 3.0
   },
@@ -123,7 +123,7 @@
   {
    "name": "Hộp carton loại 1",
    "cat": "Packaging",
-   "stock": 24.0,
+   "stock": 23.0,
    "unit": "pcs",
    "alert": 10.0
   },
@@ -151,7 +151,7 @@
   {
    "name": "Bóng đèn LED RGB pro",
    "cat": "Component",
-   "stock": 21.0,
+   "stock": 20.0,
    "unit": "pcs",
    "alert": 5.0
   },
@@ -172,7 +172,7 @@
   {
    "name": "Dây đèn + đuôi đèn",
    "cat": "Component",
-   "stock": 11.0,
+   "stock": 10.0,
    "unit": "pcs",
    "alert": 10.0
   },
@@ -193,7 +193,7 @@
   {
    "name": "Nhựa PLA Matte - Olive Green Tinmorry",
    "cat": "Filament",
-   "stock": 9.552,
+   "stock": 9.304,
    "unit": "kg",
    "alert": 1.5
   },
@@ -221,7 +221,7 @@
   {
    "name": "Tờ infor Floria",
    "cat": "Documentation",
-   "stock": 100.0,
+   "stock": 99.0,
    "unit": "pcs",
    "alert": 5.0
   },
