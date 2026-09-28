@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-28 08:19 ICT",
+ "generated": "2026-09-28 16:11 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -11,7 +11,7 @@
   {
    "name": "floria_olive_green_base",
    "cat": "PrintedComponent",
-   "stock": 4.0,
+   "stock": 2.0,
    "unit": "pcs",
    "alert": 2.0
   },
@@ -46,7 +46,7 @@
   {
    "name": "floria_standard_skin",
    "cat": "PrintedComponent",
-   "stock": 4.0,
+   "stock": 2.0,
    "unit": "pcs",
    "alert": 3.0
   },
