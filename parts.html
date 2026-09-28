@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AERA Inv">
+<meta name="theme-color" content="#001B5E">
+<link rel="manifest" href="./manifest.json">
+<title>AERA — Linh kiện in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pb:#0038BC;--pb-deep:#001B5E;--plat:#EEEEEE;--dim:#C9CDD4;--red:#E5484D;--green:#30A46C;--amber:#FFB224;--grey:#8A8F98}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(1000px 500px at 70% -10%,rgba(0,56,188,.25),transparent 60%),radial-gradient(800px 400px at 10% 110%,rgba(0,56,188,.15),transparent 60%);pointer-events:none;z-index:0}
+nav{position:sticky;top:0;z-index:50;display:flex;gap:20px;padding:14px 28px;background:rgba(0,18,55,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(238,238,238,.1)}
+nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:color .25s}
+nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
+.hero{position:relative;padding:42px 28px 8px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;left:50%;top:-140px;width:620px;height:360px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,56,188,.55),transparent 72%);filter:blur(34px);pointer-events:none}
+.hero h1{position:relative;font-size:26px;font-weight:800;letter-spacing:-.5px;animation:fadeUp .55s ease-out both}
+.hero p{position:relative;font-size:12px;color:var(--dim);margin-top:8px;letter-spacing:.5px;animation:fadeUp .55s .08s ease-out both}
+.livebadge{position:relative;display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:6px 15px;border-radius:999px;border:1px solid rgba(48,164,108,.38);background:rgba(48,164,108,.1);color:var(--green);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;animation:fadeUp .55s .16s ease-out both}
+.livebadge .dotp{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite}
+#reloadBtn{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;margin-left:8px;border-radius:50%;border:1px solid rgba(238,238,238,.25);background:rgba(238,238,238,.06);color:var(--plat);font-size:15px;cursor:pointer;vertical-align:middle;transition:transform .25s,background .25s,border-color .25s}
+#reloadBtn:hover{background:rgba(0,56,188,.3);border-color:var(--pb)}
+#reloadBtn.spinning{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}55%{box-shadow:0 0 0 7px rgba(48,164,108,0)}}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:22px 20px 64px}
+#errbox{display:none;background:var(--red);color:#fff;padding:12px;text-align:center;margin-bottom:16px;border-radius:10px}
+.capstrip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0 8px}
+@media(max-width:700px){.capstrip{grid-template-columns:1fr}}
+.capcard{position:relative;overflow:hidden;border-radius:18px;padding:22px 24px;background:linear-gradient(135deg,rgba(0,56,188,.5),rgba(0,56,188,.12));border:1px solid rgba(126,166,255,.35);animation:fadeUp .5s ease-out both}
+.capcard .fam{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);font-weight:700}
+.capcard .big{font-size:52px;font-weight:800;line-height:1.05;color:#7EA6FF;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+.capcard .unit{font-size:12px;color:var(--dim);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.capcard svg.bottle{position:absolute;right:-12px;bottom:-16px;opacity:.16}
+.famhead{display:flex;align-items:baseline;gap:12px;margin:30px 0 14px}
+.famhead .t{font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:800}
+.famhead .sub{font-size:11px;color:var(--dim);letter-spacing:1px}
+.famhead .line{flex:1;height:1px;background:linear-gradient(90deg,rgba(238,238,238,.3),transparent)}
+.rings{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.ringcard{background:rgba(238,238,238,.05);border:1px solid rgba(238,238,238,.12);border-radius:16px;padding:18px 12px 14px;text-align:center;animation:fadeUp .5s ease-out both;transition:transform .3s ease-out,box-shadow .3s ease-out}
+.ringcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.ring{position:relative;width:112px;height:112px;margin:0 auto 10px;border-radius:50%}
+.ring .hole{position:absolute;inset:9px;border-radius:50%;background:#04123a;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .n{font-size:30px;font-weight:800;line-height:1;color:#EEEEEE;font-variant-numeric:tabular-nums;font-feature-settings:'tnum' 1}
+.ring .u{font-size:9.5px;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase;margin-top:3px}
+.rname{font-size:11.5px;font-weight:600;letter-spacing:.4px;line-height:1.35;min-height:31px;display:flex;align-items:center;justify-content:center;gap:6px}
+.dotc{width:9px;height:9px;border-radius:50%;flex-shrink:0;border:1px solid rgba(255,255,255,.4)}
+.st{display:inline-block;margin-top:8px;padding:2px 9px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:1.2px}
+.st.ok{background:rgba(48,164,108,.14);color:var(--green)}
+.st.low{background:rgba(229,72,77,.14);color:var(--red)}
+.st.crit{background:rgba(255,178,36,.14);color:var(--amber)}
+footer{position:relative;text-align:center;padding:24px;font-size:11px;letter-spacing:2px;color:var(--dim);opacity:.7}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:640px){.wrap{padding:14px 12px 48px}.hero h1{font-size:23px}.rings{grid-template-columns:repeat(2,1fr)}.ring{width:96px;height:96px}.ring .n{font-size:25px}.capcard .big{font-size:42px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<nav><a href="./">Tổng quan</a><a href="./parts.html" class="active">Linh kiện in 🧩</a><a href="./filaments.html">Filament 🧵</a></nav>
+<div class="hero"><h1>Linh kiện in</h1><p>FLORIA × STRATA · đế &amp; vỏ</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div><button id="reloadBtn" title="Tải dữ liệu mới">↻</button></div>
+<div class="wrap">
+<div id="errbox"></div>
+<div class="capstrip" id="capstrip"></div>
+<div id="families"></div>
+</div>
+<footer>AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATINUM</footer>
+<script>
+const PCOLORS={
+ 'floria_desert_tan_base':'#C7A57B','floria_olive_green_base':'#626846','floria_matte_red_base':'#B03A3A',
+ 'floria_burnt_orange_base':'#D46C34','floria_persian_blue_base':'#274FD0','floria_milky_base':'#EAE6DC',
+ 'floria_standard_skin':'#E8D5C0','strata_matte_red_base':'#B03A3A','strata_matte_red_skin':'#B03A3A',
+ 'strata_navy_blue_base':'#394157','strata_dark_blue_skin':'#1F2A44'
+};
+const FLORIA_BASES=['floria_milky_base','floria_desert_tan_base','floria_matte_red_base','floria_burnt_orange_base','floria_olive_green_base','floria_persian_blue_base'];
+const STRATA_PARTS=['strata_dark_blue_skin','strata_navy_blue_base','strata_matte_red_skin','strata_matte_red_base'];
+(async()=>{
+let items=[],META={};
+try{const _j=await(await fetch('./inventory.json?t='+Date.now())).json();items=_j.items||[];META=_j;}catch(e){
+const eb=document.getElementById('errbox');eb.style.display='block';eb.textContent='Không tải được inventory.json';return;}
+if(META.generated)document.getElementById('liveTxt').textContent='Live · cập nhật '+META.generated;
+const CRIT='crit',LOW='low',OK='ok';
+const byName={};items.forEach(d=>byName[d.name]=d);
+const st=d=>d.alert===0?OK:d.stock<=d.alert*.5?CRIT:d.stock<=d.alert?LOW:OK;
+const STC={ok:'#30A46C',low:'#E5484D',crit:'#FFB224'};
+const STT={ok:'ĐỦ',low:'SẮP HẾT',crit:'NGUY CẤP'};
+const g=n=>byName[n]||{name:n,stock:0,unit:'pcs',alert:2};
+
+/* capacity strips — printed-parts only (skin giới hạn) */
+const fCap=g('floria_standard_skin').stock, sCap=Math.min(g('strata_dark_blue_skin').stock,g('strata_navy_blue_base').stock,g('strata_matte_red_skin').stock,g('strata_matte_red_base').stock);
+document.getElementById('capstrip').innerHTML=
+ `<div class="capcard"><div class="fam">Floria · tối đa</div><div class="big">${fCap}</div><div class="unit">đèn lắp được (vỏ)</div>
+  <svg class="bottle" width="110" height="140" viewBox="0 0 110 140" fill="none"><path d="M42 8h26v18c14 8 22 22 22 38v58a12 12 0 0 1-12 12H32a12 12 0 0 1-12-12V64c0-16 8-30 22-38V8z" stroke="#EEEEEE" stroke-width="5"/><path d="M28 92c8-8 16 4 27-2s20 2 27-4" stroke="#EEEEEE" stroke-width="5" stroke-linecap="round"/></svg></div>`+
+ `<div class="capcard"><div class="fam">Strata · tối đa</div><div class="big">${sCap}</div><div class="unit">đèn lắp được (vỏ + đế)</div>
+  <svg class="bottle" width="110" height="140" viewBox="0 0 110 140" fill="none"><rect x="30" y="34" width="50" height="86" rx="10" stroke="#EEEEEE" stroke-width="5"/><path d="M40 34V16h30v18" stroke="#EEEEEE" stroke-width="5"/><circle cx="55" cy="76" r="14" stroke="#EEEEEE" stroke-width="5"/></svg></div>`;
+
+/* ring tiles */
+function tile(n,i){
+ const d=g(n),s=st(d),c=STC[s];
+ const max=Math.max(d.stock,d.alert*2,1),pct=Math.min(d.stock/max,1)*100;
+ const chip=PCOLORS[n]?`<span class="dotc" style="background:${PCOLORS[n]}"></span>`:'';
+ return `<div class="ringcard" style="animation-delay:${i*50}ms" title="${n} · alert ${d.alert}${d.unit}">
+  <div class="ring" style="background:conic-gradient(${c} 0% ${pct}%,rgba(238,238,238,.09) ${pct}% 100%)">
+   <div class="hole"><div class="n">${d.stock}</div><div class="u">${d.unit}</div></div></div>
+  <div class="rname">${chip}${n.replace(/_/g,' ')}</div>
+  <span class="st ${s}">${STT[s]}</span></div>`;
+}
+const famHTML=
+ `<div class="famhead"><span class="t">FLORIA</span><span class="sub">1 vỏ chung · 6 đế màu</span><span class="line"></span></div>`+
+ `<div class="rings">${tile('floria_standard_skin',0)}${FLORIA_BASES.map((n,i)=>tile(n,i+1)).join('')}</div>`+
+ `<div class="famhead"><span class="t">STRATA</span><span class="sub">2 vỏ · 2 đế</span><span class="line"></span></div>`+
+ `<div class="rings">${STRATA_PARTS.map((n,i)=>tile(n,i)).join('')}</div>`;
+document.getElementById('families').innerHTML=famHTML;
+
+const rb=document.getElementById('reloadBtn');
+rb.addEventListener('click',()=>{if(rb.classList.contains('spinning'))return;rb.classList.add('spinning');
+fetch('./inventory.json?t='+Date.now()).then(()=>location.reload()).catch(()=>location.reload());});
+})();
+</script>
+</body>
+</html>
