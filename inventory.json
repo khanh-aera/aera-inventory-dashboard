@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-30 08:11 ICT",
+ "generated": "2026-09-30 08:13 ICT",
  "items": [
   {
    "name": "floria_desert_tan_base",
@@ -46,7 +46,7 @@
   {
    "name": "floria_standard_skin",
    "cat": "PrintedComponent",
-   "stock": 1.0,
+   "stock": 8.0,
    "unit": "pcs",
    "alert": 3.0
   },
@@ -102,7 +102,7 @@
   {
    "name": "Nhựa PLA - trong suốt R3D",
    "cat": "Filament",
-   "stock": 3.0,
+   "stock": 2.132,
    "unit": "kg",
    "alert": 2.0
   },
