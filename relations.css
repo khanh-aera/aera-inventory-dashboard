@@ -1,6 +1,6 @@
 :root{--pb:#0038BC;--pb-deep:#001B5E;--plat:#EEEEEE;--dim:#C9CDD4;--red:#E5484D;--green:#30A46C;--amber:#FFB224}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh;overflow-x:hidden}
+body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);height:100vh;overflow:hidden;display:flex;flex-direction:column}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(1000px 500px at 70% -10%,rgba(0,56,188,.25),transparent 60%),radial-gradient(800px 400px at 10% 110%,rgba(0,56,188,.15),transparent 60%);pointer-events:none;z-index:0}
 nav{position:sticky;top:0;z-index:50;display:flex;gap:20px;padding:14px 28px;background:rgba(0,18,55,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(238,238,238,.1)}
 nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:color .25s}
@@ -8,7 +8,8 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 .livebadge{position:absolute;top:12px;left:14px;z-index:5;display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:6px 15px;border-radius:999px;border:1px solid rgba(48,164,108,.38);background:rgba(48,164,108,.1);color:var(--green);font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;animation:fadeUp .55s .16s ease-out both}
 .livebadge .dotp{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(48,164,108,.55)}55%{box-shadow:0 0 0 7px rgba(48,164,108,0)}}
-#graphwrap{position:relative;z-index:1;height:calc(100vh - 49px)}
+nav{flex:none}
+#graphwrap{position:relative;z-index:1;flex:1 1 auto;min-height:0}
 .chipbar{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:5;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:94%}
 .chip{padding:9px 15px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:1px;border:1px solid rgba(238,238,238,.25);background:transparent;color:var(--dim);cursor:pointer;font-family:inherit;text-transform:uppercase;transition:all .25s ease-out}
 .chip:hover{border-color:rgba(126,166,255,.55);color:#fff;transform:translateY(-1px)}
@@ -24,5 +25,5 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 .legend{position:absolute;bottom:10px;left:0;right:0;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-size:10.5px;color:var(--dim);pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.6)}
 .lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media(max-width:640px){#graphwrap{height:calc(100vh - 45px)}.chip{padding:7px 11px;font-size:11px}}
+@media(max-width:640px){nav{gap:12px;padding:11px 14px}nav a{font-size:10.5px;letter-spacing:1px}.chip{padding:7px 11px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
