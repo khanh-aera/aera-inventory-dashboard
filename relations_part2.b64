@@ -1,0 +1,11 @@
+:wrap;font-size:10.5px;color:var(--dim);pointer-events:none;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media(max-width:640px){#graphwrap{height:calc(100vh - 45px)}.chip{padding:7px 11px;font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<nav><a href="./">Tổng quan</a><a href="./parts.html">Linh kiện in 🧩</a><a href="./relations.html" class="active">Quan hệ 🔗</a><a href="./filaments.html">Filament 🧵</a></nav>
+<div id="graphwrap">
+<div id="graphbox"><div id="tooltip"></div><svg id="graph"></svg>
