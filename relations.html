@@ -18,8 +18,23 @@
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <link rel="stylesheet" href="./relations.css">
 </head>
-</head>
 <body>
-<nav><a href="./">Ԥnống quan</a><a href="./parts.html">Linh kiện in ✩g</a><a href="./relations.html" class="active">Quan hị in�ʋ</a><a href="./filaments.html">Filament ✯'</a></nav>
+<nav><a href="./">Tổng quan</a><a href="./parts.html">Linh kiện in 🧩</a><a href="./relations.html" class="active">Quan hệ 🔗</a><a href="./filaments.html">Filament 🧵</a></nav>
 <div id="graphwrap">
 <div id="graphbox"><div id="tooltip"></div><svg id="graph"></svg>
+<div class="chipbar" id="chips"></div>
+<div class="hint">kéo node · lăn chuột zoom · rê chuột xem tồn kho</div>
+<div class="legend">
+<span class="lg"><i style="background:#7EA6FF"></i>Đèn</span>
+<span class="lg"><i style="background:#4D79FF"></i>Linh kiện in</span>
+<span class="lg"><i style="background:#FFB224"></i>Component</span>
+<span class="lg"><i style="background:#00B8A9"></i>Filament (nhựa nguồn)</span>
+<span class="lg"><i style="background:#8E6BF1"></i>Packaging</span>
+<span class="lg"><i style="background:#8A8F98"></i>Documentation</span>
+</div>
+</div>
+
+<script src="./relations_data.js"></script>
+<script src="./relations_min.js"></script>
+</body>
+</html>
