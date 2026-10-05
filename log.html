@@ -17,9 +17,9 @@
 :root{--pb:#0038BC;--pb-deep:#001B5E;--plat:#EEEEEE;--dim:#C9CDD4;--red:#E5484D;--green:#30A46C;--amber:#FFB224}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh}
-nav{display:flex;gap:20px;padding:16px 28px;background:rgba(0,27,94,.85);border-bottom:1px solid rgba(238,238,238,.15);overflow-x:auto;white-space:nowrap}
-nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
-nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
+
+
+
 .hero{display:flex;align-items:flex-end;gap:14px;padding:24px 28px 8px}
 .hero h1{font-size:26px;font-weight:800;letter-spacing:-.5px}
 .hero p{font-size:12px;color:var(--dim);letter-spacing:1px;padding-bottom:4px}
@@ -64,7 +64,7 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
   text-align:center;padding:26px 20px 8px}
 .empty{font-size:13px;color:var(--dim);padding:40px 0;text-align:center}
 @media(max-width:640px){
-  nav{gap:14px;padding:12px 16px}
+
   .hero{padding:18px 16px 6px;flex-direction:column;align-items:flex-start;gap:4px}
   .hero h1{font-size:22px}
   .wrap{padding:12px 14px 48px}
@@ -77,9 +77,9 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
   .dlt{min-width:48px;font-size:10.5px}
 }
 </style>
+<link rel="stylesheet" href="./nav.css?v=1">
 </head>
 <body>
-<nav><a href="./">Tổng quan</a><a href="./parts.html">Linh kiện in 🧩</a><a href="./relations.html">Quan hệ 🔗</a><a href="./filaments.html">Filament 🧵</a><a href="./log.html" class="active">Nhật ký 📋</a></nav>
 <div class="hero"><h1>Nhật ký kho</h1><p>Mỗi lần bán · in · đếm lại</p></div>
 <div class="wrap">
 <div class="bar" id="bar"></div>
@@ -88,5 +88,7 @@ nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
 <footer class="foot">AERA · ORGANIC MODERNISM · PERSIAN BLUE × PLATIN</footer>
 <script src="./log_data.js?v=1"></script>
 <script src="./log_main.js?v=1"></script>
+<script src="./nav.js?v=1"></script>
+<script>AERA_NAV.mount('log');</script>
 </body>
 </html>
