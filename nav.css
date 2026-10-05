@@ -1,0 +1,44 @@
+/* Shared header + burger drawer for the AERA inventory dashboard.
+   Loaded AFTER each page's own stylesheet so these rules win.
+   Rules are scoped to .ahdr / .adrawer so they can never collide with a
+   page's own `nav` selectors (relations.css styles `nav` directly and its
+   body is a locked flex column around a full-height graph). */
+.a-hdr{position:sticky;top:0;z-index:60;flex:none;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:12px 28px;
+  background:rgba(0,18,55,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(238,238,238,.15)}
+.a-brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;
+  font-size:15px;font-weight:800;letter-spacing:4px;text-transform:uppercase}
+.a-brand i{width:9px;height:9px;border-radius:2px;background:var(--pb,#0038BC);
+  transform:rotate(45deg);display:block}
+.a-burger{width:42px;height:38px;flex:none;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:5px;background:transparent;
+  border:1px solid rgba(238,238,238,.28);border-radius:9px;cursor:pointer;padding:0}
+.a-burger span{display:block;width:19px;height:2px;border-radius:2px;
+  background:var(--plat,#EEEEEE);transition:transform .28s,opacity .2s}
+.a-burger:hover{border-color:rgba(238,238,238,.6)}
+body.a-open .a-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.a-open .a-burger span:nth-child(2){opacity:0}
+body.a-open .a-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.a-drawer{position:fixed;inset:0;z-index:55;background:rgba(0,10,38,.93);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;transition:opacity .26s,visibility .26s}
+body.a-open .a-drawer{opacity:1;visibility:visible}
+.a-drawer ul{list-style:none;display:flex;flex-direction:column;gap:4px;
+  width:min(300px,82vw)}
+.a-drawer a{display:block;padding:15px 18px;color:var(--dim,#C9CDD4);text-decoration:none;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  border:1px solid transparent;border-radius:10px;transition:color .2s,border-color .2s,background .2s}
+.a-drawer a:hover{color:#fff;border-color:rgba(238,238,238,.25)}
+.a-drawer a.on{color:#fff;background:rgba(0,56,188,.32);border-color:rgba(238,238,238,.4)}
+.a-close{position:absolute;top:16px;right:20px;width:40px;height:40px;
+  background:transparent;border:1px solid rgba(238,238,238,.28);border-radius:9px;
+  color:var(--plat,#EEEEEE);font-size:20px;line-height:1;cursor:pointer}
+.a-close:hover{border-color:rgba(238,238,238,.6)}
+@media(max-width:640px){
+  .a-hdr{padding:10px 16px}
+  .a-brand{font-size:13px;letter-spacing:3px}
+  .a-burger{width:40px;height:36px}
+}
