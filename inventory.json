@@ -1,257 +1,257 @@
 {
- "generated": "2026-10-02 08:14 ICT",
- "items": [
-  {
-   "name": "floria_desert_tan_base",
-   "cat": "PrintedComponent",
-   "stock": 4.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_olive_green_base",
-   "cat": "PrintedComponent",
-   "stock": 3.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_matte_red_base",
-   "cat": "PrintedComponent",
-   "stock": 3.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_burnt_orange_base",
-   "cat": "PrintedComponent",
-   "stock": 5.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_persian_blue_base",
-   "cat": "PrintedComponent",
-   "stock": 5.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_milky_base",
-   "cat": "PrintedComponent",
-   "stock": 6.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "floria_standard_skin",
-   "cat": "PrintedComponent",
-   "stock": 6.0,
-   "unit": "pcs",
-   "alert": 3.0
-  },
-  {
-   "name": "strata_matte_red_base",
-   "cat": "PrintedComponent",
-   "stock": 3.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "strata_matte_red_skin",
-   "cat": "PrintedComponent",
-   "stock": 3.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "strata_navy_blue_base",
-   "cat": "PrintedComponent",
-   "stock": 4.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "strata_dark_blue_skin",
-   "cat": "PrintedComponent",
-   "stock": 6.0,
-   "unit": "pcs",
-   "alert": 2.0
-  },
-  {
-   "name": "Dây dimmer chiết áp",
-   "cat": "Component",
-   "stock": 6.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Bóng đèn LED Essential E27 (5W, 3000K)",
-   "cat": "Component",
-   "stock": 6.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Bóng đèn OSRAM LED (3W, 3000K)",
-   "cat": "Component",
-   "stock": 3.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Nhựa PLA - trong suốt R3D",
-   "cat": "Filament",
-   "stock": 0.128,
-   "unit": "kg",
-   "alert": 2.0
-  },
-  {
-   "name": "Túi giấy đựng móc khóa",
-   "cat": "Packaging",
-   "stock": 85.0,
-   "unit": "pcs",
-   "alert": 20.0
-  },
-  {
-   "name": "Hộp carton loại 2",
-   "cat": "Packaging",
-   "stock": 60.0,
-   "unit": "pcs",
-   "alert": 10.0
-  },
-  {
-   "name": "Hộp carton loại 1",
-   "cat": "Packaging",
-   "stock": 21.0,
-   "unit": "pcs",
-   "alert": 10.0
-  },
-  {
-   "name": "Nhựa PLA Matte - Milky",
-   "cat": "Filament",
-   "stock": 3.0,
-   "unit": "kg",
-   "alert": 2.0
-  },
-  {
-   "name": "Nhựa PLA Basic - Persian Blue Bambu",
-   "cat": "Filament",
-   "stock": 2.0,
-   "unit": "kg",
-   "alert": 1.5
-  },
-  {
-   "name": "Nhựa PLA Basic - Burnt Orange R3D",
-   "cat": "Filament",
-   "stock": 1.0,
-   "unit": "kg",
-   "alert": 1.0
-  },
-  {
-   "name": "Bóng đèn LED RGB pro",
-   "cat": "Component",
-   "stock": 20.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Bóng đèn LED RGB",
-   "cat": "Component",
-   "stock": 1.0,
-   "unit": "pcs",
-   "alert": 0.0
-  },
-  {
-   "name": "Bóng đèn LED ST64 E27",
-   "cat": "Component",
-   "stock": 31.0,
-   "unit": "pcs",
-   "alert": 0.0
-  },
-  {
-   "name": "Dây đèn + đuôi đèn",
-   "cat": "Component",
-   "stock": 8.0,
-   "unit": "pcs",
-   "alert": 10.0
-  },
-  {
-   "name": "Nhựa PLA Matte - Matte Red",
-   "cat": "Filament",
-   "stock": 1.336,
-   "unit": "kg",
-   "alert": 1.0
-  },
-  {
-   "name": "Tờ infor Strata",
-   "cat": "Documentation",
-   "stock": 97.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Nhựa PLA Matte - Olive Green Tinmorry",
-   "cat": "Filament",
-   "stock": 9.056,
-   "unit": "kg",
-   "alert": 1.5
-  },
-  {
-   "name": "Nhựa PLA Matte - Desert Tan Bambu",
-   "cat": "Filament",
-   "stock": 2.0,
-   "unit": "kg",
-   "alert": 1.5
-  },
-  {
-   "name": "Nhựa PLA Matte - Dark Blue Bambu",
-   "cat": "Filament",
-   "stock": 2.0,
-   "unit": "kg",
-   "alert": 1.5
-  },
-  {
-   "name": "Nhựa PLA Matte - Navy Blue Tinmorry",
-   "cat": "Filament",
-   "stock": 8.0,
-   "unit": "kg",
-   "alert": 1.0
-  },
-  {
-   "name": "Tờ infor Floria",
-   "cat": "Documentation",
-   "stock": 97.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Túi khí chèn hàng",
-   "cat": "Packaging",
-   "stock": 35.0,
-   "unit": "pcs",
-   "alert": 5.0
-  },
-  {
-   "name": "Giấy tổ ong",
-   "cat": "Packaging",
-   "stock": 1.5,
-   "unit": "rolls",
-   "alert": 1.0
-  },
-  {
-   "name": "Móc khóa quà tặng",
-   "cat": "Packaging",
-   "stock": 36.0,
-   "unit": "pcs",
-   "alert": 10.0
-  },
-  {
-   "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
-   "cat": "Component",
-   "stock": 8.0,
-   "unit": "pcs",
-   "alert": 5.0
-  }
- ]
+  "generated": "2026-10-05 10:35 ICT",
+  "items": [
+    {
+      "name": "floria_desert_tan_base",
+      "cat": "PrintedComponent",
+      "stock": 3.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_olive_green_base",
+      "cat": "PrintedComponent",
+      "stock": 3.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_matte_red_base",
+      "cat": "PrintedComponent",
+      "stock": 3.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_burnt_orange_base",
+      "cat": "PrintedComponent",
+      "stock": 5.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_persian_blue_base",
+      "cat": "PrintedComponent",
+      "stock": 5.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_milky_base",
+      "cat": "PrintedComponent",
+      "stock": 6.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "floria_standard_skin",
+      "cat": "PrintedComponent",
+      "stock": 5.0,
+      "unit": "pcs",
+      "alert": 3.0
+    },
+    {
+      "name": "strata_matte_red_base",
+      "cat": "PrintedComponent",
+      "stock": 3.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "strata_matte_red_skin",
+      "cat": "PrintedComponent",
+      "stock": 3.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "strata_navy_blue_base",
+      "cat": "PrintedComponent",
+      "stock": 4.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "strata_dark_blue_skin",
+      "cat": "PrintedComponent",
+      "stock": 6.0,
+      "unit": "pcs",
+      "alert": 2.0
+    },
+    {
+      "name": "Dây dimmer chiết áp",
+      "cat": "Component",
+      "stock": 6.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Bóng đèn LED Essential E27 (5W, 3000K)",
+      "cat": "Component",
+      "stock": 6.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Bóng đèn OSRAM LED (3W, 3000K)",
+      "cat": "Component",
+      "stock": 2.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Nhựa PLA - trong suốt R3D",
+      "cat": "Filament",
+      "stock": 0.128,
+      "unit": "kg",
+      "alert": 2.0
+    },
+    {
+      "name": "Túi giấy đựng móc khóa",
+      "cat": "Packaging",
+      "stock": 85.0,
+      "unit": "pcs",
+      "alert": 20.0
+    },
+    {
+      "name": "Hộp carton loại 2",
+      "cat": "Packaging",
+      "stock": 60.0,
+      "unit": "pcs",
+      "alert": 10.0
+    },
+    {
+      "name": "Hộp carton loại 1",
+      "cat": "Packaging",
+      "stock": 20.0,
+      "unit": "pcs",
+      "alert": 10.0
+    },
+    {
+      "name": "Nhựa PLA Matte - Milky",
+      "cat": "Filament",
+      "stock": 3.0,
+      "unit": "kg",
+      "alert": 2.0
+    },
+    {
+      "name": "Nhựa PLA Basic - Persian Blue Bambu",
+      "cat": "Filament",
+      "stock": 2.0,
+      "unit": "kg",
+      "alert": 1.5
+    },
+    {
+      "name": "Nhựa PLA Basic - Burnt Orange R3D",
+      "cat": "Filament",
+      "stock": 1.0,
+      "unit": "kg",
+      "alert": 1.0
+    },
+    {
+      "name": "Bóng đèn LED RGB pro",
+      "cat": "Component",
+      "stock": 20.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Bóng đèn LED RGB",
+      "cat": "Component",
+      "stock": 1.0,
+      "unit": "pcs",
+      "alert": 0.0
+    },
+    {
+      "name": "Bóng đèn LED ST64 E27",
+      "cat": "Component",
+      "stock": 31.0,
+      "unit": "pcs",
+      "alert": 0.0
+    },
+    {
+      "name": "Dây đèn + đuôi đèn",
+      "cat": "Component",
+      "stock": 7.0,
+      "unit": "pcs",
+      "alert": 10.0
+    },
+    {
+      "name": "Nhựa PLA Matte - Matte Red",
+      "cat": "Filament",
+      "stock": 1.336,
+      "unit": "kg",
+      "alert": 1.0
+    },
+    {
+      "name": "Tờ infor Strata",
+      "cat": "Documentation",
+      "stock": 97.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Nhựa PLA Matte - Olive Green Tinmorry",
+      "cat": "Filament",
+      "stock": 9.056,
+      "unit": "kg",
+      "alert": 1.5
+    },
+    {
+      "name": "Nhựa PLA Matte - Desert Tan Bambu",
+      "cat": "Filament",
+      "stock": 2.0,
+      "unit": "kg",
+      "alert": 1.5
+    },
+    {
+      "name": "Nhựa PLA Matte - Dark Blue Bambu",
+      "cat": "Filament",
+      "stock": 2.0,
+      "unit": "kg",
+      "alert": 1.5
+    },
+    {
+      "name": "Nhựa PLA Matte - Navy Blue Tinmorry",
+      "cat": "Filament",
+      "stock": 8.0,
+      "unit": "kg",
+      "alert": 1.0
+    },
+    {
+      "name": "Tờ infor Floria",
+      "cat": "Documentation",
+      "stock": 96.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Túi khí chèn hàng",
+      "cat": "Packaging",
+      "stock": 35.0,
+      "unit": "pcs",
+      "alert": 5.0
+    },
+    {
+      "name": "Giấy tổ ong",
+      "cat": "Packaging",
+      "stock": 1.5,
+      "unit": "rolls",
+      "alert": 1.0
+    },
+    {
+      "name": "Móc khóa quà tặng",
+      "cat": "Packaging",
+      "stock": 36.0,
+      "unit": "pcs",
+      "alert": 10.0
+    },
+    {
+      "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
+      "cat": "Component",
+      "stock": 8.0,
+      "unit": "pcs",
+      "alert": 5.0
+    }
+  ]
 }
