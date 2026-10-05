@@ -20,9 +20,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--pb-deep);color:var(--plat);min-height:100vh}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(1000px 500px at 70% -10%,rgba(0,56,188,.25),transparent 60%),radial-gradient(800px 400px at 10% 110%,rgba(0,56,188,.15),transparent 60%);pointer-events:none;z-index:0}
-nav{position:sticky;top:0;z-index:50;display:flex;gap:20px;padding:14px 28px;background:rgba(0,18,55,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(238,238,238,.1)}
-nav a{color:var(--dim);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;transition:color .25s}
-nav a.active,nav a:hover{color:#fff;border-bottom:2px solid var(--plat)}
+
+
+
 .hero{position:relative;padding:42px 28px 8px;text-align:center;overflow:hidden}
 .hero::before{content:'';position:absolute;left:50%;top:-140px;width:620px;height:360px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(0,56,188,.55),transparent 72%);filter:blur(34px);pointer-events:none}
 .hero h1{position:relative;font-size:26px;font-weight:800;letter-spacing:-.5px;animation:fadeUp .55s ease-out both}
@@ -67,9 +67,9 @@ footer{position:relative;text-align:center;padding:24px;font-size:11px;letter-sp
 @media(max-width:640px){.wrap{padding:14px 12px 48px}.hero h1{font-size:23px}.rings{grid-template-columns:repeat(2,1fr)}.ring{width:96px;height:96px}.ring .n{font-size:25px}.capcard .fname{font-size:36px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}
 </style>
+<link rel="stylesheet" href="./nav.css?v=1">
 </head>
 <body>
-<nav><a href="./">Tổng quan</a><a href="./parts.html" class="active">Linh kiện in 🧩</a><a href="./relations.html">Quan hệ 🔗</a><a href="./filaments.html">Filament 🧵</a><a href="./log.html">Nhật ký 📋</a></nav>
 <div class="hero"><h1>Linh kiện in</h1><p>FLORIA × STRATA · đế &amp; vỏ</p><div class="livebadge"><span class="dotp"></span><span id="liveTxt">Live · đồng bộ từ inventory.csv</span></div><button id="reloadBtn" title="Tải dữ liệu mới">↻</button></div>
 <div class="wrap">
 <div id="errbox"></div>
@@ -131,5 +131,7 @@ rb.addEventListener('click',()=>{if(rb.classList.contains('spinning'))return;rb.
 fetch('./inventory.json?t='+Date.now()).then(()=>location.reload()).catch(()=>location.reload());});
 })();
 </script>
+<script src="./nav.js?v=1"></script>
+<script>AERA_NAV.mount('parts');</script>
 </body>
 </html>
