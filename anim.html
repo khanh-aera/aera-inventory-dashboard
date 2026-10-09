@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="./favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AERA Inv">
+<meta name="theme-color" content="#001B5E">
+<link rel="manifest" href="./manifest.json">
+<title>AERA — Dựng hình kỹ thuật FLORIA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./anim.css?v=1">
+<link rel="stylesheet" href="./nav.css?v=1">
+</head>
+<body>
+<div class="hero">
+  <h1>Dựng hình kỹ thuật — FLORIA</h1>
+  <p>13 bộ phận rời · tổng hợp &amp; bung rời kỹ thuật · 1.410.324 tam giác · toon + edge</p>
+</div>
+
+<div class="wrap">
+  <div class="stage">
+    <div id="gl"></div>
+    <div class="hud">
+      <div class="chip" id="chipState">Trạng thái: <b>—</b></div>
+      <div class="chip" id="chipTris">Tam giác: <b>—</b></div>
+      <div class="chip" id="chipFps">FPS: <b>—</b></div>
+    </div>
+    <div class="loading" id="load">
+      <div class="spin"></div>
+      <div class="lt">Đang tải mô hình</div>
+      <div class="lp" id="loadp">—</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="card">
+      <div class="ct">Điều khiển kỹ thuật</div>
+      <div class="scrub">
+        <input type="range" id="scrub" min="0" max="1000" value="0" step="1" aria-label="Mức bung rời">
+        <div class="pct" id="pct">0%</div>
+      </div>
+      <div class="btns">
+        <button class="btn pri" id="play" type="button">▶ Phát</button>
+        <button class="btn" id="rev" type="button">◀ Nghịch</button>
+        <button class="btn" id="reset" type="button">↺ Reset</button>
+        <button class="btn" id="auto" type="button" aria-pressed="false">⟳ Quay tự động</button>
+      </div>
+      <div class="speeds">
+        <span class="sl">Tốc độ</span>
+        <button class="sp" data-s="0.5" type="button">0.5×</button>
+        <button class="sp on" data-s="1" type="button">1×</button>
+        <button class="sp" data-s="1.6" type="button">1.6×</button>
+        <button class="sp" data-s="2.6" type="button">2.6×</button>
+      </div>
+      <div class="note">
+        <b>Kéo</b> để xoay · <b>lăn chuột</b> để zoom · <b>chéo 2 ngón</b> trên máy tính bảng.<br>
+        Trục <b>Y</b> là trục dọc của đèn. Bấm tên bộ phận để ẩn/hiện.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">Bộ phận — top → base</div>
+      <div id="legend"></div>
+      <div class="note">
+        Vị trí <b>Y</b> tính theo trục dọc sau khi chuẩn hoá và đặt đèn chạm sàn.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>AERA · Inventory Dashboard — bản dựng kỹ thuật nội bộ</footer>
+
+<script src="./anim_parts.js?v=1"></script>
+<script type="module" src="./anim_main.js?v=1"></script>
+<script src="./nav.js?v=1"></script>
+<script>AERA_NAV.mount('anim');</script>
+</body>
+</html>

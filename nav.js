@@ -7,6 +7,7 @@
     { href: './parts.html',   label: 'Linh kiện in 🧩', key: 'parts' },
     { href: './relations.html', label: 'Quan hệ 🔗',     key: 'relations' },
     { href: './filaments.html', label: 'Filament 🧵',    key: 'filaments' },
+    { href: './anim.html',      label: 'Kỹ thuật 🎬',   key: 'anim' },
     { href: './log.html',     label: 'Nhật ký 📋',       key: 'log' }
   ];
 
