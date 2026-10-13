@@ -1,5 +1,6 @@
 {
-  "generated": "2026-10-05 10:35 ICT",
+  "generated": "2026-10-13 08:52:08 +0700",
+  "source": "inventory.csv",
   "items": [
     {
       "name": "floria_desert_tan_base",
@@ -11,7 +12,7 @@
     {
       "name": "floria_olive_green_base",
       "cat": "PrintedComponent",
-      "stock": 3.0,
+      "stock": 2.0,
       "unit": "pcs",
       "alert": 2.0
     },
@@ -46,7 +47,7 @@
     {
       "name": "floria_standard_skin",
       "cat": "PrintedComponent",
-      "stock": 5.0,
+      "stock": 4.0,
       "unit": "pcs",
       "alert": 3.0
     },
@@ -67,14 +68,14 @@
     {
       "name": "strata_navy_blue_base",
       "cat": "PrintedComponent",
-      "stock": 4.0,
+      "stock": 3.0,
       "unit": "pcs",
       "alert": 2.0
     },
     {
       "name": "strata_dark_blue_skin",
       "cat": "PrintedComponent",
-      "stock": 6.0,
+      "stock": 5.0,
       "unit": "pcs",
       "alert": 2.0
     },
@@ -116,14 +117,14 @@
     {
       "name": "Hộp carton loại 2",
       "cat": "Packaging",
-      "stock": 60.0,
+      "stock": 59.0,
       "unit": "pcs",
       "alert": 10.0
     },
     {
       "name": "Hộp carton loại 1",
       "cat": "Packaging",
-      "stock": 20.0,
+      "stock": 19.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -151,7 +152,7 @@
     {
       "name": "Bóng đèn LED RGB pro",
       "cat": "Component",
-      "stock": 20.0,
+      "stock": 19.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -172,7 +173,7 @@
     {
       "name": "Dây đèn + đuôi đèn",
       "cat": "Component",
-      "stock": 7.0,
+      "stock": 5.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -186,7 +187,7 @@
     {
       "name": "Tờ infor Strata",
       "cat": "Documentation",
-      "stock": 97.0,
+      "stock": 96.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -221,7 +222,7 @@
     {
       "name": "Tờ infor Floria",
       "cat": "Documentation",
-      "stock": 96.0,
+      "stock": 95.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -249,7 +250,7 @@
     {
       "name": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
       "cat": "Component",
-      "stock": 8.0,
+      "stock": 7.0,
       "unit": "pcs",
       "alert": 5.0
     }
