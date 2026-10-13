@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-13 08:52 ICT",
+  "updated": "2026-10-13 09:23 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -461,6 +461,38 @@ window.LOGDATA = {
           "m": "Tờ infor Floria",
           "b": 96,
           "a": 95,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "kind": "production+restock",
+      "note": "In 1 đế floria olive green (−0.124kg nhựa Olive Green Tinmorry) + nhập 40 dây đèn + 10 bóng OSRAM 3W",
+      "commit": "1989dac1",
+      "changes": [
+        {
+          "m": "floria_olive_green_base",
+          "b": 2,
+          "a": 3,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA Matte - Olive Green Tinmorry",
+          "b": 9.056,
+          "a": 8.932,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 5,
+          "a": 45,
+          "t": "stock"
+        },
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 2,
+          "a": 12,
           "t": "stock"
         }
       ]
