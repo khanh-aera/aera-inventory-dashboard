@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-13 09:23 ICT",
+  "updated": "2026-10-16 13:06 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -493,6 +493,62 @@ window.LOGDATA = {
           "m": "Bóng đèn OSRAM LED (3W, 3000K)",
           "b": 2,
           "a": 12,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "sale+production",
+      "note": "Bán 1× floria đỏ thường (matte_red, OSRAM 3W) + in 1 đế floria xanh lá (−0.124kg Olive Green Tinmorry). floria_matte_red_base lần đầu xuất hiện trong nhật ký (tồn trước đó chưa từng có giao dịch log).",
+      "commit": "bf1b5325",
+      "changes": [
+        {
+          "m": "floria_standard_skin",
+          "b": 4,
+          "a": 3,
+          "t": "stock"
+        },
+        {
+          "m": "floria_matte_red_base",
+          "b": 3,
+          "a": 2,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 45,
+          "a": 44,
+          "t": "stock"
+        },
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 12,
+          "a": 11,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 19,
+          "a": 18,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 95,
+          "a": 94,
+          "t": "stock"
+        },
+        {
+          "m": "floria_olive_green_base",
+          "b": 3,
+          "a": 4,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA Matte - Olive Green Tinmorry",
+          "b": 8.932,
+          "a": 8.808,
           "t": "stock"
         }
       ]
