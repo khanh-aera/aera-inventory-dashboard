@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-16 13:06 ICT",
+  "updated": "2026-10-16 13:2x ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -549,6 +549,50 @@ window.LOGDATA = {
           "m": "Nhựa PLA Matte - Olive Green Tinmorry",
           "b": 8.932,
           "a": 8.808,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "kind": "sale",
+      "note": "AUTO (cron, hiệu chỉnh tay sau lỗi double-deduct): 1× SS26P02_STRATA_DUSK [delivering] — strata_blue",
+      "commit": "899f8c0c4f",
+      "changes": [
+        {
+          "m": "strata_dark_blue_skin",
+          "b": 5,
+          "a": 4,
+          "t": "stock"
+        },
+        {
+          "m": "strata_navy_blue_base",
+          "b": 3,
+          "a": 2,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 44,
+          "a": 43,
+          "t": "stock"
+        },
+        {
+          "m": "Bóng đèn OSRAM LED Stick (7W, 2700K)",
+          "b": 7,
+          "a": 6,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 2",
+          "b": 59,
+          "a": 58,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Strata",
+          "b": 96,
+          "a": 95,
           "t": "stock"
         }
       ]
