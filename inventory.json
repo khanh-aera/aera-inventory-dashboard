@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-13 09:23:08 +0700",
+  "generated": "2026-10-16 13:06:29 +0700",
   "source": "inventory.csv",
   "items": [
     {
@@ -12,14 +12,14 @@
     {
       "name": "floria_olive_green_base",
       "cat": "PrintedComponent",
-      "stock": 3.0,
+      "stock": 4.0,
       "unit": "pcs",
       "alert": 2.0
     },
     {
       "name": "floria_matte_red_base",
       "cat": "PrintedComponent",
-      "stock": 3.0,
+      "stock": 2.0,
       "unit": "pcs",
       "alert": 2.0
     },
@@ -47,7 +47,7 @@
     {
       "name": "floria_standard_skin",
       "cat": "PrintedComponent",
-      "stock": 4.0,
+      "stock": 3.0,
       "unit": "pcs",
       "alert": 3.0
     },
@@ -96,7 +96,7 @@
     {
       "name": "Bóng đèn OSRAM LED (3W, 3000K)",
       "cat": "Component",
-      "stock": 12.0,
+      "stock": 11.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -124,7 +124,7 @@
     {
       "name": "Hộp carton loại 1",
       "cat": "Packaging",
-      "stock": 19.0,
+      "stock": 18.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -173,7 +173,7 @@
     {
       "name": "Dây đèn + đuôi đèn",
       "cat": "Component",
-      "stock": 45.0,
+      "stock": 44.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -194,7 +194,7 @@
     {
       "name": "Nhựa PLA Matte - Olive Green Tinmorry",
       "cat": "Filament",
-      "stock": 8.932,
+      "stock": 8.808,
       "unit": "kg",
       "alert": 1.5
     },
@@ -222,7 +222,7 @@
     {
       "name": "Tờ infor Floria",
       "cat": "Documentation",
-      "stock": 95.0,
+      "stock": 94.0,
       "unit": "pcs",
       "alert": 5.0
     },
