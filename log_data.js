@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-17 08:00 ICT",
+  "updated": "2026-10-17 13:05 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -637,6 +637,56 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 3.0,
           "a": 2.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "kind": "sale",
+      "note": "AUTO: Floria MOSS GREEN ×1 → floria_olive_green [delivering] 2026-10-17; Floria SANDY YELLOW ×1 → floria_desert_tan [delivering] 2026-10-17",
+      "commit": "1a136b1680",
+      "changes": [
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 11.0,
+          "a": 9.0,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 42.0,
+          "a": 40.0,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 17.0,
+          "a": 15.0,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 93.0,
+          "a": 91.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_desert_tan_base",
+          "b": 3.0,
+          "a": 2.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_olive_green_base",
+          "b": 3.0,
+          "a": 2.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 2.0,
+          "a": 0.0,
           "t": "stock"
         }
       ]
