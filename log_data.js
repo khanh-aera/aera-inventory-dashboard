@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-17 13:05 ICT",
+  "updated": "2026-10-20 20:53:20 +0700",
   "entries": [
     {
       "date": "2026-09-16",
@@ -687,6 +687,26 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 2.0,
           "a": 0.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-20",
+      "kind": "restock+production",
+      "note": "Nhập 3kg nhựa PLA trong suốt R3D + in 4 skin floria (−4×0.124=0.496kg R3D)",
+      "commit": "de06f885fc",
+      "changes": [
+        {
+          "m": "Nhựa PLA - trong suốt R3D",
+          "b": 0.128,
+          "a": 2.632,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 0.0,
+          "a": 4.0,
           "t": "stock"
         }
       ]
