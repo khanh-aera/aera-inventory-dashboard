@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-20 20:53:20 +0700",
+  "updated": "2026-10-21 08:00 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -707,6 +707,50 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 0.0,
           "a": 4.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-21",
+      "kind": "sale",
+      "note": "AUTO: Floria MILKY ×1 → floria_pro_milky [delivering] 2026-10-20",
+      "commit": "8b72c4403a",
+      "changes": [
+        {
+          "m": "Bóng đèn LED RGB pro",
+          "b": 18.0,
+          "a": 17.0,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 40.0,
+          "a": 39.0,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 15.0,
+          "a": 14.0,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 91.0,
+          "a": 90.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_milky_base",
+          "b": 6.0,
+          "a": 5.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 4.0,
+          "a": 3.0,
           "t": "stock"
         }
       ]
