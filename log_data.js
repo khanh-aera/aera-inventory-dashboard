@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-21 10:00:00 +0700",
+  "updated": "2026-10-22 17:59:36 +0700",
   "entries": [
     {
       "date": "2026-09-16",
@@ -771,6 +771,26 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 3.0,
           "a": 4.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "production",
+      "note": "In 1 skin floria (−0.124kg R3D trong suốt)",
+      "commit": "2eeea0f97a",
+      "changes": [
+        {
+          "m": "floria_standard_skin",
+          "b": 4.0,
+          "a": 5.0,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA - trong suốt R3D",
+          "b": 2.508,
+          "a": 2.384,
           "t": "stock"
         }
       ]
