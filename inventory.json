@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-21 10:00:00 +0700",
+  "generated": "2026-10-22 17:59:36 +0700",
   "source": "inventory.csv",
   "items": [
     {
@@ -47,7 +47,7 @@
     {
       "name": "floria_standard_skin",
       "cat": "PrintedComponent",
-      "stock": 4.0,
+      "stock": 5.0,
       "unit": "pcs",
       "alert": 3.0
     },
@@ -103,7 +103,7 @@
     {
       "name": "Nhựa PLA - trong suốt R3D",
       "cat": "Filament",
-      "stock": 2.508,
+      "stock": 2.384,
       "unit": "kg",
       "alert": 2.0
     },
