@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-22 17:59:36 +0700",
+  "updated": "2026-10-22 21:41:45 +0700",
   "entries": [
     {
       "date": "2026-09-16",
@@ -791,6 +791,20 @@ window.LOGDATA = {
           "m": "Nhựa PLA - trong suốt R3D",
           "b": 2.508,
           "a": 2.384,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "sale",
+      "note": "Trừ 1 bóng OSRAM LED 3W 3000K",
+      "commit": "dd7c3cdfe2",
+      "changes": [
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 9.0,
+          "a": 8.0,
           "t": "stock"
         }
       ]
