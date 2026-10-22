@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22 17:59:36 +0700",
+  "generated": "2026-10-22 21:41:45 +0700",
   "source": "inventory.csv",
   "items": [
     {
@@ -96,7 +96,7 @@
     {
       "name": "Bóng đèn OSRAM LED (3W, 3000K)",
       "cat": "Component",
-      "stock": 9.0,
+      "stock": 8.0,
       "unit": "pcs",
       "alert": 5.0
     },
