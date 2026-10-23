@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22 21:41:45 +0700",
+  "generated": "2026-10-23 12:13:17 +0700",
   "source": "inventory.csv",
   "items": [
     {
@@ -12,7 +12,7 @@
     {
       "name": "floria_olive_green_base",
       "cat": "PrintedComponent",
-      "stock": 2.0,
+      "stock": 1.0,
       "unit": "pcs",
       "alert": 2.0
     },
@@ -47,7 +47,7 @@
     {
       "name": "floria_standard_skin",
       "cat": "PrintedComponent",
-      "stock": 5.0,
+      "stock": 4.0,
       "unit": "pcs",
       "alert": 3.0
     },
@@ -96,7 +96,7 @@
     {
       "name": "Bóng đèn OSRAM LED (3W, 3000K)",
       "cat": "Component",
-      "stock": 8.0,
+      "stock": 7.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -124,7 +124,7 @@
     {
       "name": "Hộp carton loại 1",
       "cat": "Packaging",
-      "stock": 14.0,
+      "stock": 13.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -173,7 +173,7 @@
     {
       "name": "Dây đèn + đuôi đèn",
       "cat": "Component",
-      "stock": 39.0,
+      "stock": 38.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -222,7 +222,7 @@
     {
       "name": "Tờ infor Floria",
       "cat": "Documentation",
-      "stock": 90.0,
+      "stock": 89.0,
       "unit": "pcs",
       "alert": 5.0
     },
