@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-22 21:41:45 +0700",
+  "updated": "2026-10-23 12:13 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -805,6 +805,50 @@ window.LOGDATA = {
           "m": "Bóng đèn OSRAM LED (3W, 3000K)",
           "b": 9.0,
           "a": 8.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "sale",
+      "note": "AUTO: Floria MOSS GREEN ×1 → floria_olive_green [delivering] 2026-10-22",
+      "commit": "7e17d9ee06",
+      "changes": [
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 8.0,
+          "a": 7.0,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 39.0,
+          "a": 38.0,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 14.0,
+          "a": 13.0,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 90.0,
+          "a": 89.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_olive_green_base",
+          "b": 2.0,
+          "a": 1.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 5.0,
+          "a": 4.0,
           "t": "stock"
         }
       ]
