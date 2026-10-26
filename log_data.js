@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-23 12:13 ICT",
+  "updated": "2026-10-26 08:00 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -849,6 +849,50 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 5.0,
           "a": 4.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "sale",
+      "note": "AUTO: Floria MOSS GREEN ×1 → floria_pro_olive_green [delivering] 2026-10-25",
+      "commit": "b8e4cf4269",
+      "changes": [
+        {
+          "m": "Bóng đèn LED RGB pro",
+          "b": 17.0,
+          "a": 16.0,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 38.0,
+          "a": 37.0,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 13.0,
+          "a": 12.0,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 89.0,
+          "a": 88.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_olive_green_base",
+          "b": 1.0,
+          "a": 0.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 4.0,
+          "a": 3.0,
           "t": "stock"
         }
       ]
