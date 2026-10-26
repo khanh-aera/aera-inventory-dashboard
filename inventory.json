@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-23 12:13:17 +0700",
+  "generated": "2026-10-26 08:00:05 +0700",
   "source": "inventory.csv",
   "items": [
     {
@@ -12,7 +12,7 @@
     {
       "name": "floria_olive_green_base",
       "cat": "PrintedComponent",
-      "stock": 1.0,
+      "stock": 0.0,
       "unit": "pcs",
       "alert": 2.0
     },
@@ -47,7 +47,7 @@
     {
       "name": "floria_standard_skin",
       "cat": "PrintedComponent",
-      "stock": 4.0,
+      "stock": 3.0,
       "unit": "pcs",
       "alert": 3.0
     },
@@ -124,7 +124,7 @@
     {
       "name": "Hộp carton loại 1",
       "cat": "Packaging",
-      "stock": 13.0,
+      "stock": 12.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -152,7 +152,7 @@
     {
       "name": "Bóng đèn LED RGB pro",
       "cat": "Component",
-      "stock": 17.0,
+      "stock": 16.0,
       "unit": "pcs",
       "alert": 5.0
     },
@@ -173,7 +173,7 @@
     {
       "name": "Dây đèn + đuôi đèn",
       "cat": "Component",
-      "stock": 38.0,
+      "stock": 37.0,
       "unit": "pcs",
       "alert": 10.0
     },
@@ -222,7 +222,7 @@
     {
       "name": "Tờ infor Floria",
       "cat": "Documentation",
-      "stock": 89.0,
+      "stock": 88.0,
       "unit": "pcs",
       "alert": 5.0
     },
