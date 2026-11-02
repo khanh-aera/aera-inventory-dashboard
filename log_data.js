@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-10-30 08:00 ICT",
+  "updated": "2026-11-02 08:00 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -937,6 +937,50 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 3.0,
           "a": 2.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-02",
+      "kind": "sale",
+      "note": "AUTO: Floria MILKY ×1 → floria_milky [complete] 2026-11-01",
+      "commit": "389184833d",
+      "changes": [
+        {
+          "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+          "b": 7.0,
+          "a": 6.0,
+          "t": "stock"
+        },
+        {
+          "m": "Dây đèn + đuôi đèn",
+          "b": 36.0,
+          "a": 35.0,
+          "t": "stock"
+        },
+        {
+          "m": "Hộp carton loại 1",
+          "b": 11.0,
+          "a": 10.0,
+          "t": "stock"
+        },
+        {
+          "m": "Tờ infor Floria",
+          "b": 87.0,
+          "a": 86.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_milky_base",
+          "b": 4.0,
+          "a": 3.0,
+          "t": "stock"
+        },
+        {
+          "m": "floria_standard_skin",
+          "b": 2.0,
+          "a": 1.0,
           "t": "stock"
         }
       ]
