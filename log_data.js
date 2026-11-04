@@ -1,5 +1,5 @@
 window.LOGDATA = {
-  "updated": "2026-11-02 08:00 ICT",
+  "updated": "2026-11-04 11:53 ICT",
   "entries": [
     {
       "date": "2026-09-16",
@@ -981,6 +981,66 @@ window.LOGDATA = {
           "m": "floria_standard_skin",
           "b": 2.0,
           "a": 1.0,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "production",
+      "note": "BACKFILL từ audit md: In 4 đế floria xanh lá (4×0.124 = 0.496 kg)",
+      "commit": "INVENTORY_UPDATE_olive_green_production.md",
+      "changes": [
+        {
+          "m": "floria_olive_green_base",
+          "b": 0.0,
+          "a": 4.0,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA Matte - Olive Green Tinmorry",
+          "b": 8.808,
+          "a": 8.312,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "production",
+      "note": "BACKFILL từ audit md: In thêm 1 đế floria xanh lá (−0.124 kg)",
+      "commit": "INVENTORY_UPDATE_olive_green_production_2.md",
+      "changes": [
+        {
+          "m": "floria_olive_green_base",
+          "b": 4.0,
+          "a": 5.0,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA Matte - Olive Green Tinmorry",
+          "b": 8.312,
+          "a": 8.188,
+          "t": "stock"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-04",
+      "kind": "production",
+      "note": "In thêm 1 đế floria xanh lá — Khanh: 'hôm nay có in thêm một đế floria xanh lá nha'",
+      "commit": "c2cd52acb5",
+      "changes": [
+        {
+          "m": "floria_olive_green_base",
+          "b": 5.0,
+          "a": 6.0,
+          "t": "stock"
+        },
+        {
+          "m": "Nhựa PLA Matte - Olive Green Tinmorry",
+          "b": 8.188,
+          "a": 8.064,
           "t": "stock"
         }
       ]
