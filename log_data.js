@@ -1,5 +1,5 @@
 window.LOGDATA = {
- "updated": "2026-11-06 14:45 ICT",
+ "updated": "2026-11-06 14:50 ICT",
  "entries": [
   {
    "date": "2026-09-16",
@@ -1061,6 +1061,62 @@ window.LOGDATA = {
      "m": "Nhựa PLA - trong suốt R3D",
      "b": 2.384,
      "a": 2.136,
+     "t": "stock"
+    }
+   ]
+  },
+  {
+   "date": "2026-11-06",
+   "kind": "sale",
+   "note": "AUTO bù: Floria MILKY ×1 + Floria MOSS GREEN (PRO) ×1 — đơn ee9e4c67 [delivering] 05/11, 920.000đ (cron 08:00 fail do mất folder, chạy bù 14:47)",
+   "commit": "e7d488fe83",
+   "changes": [
+    {
+     "m": "floria_standard_skin",
+     "b": 3.0,
+     "a": 1.0,
+     "t": "stock"
+    },
+    {
+     "m": "floria_milky_base",
+     "b": 3.0,
+     "a": 2.0,
+     "t": "stock"
+    },
+    {
+     "m": "floria_olive_green_base",
+     "b": 6.0,
+     "a": 5.0,
+     "t": "stock"
+    },
+    {
+     "m": "Dây đèn + đuôi đèn",
+     "b": 35.0,
+     "a": 33.0,
+     "t": "stock"
+    },
+    {
+     "m": "Bóng đèn OSRAM LED (3W, 3000K)",
+     "b": 6.0,
+     "a": 5.0,
+     "t": "stock"
+    },
+    {
+     "m": "Hộp carton loại 1",
+     "b": 10.0,
+     "a": 8.0,
+     "t": "stock"
+    },
+    {
+     "m": "Tờ infor Floria",
+     "b": 86.0,
+     "a": 84.0,
+     "t": "stock"
+    },
+    {
+     "m": "Bóng đèn LED RGB pro",
+     "b": 15.0,
+     "a": 14.0,
      "t": "stock"
     }
    ]
